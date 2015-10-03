@@ -1,0 +1,129 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+/* colors 
+***************/
+	/* standard */
+	$black: #000;
+	$white: #fff;
+	$accent: red;
+	$base: $black;
+
+	/* hover states */
+	$hover-dark-base: darken($base, 10%);
+	$hover-light-base: lighten($base, 10%);
+	$hover-dark-accent: darken($accent, 10%);
+	$hover-light-accent: lighten($accent, 10%);
+
+/* typography 
+***************/
+	/* font imports */
+	/*$heading-font: ;*/
+	/*$base-font: ;*/
+
+	body {
+		/*font-family: $base-font;*/
+	}
+
+	/* sizing */
+	$huge: 4em; 
+	$large: 3em;
+	$medium: 2em;
+	$small: 1.5em;
+	$tiny: 1em;
+
+	/* headings */
+	.title { 
+		/*font-family: $heading-font;*/
+		font-weight: 800;
+		font-size: $huge;
+	}
+
+	h1 {
+		font-size: $large;
+		font-weight: 600;
+	}
+	h2 { 
+		font-size: $medium; 
+		font-weight: 500;
+	}
+
+	/* subtitles */
+	.subtitle {
+		font-size: $large;
+	}
+
+	/* other */
+	p, dl, label {
+		font-weight: normal;
+	}
+
+	/* alignment */
+	/*body { text-align: center; } */ /* Uncheck to have everything centered */
+	h1, h2, p { text-align: center; }
+
+
+/* general 
+****************/
+#site-content-wrapper {
+	margin-top: 3%;
+}
+
+$slight-amount: 3%; 
+$small-amount: 5%; 
+$medium-amount: 10%; 
+$large-amount: 15%; 
+$huge-amount: 20%;
+
+/* buttons
+***************/
+
+.btn {
+/*	color: ;*/
+}
+
+.btn-primary {
+/*	background-color: $base;*/
+/* color: $accent; */
+/*	&:hover {
+		;
+	}*/
+}
+
+.btn-default {
+
+}
+
+
+/* miscellaneous 
+****************/
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
+/* errors 
+***************/
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
