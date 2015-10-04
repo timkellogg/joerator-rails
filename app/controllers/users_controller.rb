@@ -10,6 +10,8 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(user_params)
   	if @user.save
+      log_in @user
+      remember user
       flash[:success] = "Account was successfully created!"
       redirect_to @user
   	else
@@ -17,8 +19,13 @@ class UsersController < ApplicationController
   	end
   end
 
-  private 
+  def destroy
+    log_out @user
+    flash[:success] = "You have successfully logged out!"
+    redirect_to root_url
+  end
 
+  private 
   	def user_params
   		params.require(:user).permit(:name, :email, :password, 
   			                           :password_confirmation)
