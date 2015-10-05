@@ -83,7 +83,9 @@ $huge-amount: 20%;
 
 /* flash container 
 *****************/
-
+#flash-container {
+  margin-top: $small-amount;
+}
 
 /* buttons
 ***************/

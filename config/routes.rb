@@ -1,14 +1,10 @@
 Rails.application.routes.draw do
-  get 'sessions/newbun'
+	root :to      => 'static_pages#home'
 
-	root 'static_pages#home'
-
-  get 'signup' => 'users#new'
-
-  get  'login'  => 'sessions#new'
+  get 'signup'  => 'users#new'
+  get  'login'  => 'sessions#new' 
   post 'login'  => 'sessions#create'
   get  'logout' => 'sessions#destroy'
-
 
   resources :users
 end

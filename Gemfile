@@ -14,6 +14,7 @@ gem 'bootstrap-sass',       '3.2.0.0'
 
 group :production do 
   gem 'puma'
+  gem 'rails_12factor'
 end
 
 group :development do
@@ -21,6 +22,8 @@ group :development do
   gem 'web-console'
   gem 'spring'
   gem 'quiet_assets'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test, :development do
