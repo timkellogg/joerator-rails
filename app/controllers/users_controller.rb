@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:edit, :update, :destroy]
+  before_action :correct_user,   only: [:edit, :update]
+  before_action :is_admin?,      only: :destroy
   def show
   	@user = User.find(params[:id])
   end
@@ -19,15 +22,42 @@ class UsersController < ApplicationController
   	end
   end
 
+  def edit
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash[:success] = "Profile successfully updated!"
+    else
+      flash[:danger] = "Something went wrong"
+      render 'edit'
+    end
+  end
+
   def destroy
-    log_out @user if logged_in?
-    flash[:success] = "You have successfully logged out!"
+    User.find(params[:id]).destroy
+    flash[:success] = "User account has been removed"
     redirect_to root_url
   end
 
-  private 
+  private
   	def user_params
-  		params.require(:user).permit(:name, :email, :password, 
+  		params.require(:user).permit(:name, :email, :password,
   			                           :password_confirmation)
   	end
+
+    def logged_in_user
+      unless logged_in?
+        flash[:danger] = "Please log in first"
+        redirect_to login_url
+      end
+    end
+
+    def correct_user
+      @user = User.find(params[:id])
+      flash[:danger] = "You can only edit your own profile"
+      redirect_to root_url unless @user == current_user
+    end
+
+    def is_admin?
+      redirect_to(root_url) unless current_user.admin?
+    end
 end

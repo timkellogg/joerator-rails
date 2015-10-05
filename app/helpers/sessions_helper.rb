@@ -1,11 +1,11 @@
 module SessionsHelper
 
-	# stores user id into temp session 
+	# stores user id into temp session
 	def log_in (user)
 		session[:user_id] = user.id
 	end
 
-  # looks for the cookie in the session 
+  # looks for the cookie in the session
   def remember (user)
     user.remember
     cookies.permanent.signed[:user_id] = user.id
@@ -25,7 +25,7 @@ module SessionsHelper
     end
   end
 
-	# checks if there is a user_id in the session 
+	# checks if there is a user_id in the session
 	def logged_in?
 		!current_user.nil?
 	end

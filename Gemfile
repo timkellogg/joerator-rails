@@ -11,8 +11,10 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass',       '3.2.0.0'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 
-group :production do 
+group :production do
   gem 'puma'
   gem 'rails_12factor'
 end
@@ -30,6 +32,7 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'launchy'
   gem 'pry'
+  gem 'faker'
 end
 
 group :test do
@@ -38,4 +41,3 @@ group :test do
   gem 'factory_girl_rails'
   gem 'simplecov', require: false
 end
-
