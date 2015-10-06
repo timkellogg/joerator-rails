@@ -105,6 +105,17 @@ $huge-amount: 20%;
 
 }
 
+.navbar-btn { 
+  margin-left: $slight-amount;
+  padding: .5em !important;
+  &:hover {
+
+  }
+}
+
+form .btn {
+  margin-top: $slight-amount;
+}
 
 /* miscellaneous 
 ****************/

@@ -37,7 +37,6 @@ module SessionsHelper
 		@current_user = nil
 	end
 
-
   # sets remember_digest to nil (thru logout) and removes id and token from session
   def forget (user)
     user.forget
