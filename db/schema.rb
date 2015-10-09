@@ -11,10 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151005162129) do
+ActiveRecord::Schema.define(version: 20151008223837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "coffeeshops", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address"
+    t.integer  "qualityRating"
+    t.integer  "studyRating"
+    t.integer  "laptopRating"
+    t.integer  "hipsterRating"
+    t.string   "imageLink"
+    t.string   "webAddress"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "body"
+    t.string   "title"
+    t.integer  "qualityRating"
+    t.integer  "hipsterRating"
+    t.integer  "studyRating"
+    t.integer  "laptopRating"
+    t.integer  "coffeeshop_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "reviews", ["coffeeshop_id"], name: "index_reviews_on_coffeeshop_id", using: :btree
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -28,4 +57,6 @@ ActiveRecord::Schema.define(version: 20151005162129) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "reviews", "coffeeshops"
+  add_foreign_key "reviews", "users"
 end

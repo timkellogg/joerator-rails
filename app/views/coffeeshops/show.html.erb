@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  Average Rating: <%= @average_rating %><br> 
+  Total: <%= @ratings[:total] %><br>
+  Quality Total: <%= @ratings[:quality_total] %><br>
+  Study Total: <%= @ratings[:study_total] %><br>
+  Hipster Total: <%= @ratings[:hipster_total] %><br>
+  Laptop Total: <%= @ratings[:laptop_total] %><br>
+
+</p>
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @coffeeshop.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @coffeeshop.address %>
+</p>
+
+<p>
+  <strong>Qualityrating:</strong>
+  <%= @coffeeshop.qualityRating %>
+</p>
+
+<p>
+  <strong>Studyrating:</strong>
+  <%= @coffeeshop.studyRating %>
+</p>
+
+<p>
+  <strong>Laptoprating:</strong>
+  <%= @coffeeshop.laptopRating %>
+</p>
+
+<p>
+  <strong>Hipsterrating:</strong>
+  <%= @coffeeshop.hipsterRating %>
+</p>
+
+<p>
+  <strong>Imagelink:</strong>
+  <%= @coffeeshop.imageLink %>
+</p>
+
+<p>
+  <strong>Webaddress:</strong>
+  <%= @coffeeshop.webAddress %>
+</p>
+
+<%= link_to 'Edit', edit_coffeeshop_path(@coffeeshop) %> |
+<%= link_to 'Back', coffeeshops_path %>

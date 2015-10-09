@@ -1,0 +1,49 @@
+<%= form_for(@review) do |f| %>
+  <% if @review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+      <% @review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_field :body %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :qualityRating %><br>
+    <%= f.number_field :qualityRating %>
+  </div>
+  <div class="field">
+    <%= f.label :hipsterRating %><br>
+    <%= f.number_field :hipsterRating %>
+  </div>
+  <div class="field">
+    <%= f.label :studyRating %><br>
+    <%= f.number_field :studyRating %>
+  </div>
+  <div class="field">
+    <%= f.label :laptopRating %><br>
+    <%= f.number_field :laptopRating %>
+  </div>
+  <div class="field">
+    <%= f.label :coffeeshop_id %><br>
+    <%= f.text_field :coffeeshop_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

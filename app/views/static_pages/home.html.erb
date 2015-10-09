@@ -1,1 +1,21 @@
-<h1>Home page</h1>
+<div class="image-container container-fluid">
+  <%= image_tag("coffee_faded.jpg", alt: "Picture of coffee beans") %>
+</div>
+
+<div class="container">
+  <%= @coffeeshops.each do |coffeeshop| %>
+    <div class="col-md-4">
+      <%= coffeeshop.name %>
+    </div>
+  <% end %>
+</div>
+
+<!-- highest reviewed -->
+
+<!-- newest editions -->
+
+<!-- best study -->
+
+<!-- best coffee -->
+
+<!-- etc. -->

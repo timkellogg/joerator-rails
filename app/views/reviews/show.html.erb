@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @review.user %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @review.body %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @review.title %>
+</p>
+
+<p>
+  <strong>Qualityrating:</strong>
+  <%= @review.qualityRating %>
+</p>
+
+<p>
+  <strong>Hipsterrating:</strong>
+  <%= @review.hipsterRating %>
+</p>
+
+<p>
+  <strong>Studyrating:</strong>
+  <%= @review.studyRating %>
+</p>
+
+<p>
+  <strong>Laptoprating:</strong>
+  <%= @review.laptopRating %>
+</p>
+
+<p>
+  <strong>Coffeeshop:</strong>
+  <%= @review.coffeeshop %>
+</p>
+
+<%= link_to 'Edit', edit_review_path(@review) %> |
+<%= link_to 'Back', reviews_path %>

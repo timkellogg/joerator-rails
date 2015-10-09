@@ -12,8 +12,10 @@
 	/* standard */
 	$black: #000;
 	$white: #fff;
-	$accent: red;
-	$base: $black;
+
+	$base: $white;
+	$accent: #54392d;
+  $darkgray: #d4d0cc;
 
 	/* hover states */
 	$hover-dark-base: darken($base, 10%);
@@ -72,7 +74,25 @@
 /* general 
 ****************/
 #site-content-wrapper {
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
 	margin-top: 3%;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+body {
+  width: 100%;
+}
+
+/* Navigation 
+******************/
+
+.navbar {
+  height: 6em;
 }
 
 $slight-amount: 3%; 
@@ -81,17 +101,43 @@ $medium-amount: 10%;
 $large-amount: 15%; 
 $huge-amount: 20%;
 
+/* Images
+******************/
+.navbar-brand img { 
+    position: relative;
+    max-height: 20em;
+    max-width: 40%;
+    overflow: visible;
+    margin-top: -1px;
+    z-index: 999;
+}
+
+.image-container {
+  width: 100%;
+  img {
+    width: 100%;
+    margin-top: -4%;
+    height: auto;
+    position: relative;
+    z-index: -999;
+  }
+}
+
+
+
+
+
 /* flash container 
 *****************/
-#flash-container {
-  margin-top: $small-amount;
-}
+
 
 /* buttons
 ***************/
 .btn {
-/*	color: ;*/
+  background-color: $darkgray;
+  border-radius: 0;
 }
+
 
 .btn-primary {
 /*	background-color: $base;*/
@@ -101,16 +147,21 @@ $huge-amount: 20%;
 	}*/
 }
 
-.btn-default {
-
-}
 
 .navbar-btn { 
   margin-left: $slight-amount;
-  padding: .5em !important;
+  padding-left: $small-amount;
+  padding-right: $small-amount;
   &:hover {
-
+    background-color: $accent !important;
+    transition: .3s linear background-color;
+    
   }
+}
+
+.navbar {
+  background-color: $white;
+  border: none;
 }
 
 form .btn {
