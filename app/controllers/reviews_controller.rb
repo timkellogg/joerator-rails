@@ -21,14 +21,14 @@ class ReviewsController < ApplicationController
     @review = @coffeeshop.reviews.new(review_params)
     @review.user = current_user
 
-    # increment the values of the ratings based on review
-    @coffeeshop.increment("studyRating",   by = @review.studyRating)
-    @coffeeshop.increment("qualityRating", by = @review.qualityRating)
-    @coffeeshop.increment("laptopRating",  by = @review.laptopRating)
-    @coffeeshop.increment("hipsterRating", by = @review.hipsterRating)
+    @coffeeshop.increment("studyRating",   by = @review.studyRating)   if !@review.studyRating.nil?
+    @coffeeshop.increment("qualityRating", by = @review.qualityRating) if !@review.qualityRating.nil?
+    @coffeeshop.increment("laptopRating",  by = @review.laptopRating)  if !@review.laptopRating.nil?
+    @coffeeshop.increment("hipsterRating", by = @review.hipsterRating) if !@review.hipsterRating.nil?
 
     if @review.save && @coffeeshop.save
-      redirect_to coffeeshop_path(@coffeeshop), notice: 'Review was successfully created.'
+      flash[:success] = "Review was added!"
+      redirect_to coffeeshop_path(@coffeeshop)
     else
       render :new
     end
@@ -38,10 +38,8 @@ class ReviewsController < ApplicationController
     respond_to do |format|
       if @review.update(review_params)
         format.html { redirect_to @review, notice: 'Review was successfully updated.' }
-        format.json { render :show, status: :ok, location: @review }
       else
         format.html { render :edit }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
       end
     end
   end

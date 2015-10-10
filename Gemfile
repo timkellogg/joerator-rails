@@ -15,7 +15,6 @@ gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem "font-awesome-rails"
 
-
 group :production do
   gem 'puma'
   gem 'rails_12factor'

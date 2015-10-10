@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,700);
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -16,6 +17,8 @@
 	$base: $white;
 	$accent: #54392d;
   $darkgray: #d4d0cc;
+  $light-gray: #f5f5f5;
+  $medium-gray: #e3e3e3;
 
 	/* hover states */
 	$hover-dark-base: darken($base, 10%);
@@ -25,9 +28,9 @@
 
 /* typography 
 ***************/
-	/* font imports */
-	/*$heading-font: ;*/
-	/*$base-font: ;*/
+* {
+  font-family: 'Roboto', sans-serif;
+}
 
 	body {
 		/*font-family: $base-font;*/
@@ -54,6 +57,7 @@
 	h2 { 
 		font-size: $medium; 
 		font-weight: 500;
+    text-shadow: 2px 2px $black;
 	}
 
 	/* subtitles */
@@ -103,6 +107,17 @@ $huge-amount: 20%;
 
 /* Images
 ******************/
+#front-page-banner-img { 
+  background: url('/assets/coffee_faded.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 500px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 .navbar-brand img { 
     position: relative;
     max-height: 20em;
@@ -136,6 +151,42 @@ h1 .fa-coffee {
   color: gold;
 }
 
+/* subtitle-block
+*****************/
+.subtitle-block {
+  margin-top: 0;
+  height: 80px;
+  background-color: $accent;
+  h2 {
+    color: $base;
+    margin-top: 0;
+    padding-top: 8px;
+    font-size: $huge;
+    
+  }
+}
+
+
+/* cards 
+*****************/
+.card-container {
+  margin-top: $small-amount;
+}
+
+.card-image {
+  width: 80%;
+}
+
+.card {
+  height: 400px;
+  margin: $tiny;
+}
+
+.card-header {
+  h3 {
+
+  }
+}
 
 /* flash container 
 *****************/
@@ -144,7 +195,8 @@ h1 .fa-coffee {
 /* buttons
 ***************/
 .btn {
-  background-color: $darkgray;
+  background-color: $light-gray;
+  border-color: $medium-gray;
   border-radius: 0;
 }
 
