@@ -12,11 +12,10 @@ class Coffeeshop < ActiveRecord::Base
   # Issues with it labeling everything as invalid 
   # validates_uri_existence_of :imageLink, :with =>
   #       /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
-
-
-
-
-
-
+ 
+  # searches through coffeeshops where name includes 
+  def self.search(query)
+    where("name like ?", "%#{query}%") 
+  end
 end
 
