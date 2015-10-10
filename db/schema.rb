@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151008223837) do
+ActiveRecord::Schema.define(version: 20151009060645) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,8 +25,16 @@ ActiveRecord::Schema.define(version: 20151008223837) do
     t.integer  "hipsterRating"
     t.string   "imageLink"
     t.string   "webAddress"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.time     "opens_at"
+    t.time     "closes_at"
+    t.integer  "price"
+    t.boolean  "accepts_credit",  default: true
+    t.string   "parking"
+    t.string   "style"
+    t.boolean  "vegan_friendly",  default: false
+    t.boolean  "veggie_friendly", default: false
   end
 
   create_table "reviews", force: :cascade do |t|

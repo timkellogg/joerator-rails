@@ -123,8 +123,18 @@ $huge-amount: 20%;
   }
 }
 
+.coffeeshop-img {
+  height: auto;
+  width: 400px;
+}
 
-
+/* Icons
+*****************/
+h1 .fa-coffee {
+  color: $accent;
+  font-size: $tiny;
+  color: gold;
+}
 
 
 /* flash container 

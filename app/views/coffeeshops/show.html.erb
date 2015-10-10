@@ -1,55 +1,58 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, @coffeeshop.name) %>
 
-<p>
-  Average Rating: <%= @average_rating %><br> 
-  Total: <%= @ratings[:total] %><br>
-  Quality Total: <%= @ratings[:quality_total] %><br>
-  Study Total: <%= @ratings[:study_total] %><br>
-  Hipster Total: <%= @ratings[:hipster_total] %><br>
-  Laptop Total: <%= @ratings[:laptop_total] %><br>
+<div id="coffeeshop-wrapper " class="container">
+  
+  <div class="row">
+    <h1><%= @coffeeshop.name %><br>
+    <% @average_rating.times do %>
+      <small><%= fa_icon "coffee" %></small>
+    <% end %> 
+    <small>| <%= @ratings[:total] %> Reviews</small>
+    </h1>
+  </div> 
 
-</p>
+      <img class="coffeeshop-img" src=<%= @coffeeshop.imageLink %> alt="">      
+
+      <p>
+        Average Rating: <%= @average_rating %><br> 
+        Total: <%= @ratings[:total] %><br>
+        Quality Total: <%= @ratings[:quality_total] %><br>
+        Study Total: <%= @ratings[:study_total] %><br>
+        Hipster Total: <%= @ratings[:hipster_total] %><br>
+        Laptop Total: <%= @ratings[:laptop_total] %><br>
+      </p>
+
+<iframe width="400" height="400" frameborder="0" style="border:0"
+src="https://www.google.com/maps/embed/v1/place?q=<%= @coffeeshop.address %>&key=AIzaSyC7refRsrpNaOI9TrGEuhjJmI9bJAi1yI0"></iframe>
+
+    <div class="container">
+
+    <% if logged_in? %>
+      <%= link_to 'Add a review', new_coffeeshop_review_path(@coffeeshop), class: 'btn btn-primary' %>
+    <% end %>
+
+    <%= will_paginate @reviews %>
+
+    <%= @reviews.each do |review| %>
+      <div class="media well">
+        <div class="media-left pull-left">
+          <%= link_to user_path(review.user) do %>
+            <%= gravatar_for review.user %>
+          <% end %>       
+        </div>
+        <div class="media-body media-left">
+          <h4 class="media-heading"><%= review.title %>
+            <em class="pull-right"><%= time_ago_in_words(review.created_at) %> ago</em>
+          </h4>
+          <%= review.body %>
+        </div>
+      </div>
+    <% end %>
+    </div>
+
+    <%= will_paginate @reviews %>
 
 
-<p>
-  <strong>Name:</strong>
-  <%= @coffeeshop.name %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @coffeeshop.address %>
-</p>
-
-<p>
-  <strong>Qualityrating:</strong>
-  <%= @coffeeshop.qualityRating %>
-</p>
-
-<p>
-  <strong>Studyrating:</strong>
-  <%= @coffeeshop.studyRating %>
-</p>
-
-<p>
-  <strong>Laptoprating:</strong>
-  <%= @coffeeshop.laptopRating %>
-</p>
-
-<p>
-  <strong>Hipsterrating:</strong>
-  <%= @coffeeshop.hipsterRating %>
-</p>
-
-<p>
-  <strong>Imagelink:</strong>
-  <%= @coffeeshop.imageLink %>
-</p>
-
-<p>
-  <strong>Webaddress:</strong>
-  <%= @coffeeshop.webAddress %>
-</p>
-
-<%= link_to 'Edit', edit_coffeeshop_path(@coffeeshop) %> |
-<%= link_to 'Back', coffeeshops_path %>
+  <%= link_to 'Edit', edit_coffeeshop_path(@coffeeshop) %> |
+  <%= link_to 'Back', coffeeshops_path %>
+</div>

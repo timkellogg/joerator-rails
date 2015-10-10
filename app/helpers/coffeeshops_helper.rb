@@ -7,13 +7,14 @@ module CoffeeshopsHelper
     @study_total   = 0
     @hipster_total = 0
     @laptop_total  = 0
-
+    
     coffeeshop.reviews.each do |review| 
       @quality_total += review.qualityRating
       @study_total   += review.studyRating
       @hipster_total += review.hipsterRating
       @laptop_total  += review.laptopRating
     end
+    byebug 
 
     return ratings = {
             total: @review_total, 

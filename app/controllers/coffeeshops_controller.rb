@@ -10,6 +10,8 @@ class CoffeeshopsController < ApplicationController
   # GET /coffeeshops/1
   # GET /coffeeshops/1.json
   def show
+
+    @reviews        = @coffeeshop.reviews.order(created_at: :desc).paginate(:page => params[:page])
     @ratings        = get_ratings(@coffeeshop)
     @average_rating = get_average_rating(@ratings)
   end
