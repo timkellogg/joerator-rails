@@ -2,7 +2,7 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
 
   def index
-    @reviews = Review.all 
+    @reviews = Review.all
   end
 
   def show
@@ -21,13 +21,16 @@ class ReviewsController < ApplicationController
     @review = @coffeeshop.reviews.new(review_params)
     @review.user = current_user
 
-    respond_to do |format|
-      if @review.save
-        # byebug
-        format.html { redirect_to coffeeshop_path(@coffeeshop), notice: 'Review was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    # increment the values of the ratings based on review
+    @coffeeshop.increment("studyRating",   by = @review.studyRating)
+    @coffeeshop.increment("qualityRating", by = @review.qualityRating)
+    @coffeeshop.increment("laptopRating",  by = @review.laptopRating)
+    @coffeeshop.increment("hipsterRating", by = @review.hipsterRating)
+
+    if @review.save && @coffeeshop.save
+      redirect_to coffeeshop_path(@coffeeshop), notice: 'Review was successfully created.'
+    else
+      render :new
     end
   end
 

@@ -1,28 +1,14 @@
 module CoffeeshopsHelper
-  # retrieves the aggregate ratings for coffeeshop
-
   def get_ratings(coffeeshop)
-    @review_total  = coffeeshop.reviews.all.count
-    @quality_total = 0
-    @study_total   = 0
-    @hipster_total = 0
-    @laptop_total  = 0
-    
-    coffeeshop.reviews.each do |review| 
-      @quality_total += review.qualityRating
-      @study_total   += review.studyRating
-      @hipster_total += review.hipsterRating
-      @laptop_total  += review.laptopRating
-    end
-    byebug 
+    review_total = coffeeshop.reviews.count
 
-    return ratings = {
-            total: @review_total, 
-            quality_total: (@quality_total/@review_total),
-            study_total: @study_total/@review_total, 
-            hipster_total: @hipster_total/@review_total, 
-            laptop_total: @laptop_total/@review_total,
-          }
+    return ratings =
+      {
+        quality_total: coffeeshop.qualityRating/review_total,
+        study_total:   coffeeshop.studyRating/review_total,
+        laptop_total:  coffeeshop.laptopRating/review_total,
+        hipster_total: coffeeshop.hipsterRating/review_total
+      }
   end
 
   def get_average_rating(ratings)
