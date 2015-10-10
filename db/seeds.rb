@@ -36,6 +36,9 @@ rand(10..40).times do |n|
     state: Faker::Address.state_abbr
   )
 
+  Menu.create(coffeeshop: Coffeeshop.last)
+  
+
   rand(1..10).times do
     review = Review.create(
       user_id: User.last.id,

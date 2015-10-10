@@ -1,40 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe Coffeeshop, type: :model do
-  
   it { should have_many :reviews }
+  it { should have_one  :menu    }
 
-  it { should validate_presence_of   :name }
-  it { should validate_uniqueness_of :name }
+  it { should validate_presence_of :name            }
+  it { should validate_presence_of :imageLink       }
+  it { should validate_presence_of :webAddress      }
+  it { should validate_presence_of :city            }
+  it { should validate_presence_of :state           }
+  it { should validate_length_of   :state           } 
+  it { should validate_presence_of :opens_at        } 
+  it { should validate_presence_of :closes_at       }
+  it { should validate_presence_of :price           }
+  it { should validate_presence_of :accepts_credit  }
+  it { should validate_presence_of :parking         }
+  it { should validate_presence_of :style           }
+  it { should validate_presence_of :vegan_friendly  }
+  it { should validate_presence_of :veggie_friendly }
 
-  it { should validate_presence_of :imageLink  }
-  it { should validate_presence_of :webAddress }
+  it { should validate_numericality_of :price       }
+  it { should_not allow_value(6).for(:price)        }
+  it { should_not allow_value(-1).for(:price)       }
+  it { should_not allow_value(1.1).for(:price)      }
 
-  it { should validate_presence_of :city  }
-  it { should validate_presence_of :state }
-  it { should validate_length_of   :state }
-
-  it { should validate_presence_of :opens_at  }
-  it { should validate_presence_of :closes_at }
-
-  # describe "when saving a imageLink" do 
-  #   it "should have the correct format of a URL" do 
-  #     expect(Coffeeshop.new(name: "example", address: "123 Main Street", qualityRating: 10,
-  #     studyRating: 12, laptopRating: 12, hipsterRating: 23, opens_at: Time.new(2015, 12, 12, 6), 
-  #     closes_at: Time.new(2015, 12, 12, 18), price: 5, accepts_credit: true, parking: "lots", style: "formal",
-  #     vegan_friendly: true, veggie_friendly: true, imageLink: "https://www.google.com/", webAddress: "http//example.com")).to_not be_valid
-  #   end
-  # end
-
-  it "opens_at should be in a valid time format" do 
-    expect(@coffeeshop = Coffeeshop.new(name: "example_coffeeshop", address: "123 Main Street", qualityRating: 10,
-      studyRating: 12, laptopRating: 12, hipsterRating: 23, opens_at: Time.new(2014, 12, 12, 6), closes_at: Time.new(2015, 12, 12, 18), 
-      price: 5, accepts_credit: true, parking: "lots", style: "formal", vegan_friendly: true, veggie_friendly: 
-      true, imageLink: "http://www.example.com/", state: "CA", city: "Los Angeles", webAddress: "http//example.com")).to be_valid
-  end
-
-
+  it { should validate_inclusion_of(:parking).in_array(%w[lots some none]) }
+  it { should validate_inclusion_of(:style).in_array(%w[casual formal])    }
 end
 
-
-  # end
