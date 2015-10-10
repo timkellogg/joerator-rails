@@ -1,4 +1,5 @@
-@admin = User.create(
+# Create admin user
+User.create(
   name: "admin",
   email: "admin@joerator.com",
   password: "password",
@@ -38,6 +39,23 @@ rand(10..40).times do |n|
 
   Menu.create(coffeeshop: Coffeeshop.last)
   
+  # build menu items
+  rand(8..20).times do 
+    Item.create(
+      menu_id: Menu.last.id,
+      name: Faker::Lorem.name,
+      description: Faker::Lorem.sentences(5),
+      vegan_friendly: [true, false].sample,
+      veggie_friendly: [true, false].sample,   
+      gluten_free: [true, false].sample, 
+      meal_type: %w[appetizer brunch breakfast lunch dinner holiday].sample,
+      image_link: %w[http://uchiblogo.uchicago.edu/sexy-science-coffee.jpg https://www.nespresso.com/ecom/medias/sys_master/public/9301705261086/Vertuoline_Coffee_Set_mobile_200x200.png
+        http://3.bp.blogspot.com/_-BoFzR6biqk/TU-35do8oqI/AAAAAAAABMk/lgmVgRDOyIU/s1600/salad-sandwich-meal-plan-de-thumb-200x200-220806.jpg 
+        http://static.caloriecount.about.com/images/medium/croissant-162239.jpg http://undercalories.com/foods/bagelwithbananaandpeanutbutter.jpg
+        http://recipegreat.com/images/carrot-smoothie-04.jpg http://www.pcrm.org/sites/default/files/images/health/reports/breakfast.jpg ].sample,
+      price: rand(0.50..24.99)
+    )
+  end
 
   rand(1..10).times do
     review = Review.create(
@@ -51,9 +69,13 @@ rand(10..40).times do |n|
       coffeeshop_id: Coffeeshop.last.id
     )
 
+    # have reviews relate to the ratings of the coffeeshop 
     review.coffeeshop.increment!("studyRating",   by = review.studyRating)
     review.coffeeshop.increment!("qualityRating", by = review.qualityRating)
     review.coffeeshop.increment!("laptopRating",  by = review.laptopRating)
     review.coffeeshop.increment!("hipsterRating", by = review.hipsterRating)
   end
 end
+
+
+

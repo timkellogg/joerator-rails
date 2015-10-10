@@ -4,8 +4,8 @@ class Coffeeshop < ActiveRecord::Base
 
   before_save { self.name = name.downcase }
 
-  validates_presence_of 
-    :name, :imageLink, :webAddress, :state, :city, 
+
+  validates_presence_of :name, :imageLink, :webAddress, :state, :city, 
     :opens_at, :closes_at, :price, :accepts_credit, 
     :parking, :style, :veggie_friendly, :vegan_friendly
 
