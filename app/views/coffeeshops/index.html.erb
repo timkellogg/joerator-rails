@@ -1,41 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div class="container content-container">
 
-<h1>Listing Coffeeshops</h1>
+  <% if @came_from_search %>
+    <div class="col-md-6 text-center search-box">
+      <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
+        <div class="input-group input-append">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-default" type="button"><%= fa_icon "search" %></button>
+          </span>
+          <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search for..." %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Qualityrating</th>
-      <th>Studyrating</th>
-      <th>Laptoprating</th>
-      <th>Hipsterrating</th>
-      <th>Imagelink</th>
-      <th>Webaddress</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+  <div class=" card-container text-center">
     <% @coffeeshops.each do |coffeeshop| %>
-      <tr>
-        <td><%= coffeeshop.name %></td>
-        <td><%= coffeeshop.address %></td>
-        <td><%= coffeeshop.qualityRating %></td>
-        <td><%= coffeeshop.studyRating %></td>
-        <td><%= coffeeshop.laptopRating %></td>
-        <td><%= coffeeshop.hipsterRating %></td>
-        <td><%= coffeeshop.imageLink %></td>
-        <td><%= coffeeshop.webAddress %></td>
-        <td><%= link_to 'Show', coffeeshop %></td>
-        <td><%= link_to 'Edit', edit_coffeeshop_path(coffeeshop) %></td>
-        <td><%= link_to 'Destroy', coffeeshop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="col-md-4">
+        <div class="card-header">
+          <img class="card-image" src=<%= coffeeshop.imageLink %>> 
+        </div>
+        <div class="card-title">
+          <h3><%= truncate(coffeeshop.name, length: 20) %></h3>
+        </div>
+        <div class="card-body">
+          <p>asdlf</p>
+        </div>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
 
-<br>
-
-<%= link_to 'New Coffeeshop', new_coffeeshop_path %>
+  <% if current_user && current_user.admin? %>
+    <%= link_to 'New Coffeeshop', new_coffeeshop_path %>
+  <% end %>
+</div>

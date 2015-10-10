@@ -1,8 +1,3 @@
-IMAGES = %w[https://images.unsplash.com/photo-1441757801704-6a71cffed732?q=80&fm=jpg&s=e1a6ec9d58206d2a53ab532540347d4a
-            https://images.unsplash.com/photo-1442411210769-b95c4632195e?q=80&fm=jpg&s=1a35c4070c61332f5bffcf19b804e8e8
-            https://images.unsplash.com/photo-1421986598195-0d9c26ecfcde?q=80&fm=jpg&s=f4c1618634322aecc17fbeb78bdf528b
-            https://images.unsplash.com/photo-1428550443830-190057dc8098?q=80&fm=jpg&s=1b1da888b3a734385de61e95ab9ade15].sample(1)
-
 @admin = User.create(
   name: "admin",
   email: "admin@joerator.com",
@@ -36,7 +31,9 @@ rand(10..40).times do |n|
     vegan_friendly: [true, false].sample,
     veggie_friendly: [true, false].sample,
     imageLink: "https://images.unsplash.com/photo-1428550443830-190057dc8098?q=80&fm=jpg&s=1b1da888b3a734385de61e95ab9ade15",
-    webAddress: "http://coffeeshop#{n}.com"
+    webAddress: "http://coffeeshop#{n}.com",
+    city: Faker::Address.city,
+    state: Faker::Address.state_abbr
   )
 
   rand(1..10).times do

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151009060645) do
+ActiveRecord::Schema.define(version: 20151010053839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 20151009060645) do
     t.string   "style"
     t.boolean  "vegan_friendly",  default: false
     t.boolean  "veggie_friendly", default: false
+    t.string   "city"
+    t.string   "state"
   end
 
   create_table "reviews", force: :cascade do |t|

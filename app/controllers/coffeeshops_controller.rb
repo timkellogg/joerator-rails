@@ -3,16 +3,17 @@ class CoffeeshopsController < ApplicationController
 
 
   def index
-    # if the route was triggered by a search
+    @came_from_search = false
+
     if params[:search]
       @coffeeshops = Coffeeshop.search(params[:search]).order("created_at DESC")
+      @came_from_search = true 
     else 
       @coffeeshops = Coffeeshop.all
     end
   end
 
   def show
-
     @reviews        = @coffeeshop.reviews.order(created_at: :desc).paginate(:page => params[:page])
     @ratings        = get_ratings(@coffeeshop)
     @average_rating = get_average_rating(@ratings)
@@ -64,6 +65,7 @@ class CoffeeshopsController < ApplicationController
     end
 
     def coffeeshop_params
-      params.require(:coffeeshop).permit(:name, :address, :qualityRating, :studyRating, :laptopRating, :hipsterRating, :imageLink, :webAddress)
+      params.require(:coffeeshop).permit(:name, :address, :qualityRating, 
+        :studyRating, :laptopRating, :hipsterRating, :imageLink, :webAddress, :city, :state)
     end
 end

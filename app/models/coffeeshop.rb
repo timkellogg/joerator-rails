@@ -5,9 +5,10 @@ class Coffeeshop < ActiveRecord::Base
   validates :name,       presence: true, uniqueness: true
   validates :imageLink,  presence: true
   validates :webAddress, presence: true 
-
-  # validate opens_at  (format)
-  # validate closes_at (format)
+  validates :state,      presence: true, length: { maximum: 2 }
+  validates :city,       presence: true 
+  validates :opens_at,   presence: true
+  validates :closes_at,  presence: true
 
   # Issues with it labeling everything as invalid 
   # validates_uri_existence_of :imageLink, :with =>

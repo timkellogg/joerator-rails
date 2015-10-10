@@ -37,6 +37,7 @@
 	}
 
 	/* sizing */
+  $absurd: 6em;
 	$huge: 4em; 
 	$large: 3em;
 	$medium: 2em;
@@ -88,9 +89,19 @@
   padding: 0;
 }
 
+.content-container {
+  margin-top: $absurd;
+}
+
 body {
   width: 100%;
 }
+
+$slight-amount: 3%; 
+$small-amount: 5%; 
+$medium-amount: 10%; 
+$large-amount: 15%; 
+$huge-amount: 20%;
 
 /* Navigation 
 ******************/
@@ -99,11 +110,6 @@ body {
   height: 6em;
 }
 
-$slight-amount: 3%; 
-$small-amount: 5%; 
-$medium-amount: 10%; 
-$large-amount: 15%; 
-$huge-amount: 20%;
 
 /* Images
 ******************/
@@ -228,6 +234,13 @@ h1 .fa-coffee {
 
 form .btn {
   margin-top: $slight-amount;
+}
+
+.search-box {
+  margin-top: $small-amount;
+  .form-control {
+    width: 80% !important;
+  }
 }
 
 /* miscellaneous 
