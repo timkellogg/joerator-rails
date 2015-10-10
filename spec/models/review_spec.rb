@@ -15,25 +15,15 @@ RSpec.describe Review, type: :model do
   it { should validate_presence_of :laptopRating  }
   it { should validate_presence_of :hipsterRating }
 
+  it { should_not allow_value(1.1).for(:qualityRating) }
+  it { should_not allow_value(-1).for(:qualityRating)  }
+  it { should_not allow_value(6).for(:qualityRating)   }
+
   it { should validate_numericality_of :qualityRating }
   it { should validate_numericality_of :studyRating   }
   it { should validate_numericality_of :laptopRating  }
   it { should validate_numericality_of :hipsterRating }
 
-  describe "when saving a non-integer" do 
-    it "should fail" do 
-      expect(Review.create(user: @user, body: "words", 
-        title: "title", qualityRating: 2, studyRating: 3, 
-        laptopRating: 1, hipsterRating: 1.2, coffeeshop: @coffeeshop)).to_not be_valid
-    end
-  end
-
-  describe "when saving a negative" do 
-    it "should fail" do 
-      expect(@review = Review.new(user: @user, body: "This is the body", title: "This is the title",
-        qualityRating: 1, hipsterRating: 2, studyRating: 3, laptopRating: -1, coffeeshop_id: @coffeeshop)).to_not be_valid
-    end
-  end
 end
 
 

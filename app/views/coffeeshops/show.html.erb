@@ -33,7 +33,7 @@ src="https://www.google.com/maps/embed/v1/place?q=<%= @coffeeshop.address %>&key
 
     <%= will_paginate @reviews %>
 
-    <%= @reviews.each do |review| %>
+    <% @reviews.each do |review| %>
       <div class="media well">
         <div class="media-left pull-left">
           <%= link_to user_path(review.user) do %>

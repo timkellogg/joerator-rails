@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151010200127) do
+ActiveRecord::Schema.define(version: 20151010204407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,20 @@ ActiveRecord::Schema.define(version: 20151010200127) do
     t.string   "city"
     t.string   "state"
   end
+
+  create_table "items", force: :cascade do |t|
+    t.integer "menu_id"
+    t.string  "name"
+    t.text    "description"
+    t.boolean "veggie_friendly", default: false
+    t.boolean "vegan_friendly",  default: false
+    t.boolean "gluten_free",     default: false
+    t.string  "type"
+    t.string  "image_link"
+    t.integer "price"
+  end
+
+  add_index "items", ["menu_id"], name: "index_items_on_menu_id", using: :btree
 
   create_table "menus", force: :cascade do |t|
     t.integer "coffeeshop_id"
@@ -73,6 +87,7 @@ ActiveRecord::Schema.define(version: 20151010200127) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
+  add_foreign_key "items", "menus"
   add_foreign_key "reviews", "coffeeshops"
   add_foreign_key "reviews", "users"
 end
