@@ -13,11 +13,8 @@ RSpec.describe Coffeeshop, type: :model do
   it { should validate_presence_of :opens_at        } 
   it { should validate_presence_of :closes_at       }
   it { should validate_presence_of :price           }
-  it { should validate_presence_of :accepts_credit  }
   it { should validate_presence_of :parking         }
   it { should validate_presence_of :style           }
-  it { should validate_presence_of :vegan_friendly  }
-  it { should validate_presence_of :veggie_friendly }
 
   it { should validate_numericality_of :price       }
   it { should_not allow_value(6).for(:price)        }
