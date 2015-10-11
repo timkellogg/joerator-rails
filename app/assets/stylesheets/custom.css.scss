@@ -1,6 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,300,700);
+
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -10,9 +10,21 @@
 
 /* colors 
 ***************/
-	/* standard */
+
 	$black: #000;
-	$white: #fff;
+
+
+  /* Colors 
+  ************/
+  $white: #fff;
+  $blue: #2b6cb5;
+  $blue-hover: #3078ca; /* color */
+  $gray: #e9eaec;
+  $gray-hover: #e4e5e7;
+  $steel: #333;
+
+  /*
+  *************/
 
 	$base: $white;
 	$accent: #54392d;
@@ -29,8 +41,7 @@
 /* typography 
 ***************/
 * {
-  font-family: 'Roboto', sans-serif;
-  font-variant: small-caps;
+  font-family: 'helvetica neue', sans-serif;
 }
 
 	body {
@@ -106,30 +117,30 @@ $huge-amount: 20%;
 
 /* Navigation 
 ******************/
-#bs-example-navbar-collapse-1 {
-  height: 10em !important;
-  box-shadow: 10px 10px 5px #888888
+.navbar-item {
+  line-height: 42px;
+  height: 42px;
+  padding: 7px 7px;
+  color: #777;
+  display: inline-block;
+  background-color: transparent;
+  vertical-align: middle;
+  letter-spacing: 1px;
+  font-weight: 200;
+  transition-property: transparent;
+  font-size: 14px;
+  font-variant: small-caps;
+  margin-left: -5px;
+  &:hover {
+    background-color: $gray !important;
+    transition: .3s background-color ease-out;
+  }
 }
 
-.navbar-txt {
-  margin-top: $medium-amount;
-  font-size: $small;
-  padding-bottom: none;
-  color: $accent;
-  a:hover {
-    color: $hover-dark-base;
-  };
+.navbar-default {
+  border-radius: 0;
+  border-bottom: 1px solid $gray-hover !important;
 }
-
-.navbar-brand img { 
-    position: relative;
-    max-height: 20em;
-    max-width: 40%;
-    overflow: visible;
-    margin-top: -1px;
-    z-index: 999;
-}
-
 
 
 /* Images
@@ -170,6 +181,18 @@ h1 .fa-coffee {
   font-size: $tiny;
   color: gold;
 }
+
+.icon-tile {
+  img {
+    height: 25px;
+    width: 25px;
+    display: inline-block;    
+  }
+  &:hover {
+    background-color: $white !important;
+  }
+}
+
 
 /* subtitle-block
 *****************/
@@ -214,20 +237,43 @@ h1 .fa-coffee {
 
 /* buttons
 ***************/
+
 .btn {
-  background-color: $light-gray;
-  border-color: $medium-gray;
-  border-radius: 0;
+  padding: .5em 1.5em;
+  border-radius: 5px; 
+  line-height: 1.5;
+  margin-left: .5em;
+  cursor: pointer;
+  vertical-align: baseline;
+}
+
+$white: #fff;
+$blue: #2b6cb5;
+$blue-hover: #3078ca; /* color */
+$gray: #e9eaec;
+$gray-hover: #e4e5e7;
+$brown: #666;
+
+.btn-gray {
+  background-color: $gray;
+  color: $brown;
+  &:hover {
+    background-color: $gray-hover;
+  }
+}
+
+.btn-blue {
+  background-color: $blue;
+  color: $white !important;
+  &:hover {
+    background-color: $blue-hover;
+  }
 }
 
 
-.btn-primary {
-/*	background-color: $base;*/
-/* color: $accent; */
-/*	&:hover {
-		;
-	}*/
-}
+
+
+
 
 .nudge {
   margin-top: 2.29px;
