@@ -49,6 +49,12 @@
 		/*font-family: $base-font;*/
 	}
 
+  $slight-amount: 3%; 
+  $small-amount: 5%; 
+  $medium-amount: 10%; 
+  $large-amount: 15%; 
+  $huge-amount: 20%;
+
 	/* sizing */
   $absurd: 6em;
 	$huge: 4em; 
@@ -77,8 +83,7 @@
     margin-bottom: 0px;
   }
 
-  small {
-    
+  small {  
     color: $gray-dark;
     letter-spacing: normal;
     font-size: $medium;
@@ -90,9 +95,10 @@
 
 
 	h2 { 
+    color: $steel;
 		font-size: $medium; 
-		font-weight: 500;
-    text-shadow: 2px 2px $black;
+		font-weight: 200;
+    letter-spacing: 1px;
 	}
 
 	/* subtitles */
@@ -109,6 +115,17 @@
 	/*body { text-align: center; } */ /* Uncheck to have everything centered */
 	h1, h2, p { text-align: center; }
 
+  a {
+    text-decoration: none !important; 
+    &:hover {
+      text-decoration: none;
+      color: inherit !important;
+      background-color: inherit !important;
+    }
+  }
+
+
+
 
 /* general 
 ****************/
@@ -116,11 +133,19 @@ body {
   width: 100%;
 }
 
-$slight-amount: 3%; 
-$small-amount: 5%; 
-$medium-amount: 10%; 
-$large-amount: 15%; 
-$huge-amount: 20%;
+
+.btn-container {
+  margin-top: $slight-amount;
+}
+
+.sub-content-container {
+  margin-top: $small-amount;
+  text-align: center;
+}
+
+.banner-row {
+  margin-top: $absurd;
+}
 
 /* Navigation 
 ******************/
@@ -161,18 +186,13 @@ $huge-amount: 20%;
 
 /* Images
 ******************/
-#front-page-banner-img { 
-  background: url('/assets/coffee_faded.jpg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  height: 500px;
-  margin-bottom: 0;
-  padding-bottom: 0;
-  text-align: center;
+.home-img img {
+  margin-top: $medium-amount;
+  &:hover {
+    opacity: .8;
+    cursor: pointer;
+  }
 }
-
 
 .image-container {
   width: 100%;
@@ -253,6 +273,9 @@ h1 .fa-coffee {
 
 /* buttons
 ***************/
+.nudge {
+  height: 36.5px;
+}
 
 .btn {
   padding: .5em 1.5em;
@@ -261,6 +284,14 @@ h1 .fa-coffee {
   margin-left: .5em;
   cursor: pointer;
   vertical-align: baseline;
+}
+
+.btn-container {
+
+}
+
+.btn-panel {
+  margin-top: $small-amount;
 }
 
 $white: #fff;
@@ -276,6 +307,12 @@ $brown: #666;
   &:hover {
     background-color: $gray-hover;
   }
+  a {
+    color: $darkgray;
+    &:visited {
+      color: inherit !important;
+    }
+  }
 }
 
 .btn-blue {
@@ -284,15 +321,12 @@ $brown: #666;
   &:hover {
     background-color: $blue-hover;
   }
-}
-
-
-
-
-
-
-.nudge {
-  margin-top: 2.29px;
+  a {
+    color: $white;
+    &:visited {
+      color: inherit !important;
+    };
+  }
 }
 
 .navbar-btn { 
@@ -311,25 +345,19 @@ $brown: #666;
   border: none;
 }
 
-form .btn {
+/*form .btn {
   margin-top: $slight-amount;
 }
-
+*/
 .search-box {
   margin-top: $small-amount;
   .form-control {
-    width: 80% !important;
   }
 }
 
 #home-search {
-  margin: auto;
   margin-top: $huge-amount;
-  position: absolute;
-  top: 10%;
-  text-align: center;
   margin-left: 8%;
-
 }
 
 /* miscellaneous 

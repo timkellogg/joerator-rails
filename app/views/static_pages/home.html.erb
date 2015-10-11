@@ -1,47 +1,77 @@
-<div class="row text-center">
+<div class="row banner-row">
   <h1 class="main-heading">Joerator</h1>
-  <small>A place to find the world's <b>best</b> coffeeshops.</small>
+  <small>A network to find, review and enjoy the best coffeeshops.</small>
 </div>
 
-<div class="container">
-  <div id="home-search" class="container text-center">
-    <div class="col-md-6 text-center search-box">
+<div class="row btn-container">
+  <div class="col-md-6">
       <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
-        <div class="input-group input-append">
+        <div class="input-group">
           <span class="input-group-btn">
-            <button type="submit" class="btn btn-default btn-lg" type="button"><%= fa_icon "map-marker" %></button>
+            <button type="submit" class="btn btn-gray" type="button"><%= fa_icon "map-marker" %></button>
           </span>
-          <%= text_field_tag :search, params[:search], class: "form-control nudge input-lg", placeholder: "Search by location..." %>
+          <%= text_field_tag :search, params[:search], class: "form-control nudge", placeholder: "Search by location..." %>
         </div>
       <% end %>
-    </div>
-    <div class="col-md-6 text-center search-box">
-      <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
-        <div class="input-group input-append">
-          <span class="input-group-btn">
-            <button type="submit" class="btn btn-default btn-lg" type="button"><%= fa_icon "search" %></button>
-          </span>
-          <%= text_field_tag :search, params[:search], class: "form-control nudge input-lg", placeholder: "Search by name..." %>
-        </div>
-      <% end %>
-    </div>
+  </div>
+    <div class="col-md-6">
+    <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
+      <div class="input-group ">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-blue btn-default" type="button"><%= fa_icon "search" %></button>
+        </span>
+        <%= text_field_tag :search, params[:search], class: "form-control nudge", placeholder: "Search by name..." %>
+      </div>
+    <% end %>
   </div>
 </div>
 
+<div class="sub-content-container">
+  <div class="col-md-4 home-img">
+    <%= image_tag("beans.jpg", alt: "picture of coffee beans") %>
+    <h2>Best Coffee</h2>  
+  </div>
+
+  <div class="col-md-4 home-img">
+    <%= image_tag("crowd.jpeg", alt: "picture of coffee cup") %>
+    <h2>Most Popular</h2>  
+  </div>
+
+  <div class="col-md-4 home-img">
+    <%= image_tag("cup.jpg", alt: "picture of coffee cup") %>
+    <h2>Best to Study</h2>  
+  </div>
 
 
-<div class="card-container text-center">
-  <% @coffeeshops.each do |coffeeshop| %>
-    <div class="col-md-4">
-      <div class="card-header">
-        <img class="card-image" src=<%= coffeeshop.imageLink %>> 
-      </div>
-      <div class="card-title">
-        <h3><%= truncate(coffeeshop.name, length: 20) %></h3>
-      </div>
-      <div class="card-body">
-        <p>asdlf</p>
-      </div>
-    </div>
-  <% end %>
+  <div class="col-md-4 home-img">
+    <%= image_tag("hipster.jpeg", alt: "picture of coffee cup") %>
+    <h2>Hipster Hangouts</h2>  
+  </div>
+
+  <div class="col-md-4 home-img">
+    <%= image_tag("room.jpg", alt: "picture of coffee cup") %>
+    <h2>Most Resources</h2>  
+  </div>
+
+  <div class="col-md-4 home-img">
+    <%= image_tag("food.jpeg", alt: "picture of coffee cup") %>
+    <h2>Full Kitchens</h2>  
+  </div>
 </div>
+
+<% if logged_in? %>
+  <div class="row btn-container">
+    <div class="col-xs-12 btn-panel">
+      <button class="btn btn-lg btn-gray"><%= link_to 'List a Coffeeshop', new_coffeeshop_path %></button>
+      <button class="btn btn-lg btn-blue"><%= link_to 'Rate a Coffeeshop', new_coffeeshop_review_path(Coffeeshop.last) %></button>
+    </div>
+  </div>
+<% else %>
+  <div class="row btn-container">
+    <div class="col-xs-12 btn-panel">
+      <button class="btn btn-lg btn-gray"><%= link_to 'Signup Today!', signup_path %></button>
+    </div>
+  </div>
+<% end %>
+
+
