@@ -83,7 +83,7 @@
   margin: 0;
   padding-left: 0;
   padding-right: 0;
-	margin-top: 3%;
+	margin-top: 10%;
 }
 
 .container-fluid {
@@ -106,9 +106,9 @@ $huge-amount: 20%;
 
 /* Navigation 
 ******************/
-
-.navbar {
-  height: 6em;
+#bs-example-navbar-collapse-1 {
+  height: 10em !important;
+  box-shadow: 10px 10px 5px #888888
 }
 
 .navbar-txt {
@@ -120,6 +120,16 @@ $huge-amount: 20%;
     color: $hover-dark-base;
   };
 }
+
+.navbar-brand img { 
+    position: relative;
+    max-height: 20em;
+    max-width: 40%;
+    overflow: visible;
+    margin-top: -1px;
+    z-index: 999;
+}
+
 
 
 /* Images
@@ -136,14 +146,6 @@ $huge-amount: 20%;
   text-align: center;
 }
 
-.navbar-brand img { 
-    position: relative;
-    max-height: 20em;
-    max-width: 40%;
-    overflow: visible;
-    margin-top: -1px;
-    z-index: 999;
-}
 
 .image-container {
   width: 100%;

@@ -1,26 +1,12 @@
 <% provide(:title, @coffeeshop.name) %>
 
-<div id="coffeeshop-wrapper " class="container">
-  
-  <div class="row">
-    <h1><%= @coffeeshop.name %><br>
-    <% @average_rating.times do %>
-      <small><%= fa_icon "coffee" %></small>
-    <% end %> 
-    <small>| <%= @ratings[:total] %> Reviews</small>
-    </h1>
-  </div> 
+<div id="coffeeshop-wrapper" class="container">
+  <div class="row text-left">
+    <h1><%= @coffeeshop.name %>, <%= @coffeeshop.city %></h1>
+  </div>
 
-      <img class="coffeeshop-img" src=<%= @coffeeshop.imageLink %> alt="">      
 
-      <p>
-        Average Rating: <%= @average_rating %><br> 
-        Total: <%= @ratings[:total] %><br>
-        Quality Total: <%= @ratings[:quality_total] %><br>
-        Study Total: <%= @ratings[:study_total] %><br>
-        Hipster Total: <%= @ratings[:hipster_total] %><br>
-        Laptop Total: <%= @ratings[:laptop_total] %><br>
-      </p>
+  <img class="coffeeshop-img" src=<%= @coffeeshop.imageLink %> alt="">      
 
 <iframe width="400" height="400" frameborder="0" style="border:0"
 src="https://www.google.com/maps/embed/v1/place?q=<%= @coffeeshop.address %>&key=AIzaSyC7refRsrpNaOI9TrGEuhjJmI9bJAi1yI0"></iframe>
