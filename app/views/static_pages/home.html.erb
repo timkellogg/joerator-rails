@@ -1,4 +1,9 @@
-<div id="front-page-banner-img" class="container-fluid">
+<div class="row text-center">
+  <h1 class="main-heading">Joerator</h1>
+  <small>A place to find the world's <b>best</b> coffeeshops.</small>
+</div>
+
+<div class="container">
   <div id="home-search" class="container text-center">
     <div class="col-md-6 text-center search-box">
       <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
@@ -23,11 +28,9 @@
   </div>
 </div>
 
-<div class="subtitle-block row">
-  <h2>Featured</h2>
-</div>
 
-<div class=" card-container text-center">
+
+<div class="card-container text-center">
   <% @coffeeshops.each do |coffeeshop| %>
     <div class="col-md-4">
       <div class="card-header">

@@ -1,6 +1,5 @@
 <nav class="navbar navbar-default">
   <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -12,10 +11,9 @@
         <%= image_tag("logo.png", alt: "logo") %>
       </a>
     </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-left">
+        <li><%= link_to 'Joerator', root_url, class: 'navbar-item brand-text' %></li>
         <li><%= link_to 'Highest Rated',   coffeeshops_path,    class: 'navbar-item' %></li>
         <li><%= link_to 'Newest Editions', coffeeshops_path,    class: 'navbar-item' %></li>
         <li><%= link_to 'Most Reviewed',   coffeeshops_path,    class: 'navbar-item' %></li>

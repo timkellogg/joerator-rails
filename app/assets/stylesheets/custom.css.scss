@@ -22,6 +22,7 @@
   $gray: #e9eaec;
   $gray-hover: #e4e5e7;
   $steel: #333;
+  $gray-dark: #aaa;
 
   /*
   *************/
@@ -64,9 +65,30 @@
 	}
 
 	h1 {
-		font-size: $large;
-		font-weight: 600;
+    color: $steel;
+    font-size: $absurd;
+    font-weight: 100;
+    line-height: 1.5;
+    text-align: center;
+    letter-spacing: 2px;
 	}
+
+  .main-heading {
+    margin-bottom: 0px;
+  }
+
+  small {
+    
+    color: $gray-dark;
+    letter-spacing: normal;
+    font-size: $medium;
+    font-weight: 200;
+    b {
+      color: darken($gray-dark, 10%);
+    }
+  }
+
+
 	h2 { 
 		font-size: $medium; 
 		font-weight: 500;
@@ -90,21 +112,6 @@
 
 /* general 
 ****************/
-#site-content-wrapper {
-  margin: 0;
-  padding-left: 0;
-  padding-right: 0;
-	margin-top: 10%;
-}
-
-.container-fluid {
-  padding: 0;
-}
-
-.content-container {
-  margin-top: $absurd;
-}
-
 body {
   width: 100%;
 }
@@ -132,8 +139,17 @@ $huge-amount: 20%;
   font-variant: small-caps;
   margin-left: -5px;
   &:hover {
-    background-color: $gray !important;
-    transition: .3s background-color ease-out;
+    color: $steel;
+    font-weight: 400;
+  }
+}
+
+.brand-text {
+  color: $black !important;
+  font-weight: 400;
+  font-size: 16px;
+  &:hover { 
+    background-color: $white !important; 
   }
 }
 
