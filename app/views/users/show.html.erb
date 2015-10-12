@@ -21,11 +21,19 @@
 
   <div id="profile-details" class="row">
     <div class="col-xs-12">
-      <p> User for <%= time_ago_in_words(@user.created_at) %> </p>
-      <p> 
-        <%= fa_icon "facebook-square" %> |
-        <%= fa_icon "map-marker" %>
-      </p>
+      <p> <%= fa_icon "map-marker" %> <%= @user.location %> </p>
+        <%= link_to "#{@user.facebook_link}" do %>
+          <%= fa_icon "facebook-square" %>
+        <% end %>
+        <%= link_to "#{@user.google_link}" do %>
+          <%= fa_icon "google-plus-square" %>
+        <% end %>
+        <%= link_to "#{@user.instagram_link}" do %>
+          <%= fa_icon "instagram" %>
+        <% end %>
+        <%= link_to "#{@user.twitter_link}" do %>
+          <%= fa_icon "twitter-square" %>
+        <% end %>
     </div>
   </div>
 

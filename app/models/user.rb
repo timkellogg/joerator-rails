@@ -10,11 +10,6 @@ class User < ActiveRecord::Base
   validates :password, presence: true, length: { minimum: 8 }, allow_nil: true 
 
   # validates :bio, length: { maximum: 255 }, allow_nil: true 
-  
-  # validates_length_of :favorite_coffee, :location, :facebook_link, :twitter_link, 
-  #                     :google_link, :instagram_link, { maximum: 64 }, 
-  #                     allow_nil: true 
-
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
