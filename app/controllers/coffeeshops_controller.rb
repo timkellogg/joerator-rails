@@ -6,10 +6,13 @@ class CoffeeshopsController < ApplicationController
     @came_from_search = false
 
     if params[:search]
-      @coffeeshops = Coffeeshop.search(params[:search]).order("created_at DESC")
+      @coffeeshops = Coffeeshop.search(params[:search]).order(created_at: :desc)
+      @came_from_search = true 
+    elsif params[:search_location]
+      @coffeeshops = Coffeeshop.search_location(params[:search_location]).order(created_at: :desc)
       @came_from_search = true 
     else 
-      @coffeeshops = Coffeeshop.all
+      @coffeeshops = Coffeeshop.all.order(created_at: :desc).paginate(:page => params[:page])
     end
   end
 

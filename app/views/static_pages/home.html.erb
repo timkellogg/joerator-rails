@@ -5,14 +5,14 @@
 
 <div class="row btn-container">
   <div class="col-md-6">
-      <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
-        <div class="input-group">
-          <span class="input-group-btn">
-            <button type="submit" class="btn btn-gray" type="button"><%= fa_icon "map-marker" %></button>
-          </span>
-          <%= text_field_tag :search, params[:search], class: "form-control nudge", placeholder: "Search by location..." %>
-        </div>
-      <% end %>
+    <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-gray" type="button"><%= fa_icon "map-marker" %></button>
+        </span>
+        <%= text_field_tag :search_location, params[:search_location], class: "form-control nudge", placeholder: "Search by location..." %>
+      </div>
+    <% end %>
   </div>
     <div class="col-md-6">
     <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>

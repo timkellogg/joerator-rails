@@ -13,8 +13,15 @@ class Coffeeshop < ActiveRecord::Base
   validates :parking,  inclusion:    { :in => %w[lots some none]}
   validates :style,    inclusion:    { :in => %w[casual formal] }
 
+
+  # In future versions, raw SQL will be replaced. 
+  # However, AR does not support OR natively in a clean way
   def self.search(query)
     where("name like ?", "%#{query}%") 
+  end
+
+  def self.search_location(query)
+    where("state= ? OR city= ?", "#{query}", "#{query}")
   end
 end
 
