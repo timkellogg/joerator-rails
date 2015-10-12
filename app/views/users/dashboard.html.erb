@@ -2,6 +2,25 @@
   <h1>Admin Dashboard</h1>
 </div>
 
+<div id="admin-controls">
+  <button id="show-shop-stats" class="btn btn-gray">View Coffeeshop Stats </button>
+  <button id="show-user-stats" class="btn btn-blue">View User Stats</button>
+</div>
+
+<div id="coffeeshop-stats" class="hidden">
+  <p>Show</p>
+</div>
+
+<div id="user-stats" class="hidden">
+  <p>Show</p>
+</div>
+
+http://www.chartjs.org/
+
+
 <% if current_user && current_user.admin? %>
   <%= link_to 'New Coffeeshop', new_coffeeshop_path %>
 <% end %>
+
+
+<!-- write a scrapper to get the coffeshops on a google search -->
