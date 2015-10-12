@@ -43,6 +43,11 @@ $gray-dark: #aaa;
     text-align: left;
     color: darken($gray-dark, 15%);
   }
+  .lead {
+    font-variant: small-caps;
+    font-size: 18px;
+    padding-right: 8px;
+  }
 }
 
 .title {

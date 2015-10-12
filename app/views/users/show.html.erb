@@ -42,41 +42,20 @@
     <h4>About</h4>
   </div>
   <div class="simple-box">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p><span class="lead">Bio: </span><%= @user.bio %></p>
+    <p><span class="lead">Fav Coffee: </span><%= @user.favorite_coffee %></p>
+    <p><span class="lead">Fav Coffeeshops: </span><%= @user.favorite_coffee %></p>
   </div>
 
-  <div class="title">
-    <h4>Favorites</h4>
-  </div>
-  <div class="simple-box">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-  </div>
 
   <div class="title">
     <h4>Recent Reviews</h4>
   </div>
   <div class="simple-box">
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <p><% @user.reviews.each do |review| %>
+        <%= review.title %>
+       <% end %>
+    </p>
   </div>
 </div>
 
-<!-- Add to user -->
-<!-- Facebook link -->
-<!-- Location -->
-<!-- Short bio -->
-<!-- Favorited coffeshop -->
