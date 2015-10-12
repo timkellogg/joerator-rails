@@ -4,7 +4,14 @@
   email: "admin@joerator.com",
   password: "password",
   password_confirmation: "password",
-  admin: true
+  admin: true,
+  bio: Faker::Lorem.sentence(3),
+  favorite_coffee: 'americano',
+  location: "Portland",
+  facebook_link: "https://www.facebook.com/admin_user",
+  twitter_link: "https://twitter.com/admin_user",
+  google_link: "https://googleplus/admin_user",
+  instagram_link: "https://instagram.com/admin_user"
 )
 
 rand(10..40).times do |n|
@@ -14,6 +21,13 @@ rand(10..40).times do |n|
     email: "user#{n}@joerator.com",
     password: "password",
     password_confirmation: "password",
+    bio: Faker::Lorem.sentence(rand(1..4)),
+    favorite_coffee: %w[expresso americano latte black irish liquor chai].sample,
+    location: Faker::Address.city,
+    facebook_link: "https://www.facebook.com/user#{n}",
+    twitter_link: "https://twitter.com/user#{n}",
+    google_link: "https://googleplus/user#{n}",
+    instagram_link: "https://instagram.com/user#{n}"
   )
 
   Coffeeshop.create!(
