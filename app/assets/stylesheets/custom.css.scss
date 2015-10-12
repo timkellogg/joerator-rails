@@ -271,10 +271,18 @@ h1 .fa-coffee {
 *****************/
 
 
+
+
 /* buttons
 ***************/
 .nudge {
   height: 36.5px;
+}
+
+.btn-default {
+  a {
+    color: black;
+  }
 }
 
 .btn {

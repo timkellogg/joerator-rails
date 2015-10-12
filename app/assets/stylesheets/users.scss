@@ -1,3 +1,61 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$white: #fff;
+$blue: #2b6cb5;
+$blue-hover: #3078ca; /* color */
+$gray: #e9eaec;
+$gray-hover: #e4e5e7;
+$steel: #333;
+$gray-dark: #aaa;
+
+/* Profile Page
+*****************/
+
+#profile-picture img {
+  margin: auto;
+  border-radius: 50%;
+  height: 125px;
+  width: 125px;
+  margin-top: 5%;
+}
+
+#profile-name h1 {
+  font-size: 3em;
+}
+
+#profile-details {
+  i {
+    font-size: 1.2em;
+    color: $blue;
+  }
+  .simple-box,
+  .title {
+    width: 80%;
+  }
+}
+
+.simple-box {
+  width: 80%;
+/*  margin: auto;*/
+  background-color: darken($white, 2.5%);
+  border: 1px solid darken($white, 12%);
+  padding: 3%;
+  p {
+    line-height: 1.5;
+    text-align: left;
+    color: darken($gray-dark, 15%);
+  }
+}
+
+.title {
+  width: 80%;
+  h4 {
+    text-align: center;
+    margin-top: 5%;
+  }
+}
+
+#profile-reviews  {
+  margin-top: 2%;
+  div {
+    margin: auto;
+  }
+}
