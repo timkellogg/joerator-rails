@@ -1,35 +1,26 @@
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
-  
+describe User do 
   before do
   	@user = User.create(name: "First", email: "user@example.com",
   		                  password: "password", password_confirmation: "password")
   end
 
-  subject { @user }
+  it { should validate_presence_of   :name           }
+  it { should validate_presence_of   :email          }
 
-  it { should be_valid }
-
-  describe "when name not present" do 
-  	before { @user.name = " "}
-  	it { should_not be_valid }
-  end
-
-  describe "when email is not present" do  
-  	before { @user.email = " "}
-  	it { should_not be_valid }
-  end
-
-  describe "name should not be too long" do  
-  	before { @user.name = "a" * 51 }
-  	it { should_not be_valid }
-  end
-
-  describe "email should not be too long" do  
-  	before { @user.email = "a" * 256 }
-  	it { should_not be_valid }
-  end
+  it { should validate_uniqueness_of :email          }
+  
+  it { should validate_length_of     :bio            }
+  it { should validate_length_of     :location       }
+  it { should validate_length_of     :facebook_link  }
+  it { should validate_length_of     :twitter_link   }
+  it { should validate_length_of     :google_link    }
+  it { should validate_length_of     :instagram_link }
+  it { should validate_length_of     :password       }
+  it { should validate_length_of     :email          }
+  it { should validate_length_of     :name           }
+  it { should validate_length_of     :password       }
 
   describe "when email format is invalid" do
     it "should be invalid" do
@@ -52,58 +43,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # describe "when email address is already taken" do
-  #   before do
-  #     user_with_same_email = @user.dup
-  #     user_with_same_email.email = @user.email.upcase
-  #     user_with_same_email.save
-  #   end
-
-  #   it { should_not be_valid }
-  # end
-
   describe "when password doesn't match confirmation" do
     before { @user.password_confirmation = "mismatch" }
     it { should_not be_valid }
   end
-
-  describe "when password is too short" do  
-  	before do 
-  		@user.password = "passwor"
-  		@user.password_confirmation = "passwor"
-  	end
-
-  	it { should_not be_valid }
-  end
-
-  describe "when password is blank" do 
-  	before do 
-  		@user.password = " " * 8
-  		@user.password_confirmation = " " * 8
-  	end
-
-  	it { should_not be_valid }
-  end
-
-
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#

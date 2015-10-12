@@ -1,7 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "UsersSignups", type: :feature do
-
+describe "Signing Up", :type => :feature do 
 	describe "when passing in invalid information" do 
 		it "should return errors and render current page" do 
 			visit signup_path

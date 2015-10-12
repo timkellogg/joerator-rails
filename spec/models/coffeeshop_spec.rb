@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Coffeeshop, type: :model do
+describe Coffeeshop do
   it { should have_many :reviews }
   it { should have_one  :menu    }
 
@@ -16,10 +16,8 @@ RSpec.describe Coffeeshop, type: :model do
   it { should validate_presence_of :parking         }
   it { should validate_presence_of :style           }
 
-  it { should validate_numericality_of :price       }
   it { should_not allow_value(6).for(:price)        }
   it { should_not allow_value(-1).for(:price)       }
-  it { should_not allow_value(1.1).for(:price)      }
 
   it { should validate_inclusion_of(:parking).in_array(%w[lots some none]) }
   it { should validate_inclusion_of(:style).in_array(%w[casual formal])    }

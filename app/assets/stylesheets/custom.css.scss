@@ -368,6 +368,16 @@ $brown: #666;
   margin-left: 8%;
 }
 
+/*overriding bootstrap*/
+.form-control,
+button,
+.btn-gray,
+.btn-blue,
+.btn-default,
+.btn-primary {
+  border-radius: 0 !important;
+}
+
 /* miscellaneous 
 ****************/
 .debug_dump {

@@ -1,16 +1,33 @@
 <div class="container content-container">
 
   <% if @came_from_search %>
-    <div class="col-md-6 text-center search-box">
-      <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
-        <div class="input-group input-append">
-          <span class="input-group-btn">
-            <button type="submit" class="btn btn-default" type="button"><%= fa_icon "search" %></button>
-          </span>
-          <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search by..." %>
-        </div>
-      <% end %>
+    <div class="col-xs-12">
+      <button id="toggle-form" class="btn btn-blue">Not Satisfied?</button>
     </div>
+    <div id="search-container" class="hidden">    
+      <div class="col-md-6">
+        <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
+          <div class="input-group ">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-blue btn-default" type="button"><%= fa_icon "search" %></button>
+            </span>
+            <%= text_field_tag :search, params[:search], class: "form-control nudge", placeholder: "Search by name..." %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-6">
+        <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button type="submit" class="btn btn-gray" type="button"><%= fa_icon "map-marker" %></button>
+            </span>
+            <%= text_field_tag :search, params[:search], class: "form-control nudge", placeholder: "Search by location..." %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <h2><%= @coffeeshops.count %></h2>
   <% end %>
 
   <div class=" card-container text-center">
@@ -33,3 +50,11 @@
     <%= link_to 'New Coffeeshop', new_coffeeshop_path %>
   <% end %>
 </div>
+
+<script>
+  $(document).ready(function() {
+    $("#toggle-form").on("click", function() {
+      $("#search-container").toggleClass("hidden");
+    });
+  });
+</script>

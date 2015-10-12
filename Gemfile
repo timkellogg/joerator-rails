@@ -37,7 +37,7 @@ group :test, :development do
 end
 
 group :test do
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', github: 'thoughtbot/shoulda-matchers'
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'simplecov', require: false

@@ -8,7 +8,6 @@ class Item < ActiveRecord::Base
   validates :description,  length: { maximum: 64 }
   validates :meal_type,    inclusion: { in: %w[appetizer brunch breakfast lunch dinner holiday] }
 
-  validates :price, format:       { with: /\A\d+(?:\.\d{0,2})?\z/ }, 
-                    numericality: { greater_than: 0 }
+  validates :price, format:       { with: /\A\d+(?:\.\d{0,2})?\z/ }, numericality: { greater_than: 0 }
 end
 

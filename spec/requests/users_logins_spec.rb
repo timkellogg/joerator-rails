@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "UsersLogins", type: :feature do
+describe "Logging In", :type => :feature do 
 	describe "when using invalid info to login" do 
 		it 'should render the page with a flash message' do 
 			visit login_path 
