@@ -23,7 +23,10 @@ class UsersController < ApplicationController
   	end
   end
 
-  def edit
+  def edit 
+  end
+
+  def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "Profile successfully updated!"
@@ -58,8 +61,10 @@ class UsersController < ApplicationController
 
     def correct_user
       @user = User.find(params[:id])
-      flash[:danger] = "You can only edit your own profile"
-      redirect_to root_url unless @user == current_user
+      if @user != current_user && !current_user.admin?
+        flash[:danger] = "You can only edit your own profile"
+        redirect_to root_url unless @user == current_user
+      end
     end
 
     def is_admin?

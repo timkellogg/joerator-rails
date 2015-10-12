@@ -4,7 +4,7 @@
 
   <% if @user == current_user %>
     <div id="profile-edit">
-      <%= link_to 'Edit Profile', edit_user_path(@user.id), class: 'btn btn-default' %> 
+      <%= link_to 'Edit Profile', edit_user_path(@user), class: 'btn btn-default' %> 
     </div>
   <% end %>
   
