@@ -1,0 +1,11 @@
+<h2><%= @menu.coffeeshop.name %>'s Menu</h2>
+
+<% if @menu.items.any? %>
+  <ul>
+    <%= @menu.items.each do |item| %>
+      <li><%= item.name %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= link_to 'Back to Coffeeshop', coffeeshop_path(@menu.coffeeshop) %>

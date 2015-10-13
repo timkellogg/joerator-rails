@@ -391,12 +391,15 @@ button,
 .btn-gray,
 .btn-blue,
 .btn-default,
-.btn-primary {
+.btn-primary,
+.input-group,
+.input-group-addon {
   border-radius: 0 !important;
 
 }
 
-select {
+select,
+.input-group {
   -webkit-appearance: none;
 }
 

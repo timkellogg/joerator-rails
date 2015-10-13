@@ -6,16 +6,18 @@ class ItemsController < ApplicationController
   end
 
   def new
+    @menu = Menu.find(params[:menu_id])
     @item = Item.new 
   end
 
   def create
+    # whitelist menu_id 
+    @menu = Menu.find(params[:menu_id])
     @item = Item.new(item_params)
-    @menu = Menu.find(item_params[:menu_id])
     @item.menu = @menu 
 
     if @item.save 
-      
+      redirect_to menu_path(@menu) 
     else
       redirect_to :back
     end
@@ -31,12 +33,11 @@ class ItemsController < ApplicationController
   end
 
   private 
-
-    def set_item 
+    def item_params 
       params.require(:item).permit(:menu_id, :name, 
                                    :description, :veggie_friendly,
                                    :vegan_friendly, :gluten_free, 
-                                   :image_link, :price)
+                                   :image_link, :price, :meal_type)
     end
-
 end
+
