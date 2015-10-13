@@ -20,6 +20,10 @@ class CoffeeshopsController < ApplicationController
     @reviews        = @coffeeshop.reviews.order(created_at: :desc).paginate(:page => params[:page])
     @ratings        = get_ratings(@coffeeshop)
     @average_rating = get_average_rating(@ratings)
+    
+    if @coffeeshop.menu 
+      @menu = @coffeeshop.menu
+    end
   end
 
   def new

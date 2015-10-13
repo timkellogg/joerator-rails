@@ -5,6 +5,13 @@
     <h1><%= @coffeeshop.name %>, <%= @coffeeshop.city %></h1>
   </div>
 
+  <% if current_user && current_user.admin? && @coffeeshop.menu.nil? %>
+    <%= link_to 'Add a Menu', new_coffeeshop_menu_path(@coffeeshop), class: 'btn btn-default' %>
+  <% end %>
+
+  <% if current_user && current_user.admin? && @menu %>
+    <%= link_to 'Add an Item to the Menu', new_menu_item_path(@menu) %>
+  <% end %>
 
   <img class="coffeeshop-img" src=<%= @coffeeshop.imageLink %> alt="">      
 
@@ -40,5 +47,4 @@ src="https://www.google.com/maps/embed/v1/place?q=<%= @coffeeshop.address %>&key
 
 
   <%= link_to 'Edit', edit_coffeeshop_path(@coffeeshop) %> |
-  <%= link_to 'Back', coffeeshops_path %>
 </div>
