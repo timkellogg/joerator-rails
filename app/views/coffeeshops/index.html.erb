@@ -28,21 +28,61 @@
     </div>
 
     <h2><%= @coffeeshops.count %></h2>
+
+
+    <% if @show_map %>
+    <div id="map">
+      
+    </div>
+    <% end %>
+
+
   <% end %>
 
   <div class=" card-container text-center">
     <% @coffeeshops.each do |coffeeshop| %>
-      <div class="col-md-4">
-        <div class="card-header">
-          <img class="card-image" src=<%= coffeeshop.imageLink %>> 
+      <%= link_to coffeeshop_path(coffeeshop) do %>
+        <div class="col-md-4">
+          <div class="card-header">
+            <img class="card-image" src=<%= coffeeshop.imageLink %>> 
+          </div>
+          <div class="card-title">
+            <h3><%= truncate(coffeeshop.name, length: 20) %></h3>
+          </div>
+          <div class="card-body">
+            <p><%= fa_icon "map-marker" %> <%= coffeeshop.city %></p>
+          </div>
         </div>
-        <div class="card-title">
-          <h3><%= truncate(coffeeshop.name, length: 20) %></h3>
-        </div>
-        <div class="card-body">
-          <p>asdlf</p>
-        </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>
+
+<% if @show_map %>
+  <script>
+    function initMap() {
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: {lat: 41.8369, lng: 87.6847}
+      });
+      <% i = 0 %>
+      <% @coffeeshops.each do |coffeeshop| %>
+      var infowindow<%= i %> = new google.maps.InfoWindow({
+        content: "<%= coffeeshop.name %>"
+      });
+      var marker<%= i %> = new google.maps.Marker({
+        position: {lat: <%= sighting.lat %>, lng: <%= sighting.lng %>},
+        map: map,
+        animation: google.maps.Animation.DROP,
+        title: "<%= sighting.species.name %> Sighting",
+        icon: {url: "<%= sighting.species.img %>", scaledSize: new google.maps.Size(24, 24)}
+      })
+      marker<%= i %>.addListener('click', function() {
+        infowindow<%= i %>.open(map, marker<%= i %>);
+      });
+      <% i = i+1 %>
+      <% end %>
+    }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmrxmh4cODT8lVmgReObQQxA3H4yDzVlY&signed_in=true&callback=initMap"></script>
+<% end %>

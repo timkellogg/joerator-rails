@@ -4,6 +4,7 @@ class CoffeeshopsController < ApplicationController
 
   def index
     @came_from_search = false
+    @show_map = false
 
     if params[:search]
       @coffeeshops = Coffeeshop.search(params[:search]).order(created_at: :desc)
@@ -11,6 +12,7 @@ class CoffeeshopsController < ApplicationController
     elsif params[:search_location]
       @coffeeshops = Coffeeshop.search_location(params[:search_location]).order(created_at: :desc)
       @came_from_search = true 
+      @show_map  = false 
     else 
       @coffeeshops = Coffeeshop.all.order(created_at: :desc).paginate(:page => params[:page])
     end
