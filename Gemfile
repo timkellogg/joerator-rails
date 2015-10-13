@@ -14,6 +14,7 @@ gem 'bootstrap-sass',       '3.2.0.0'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem "font-awesome-rails"
+gem 'geocoder'
 
 
 group :production do

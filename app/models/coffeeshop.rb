@@ -13,6 +13,12 @@ class Coffeeshop < ActiveRecord::Base
   validates :parking,  inclusion:    { :in => %w[lots some none]}
   validates :style,    inclusion:    { :in => %w[casual formal] }
 
+  geocoded_by :full_address
+  after_validation :geocode 
+
+  def full_address
+    return "#{address} #{city} #{state}"
+  end
 
   # In future versions, raw SQL will be replaced. 
   # However, AR does not support OR natively in a clean way
