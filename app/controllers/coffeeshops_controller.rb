@@ -12,7 +12,7 @@ class CoffeeshopsController < ApplicationController
     elsif params[:search_location]
       @coffeeshops = Coffeeshop.search_location(params[:search_location]).order(created_at: :desc)
       @came_from_search = true 
-      @show_map  = false 
+      @show_map  = true 
     else 
       @coffeeshops = Coffeeshop.all.order(created_at: :desc).paginate(:page => params[:page])
     end

@@ -31,7 +31,7 @@
 
 
     <% if @show_map %>
-    <div id="map">
+    <div id="map" style="height: 500px; width: 500px;">
       
     </div>
     <% end %>
@@ -71,11 +71,10 @@
         content: "<%= coffeeshop.name %>"
       });
       var marker<%= i %> = new google.maps.Marker({
-        position: {lat: <%= sighting.lat %>, lng: <%= sighting.lng %>},
+        position: {lat: <%= coffeeshop.latitude %>, lng: <%= coffeeshop.longitude %>},
         map: map,
         animation: google.maps.Animation.DROP,
-        title: "<%= sighting.species.name %> Sighting",
-        icon: {url: "<%= sighting.species.img %>", scaledSize: new google.maps.Size(24, 24)}
+        title: "<%= coffeeshop.name %>"
       })
       marker<%= i %>.addListener('click', function() {
         infowindow<%= i %>.open(map, marker<%= i %>);
@@ -84,5 +83,5 @@
       <% end %>
     }
   </script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmrxmh4cODT8lVmgReObQQxA3H4yDzVlY&signed_in=true&callback=initMap"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxb-nwbVf_TPsKG2BygPDyK8-AJUM_JtY&signed_in=true&callback=initMap"></script>
 <% end %>
