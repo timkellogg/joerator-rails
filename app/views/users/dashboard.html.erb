@@ -8,14 +8,25 @@
 </div>
 
 <div id="coffeeshop-stats" class="hidden">
-  <p>Show</p>
+
+  <%= will_paginate @ordered_users, renderer: BootstrapPagination::Rails %>
+  <ul>
+    <% @ordered_users.each do |user| %>
+      <li>
+        <%= link_to user_path(user) do %>
+          <%= user.name %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
 </div>
 
 <div id="user-stats" class="hidden">
   <p>Show</p>
 </div>
 
-http://www.chartjs.org/
+<!-- http://www.chartjs.org/ -->
 
 
 <% if current_user && current_user.admin? %>

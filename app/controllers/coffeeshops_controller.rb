@@ -31,14 +31,16 @@ class CoffeeshopsController < ApplicationController
 
   def create
     @coffeeshop = Coffeeshop.new(coffeeshop_params)
+    @coffeeshop.qualityRating = 0 
+    @coffeeshop.hipsterRating = 0
+    @coffeeshop.laptopRating  = 0
+    @coffeeshop.studyRating   = 0
 
-    respond_to do |format|
-      if @coffeeshop.save
-        format.html { redirect_to @coffeeshop, notice: 'Coffeeshop was successfully created.' }
-        
-      else
-        format.html { render :new }
-      end
+    if @coffeeshop.save
+      flash[:success] = "Coffeeshop was successfully created"
+      redirect_to @coffeeshop
+    else
+      render 'new'
     end
   end
 
@@ -58,7 +60,6 @@ class CoffeeshopsController < ApplicationController
     @coffeeshop.destroy
     respond_to do |format|
       format.html { redirect_to coffeeshops_url, notice: 'Coffeeshop was successfully destroyed.' }
-      
     end
   end
 
@@ -69,6 +70,8 @@ class CoffeeshopsController < ApplicationController
 
     def coffeeshop_params
       params.require(:coffeeshop).permit(:name, :address, :qualityRating, 
-        :studyRating, :laptopRating, :hipsterRating, :imageLink, :webAddress, :city, :state)
+        :studyRating, :laptopRating, :hipsterRating, :imageLink, :webAddress, :city, :state,
+        :opens_at, :closes_at, :price, :accepts_credit, :parking, :style, :vegan_friendly, 
+        :veggie_friendly, :city, :state)
     end
 end

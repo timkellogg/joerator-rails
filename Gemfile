@@ -12,8 +12,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass',       '3.2.0.0'
 gem 'will_paginate'
-gem 'bootstrap-will_paginate'
+gem 'will_paginate-bootstrap'
 gem "font-awesome-rails"
+
 
 group :production do
   gem 'puma'

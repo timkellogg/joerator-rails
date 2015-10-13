@@ -368,6 +368,23 @@ $brown: #666;
   margin-left: 8%;
 }
 
+form {
+  h4 {
+    margin-bottom: 2%;
+    margin-top: 4%;
+  }
+  label {
+    margin-top: 2%;
+  }
+}
+
+.slighter-margin-top {
+  margin-top: 8%;
+}
+.slight-margin-top {
+  margin-top: 5%;
+}
+
 /*overriding bootstrap*/
 .form-control,
 button,
@@ -376,6 +393,11 @@ button,
 .btn-default,
 .btn-primary {
   border-radius: 0 !important;
+
+}
+
+select {
+  -webkit-appearance: none;
 }
 
 /* miscellaneous 

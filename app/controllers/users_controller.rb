@@ -43,7 +43,9 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    @users = User.all
+    @users = User.all.order(name: :desc)
+    @ordered_users = @users.paginate(:page => params[:page], :per_page => 5)
+    # @active_users  = @users.sort(revi)
   end
 
   private
