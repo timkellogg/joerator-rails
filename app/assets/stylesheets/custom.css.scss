@@ -129,9 +129,11 @@
     background-color: $light-gray;
     height: 20%;
     width: 100%;
-
   }
 
+  .page-content {
+    
+  }
 
 /* general 
 ****************/
@@ -216,10 +218,6 @@ body {
   width: 650px;
 }
 
-.banner-2 {
-  margin-top: 2%;
-  margin-left: -3%;
-}
 
 .info-panel {
   box-shadow: 2px 2px 2px 2px $gray-dark;

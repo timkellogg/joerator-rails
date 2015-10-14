@@ -32,10 +32,6 @@
       <%= link_to 'Add a review', new_coffeeshop_review_path(@coffeeshop), class: 'btn btn-primary' %>
     <% end %>
 
-    <% if logged_in? %>
-      <%= render :partial => 'reviews/form', :object => @coffeeshop %>
-    <% end %>
-
     <%= will_paginate @reviews %>
 
     <% @reviews.each do |review| %>

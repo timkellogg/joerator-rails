@@ -1,11 +1,11 @@
 <div class="simple-box container">
-  <%= form_for [@coffeeshop, @coffeeshop.reviews.new] do |f| %>
-    <% if @coffeeshop.reviews.new.errors.any? %>
+  <%= form_for [@coffeeshop, @review] do |f| %>
+    <% if @review.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@coffeeshop.reviews.new.errors.count, "error") %> prohibited this review from being saved:</h2>
+        <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
 
         <ul>
-        <% @coffeeshop.reviews.new.errors.full_messages.each do |message| %>
+        <% @review.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
         </ul>
