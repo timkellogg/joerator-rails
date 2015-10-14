@@ -1,27 +1,39 @@
 <% provide(:title, @coffeeshop.name) %>
 
-<div id="coffeeshop-wrapper" class="container">
-  <div class="row text-left">
-    <h1><%= @coffeeshop.name %>, <%= @coffeeshop.city %></h1>
+<div id="coffeeshop-wrapper">
+
+  <div class="banner row">    
+    <h2><%= @coffeeshop.name %></h2>
+    <h2><small><%= @coffeeshop.full_address %></small></h2>
   </div>
 
-  <% if current_user && current_user.admin? && @coffeeshop.menu.nil? %>
-    <%= link_to 'Add a Menu', new_coffeeshop_menu_path(@coffeeshop), class: 'btn btn-default' %>
-  <% end %>
+  <div class="banner-2 row">
+    <div class="col-xs-12">
+      <img class="coffeeshop-img" src=<%= @coffeeshop.imageLink %> alt="image of coffeeshop">      
+    </div>
+  </div>
 
-  <% if current_user && current_user.admin? && @menu %>
-    <%= link_to 'Add an Item to the Menu', new_menu_item_path(@menu) %>
-  <% end %>
 
-  <img class="coffeeshop-img" src=<%= @coffeeshop.imageLink %> alt="">      
+    <div class="col-md-6">
+      <iframe width="425" height="425" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<%= @coffeeshop.address %>&key=AIzaSyC7refRsrpNaOI9TrGEuhjJmI9bJAi1yI0"></iframe>
+     </div>
 
-<iframe width="400" height="400" frameborder="0" style="border:0"
-src="https://www.google.com/maps/embed/v1/place?q=<%= @coffeeshop.address %>&key=AIzaSyC7refRsrpNaOI9TrGEuhjJmI9bJAi1yI0"></iframe>
+    <% if current_user && current_user.admin? && @coffeeshop.menu.nil? %>
+      <%= link_to 'Add a Menu', new_coffeeshop_menu_path(@coffeeshop), class: 'btn btn-default' %>
+    <% end %>
+
+    <% if current_user && current_user.admin? && @menu %>
+      <%= link_to 'Add an Item to the Menu', new_menu_item_path(@menu) %>
+    <% end %>
 
     <div class="container">
 
     <% if logged_in? %>
       <%= link_to 'Add a review', new_coffeeshop_review_path(@coffeeshop), class: 'btn btn-primary' %>
+    <% end %>
+
+    <% if logged_in? %>
+      <%= render :partial => 'reviews/form', :object => @coffeeshop %>
     <% end %>
 
     <%= will_paginate @reviews %>
@@ -43,8 +55,12 @@ src="https://www.google.com/maps/embed/v1/place?q=<%= @coffeeshop.address %>&key
     <% end %>
     </div>
 
-    <%= will_paginate @reviews %>
-
+        <div class="col-md-5">
+      <div class="info-panel">
+        <p>asdfa</p>
+      </div>
+    </div>
 
   <%= link_to 'Edit', edit_coffeeshop_path(@coffeeshop) %> |
 </div>
+

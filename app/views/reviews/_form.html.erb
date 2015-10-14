@@ -1,41 +1,152 @@
-<%= form_for [@coffeeshop, @review] do |f| %>
-  <% if @review.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+<div class="simple-box container">
+  <%= form_for [@coffeeshop, @coffeeshop.reviews.new] do |f| %>
+    <% if @coffeeshop.reviews.new.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@coffeeshop.reviews.new.errors.count, "error") %> prohibited this review from being saved:</h2>
 
-      <ul>
-      <% @review.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% @coffeeshop.reviews.new.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :body %><br>
+      <%= f.text_field :body %>
+    </div>
+    <div class="field">
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :qualityRating %><br>
+      <%= f.number_field :qualityRating %>
+    </div>
+    <div class="field">
+      <%= f.label :hipsterRating %><br>
+      <%= f.number_field :hipsterRating %>
+    </div>
+    <div class="field">
+      <%= f.label :studyRating %><br>
+      <%= f.number_field :studyRating %>
+    </div>
+    <div class="field">
+      <%= f.label :laptopRating %><br>
+      <%= f.number_field :laptopRating %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
     </div>
   <% end %>
+</div>
 
-  <div class="field">
-    <%= f.label :body %><br>
-    <%= f.text_field :body %>
-  </div>
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :qualityRating %><br>
-    <%= f.number_field :qualityRating %>
-  </div>
-  <div class="field">
-    <%= f.label :hipsterRating %><br>
-    <%= f.number_field :hipsterRating %>
-  </div>
-  <div class="field">
-    <%= f.label :studyRating %><br>
-    <%= f.number_field :studyRating %>
-  </div>
-  <div class="field">
-    <%= f.label :laptopRating %><br>
-    <%= f.number_field :laptopRating %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<div class="simple-box container">
+  <%= form_for(@coffeeshop) do |f| %>
+    <% if @coffeeshop.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@coffeeshop.errors.count, "error") %> prohibited this coffeeshop from being saved:</h2>
+
+        <ul>
+        <% @coffeeshop.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="text-left col-xs-12">
+      <h4>Contact Information</h4>
+    </div>
+
+    <div class="form-group">     
+      <div class="col-md-12 text-left">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+    </div>
+      
+    <div class="form-group">
+      <div class="col-md-7 text-left">
+        <%= f.label :address %>
+        <%= f.text_field :address, class: 'form-control' %>
+      </div>  
+
+      <div class="col-md-3 text-left">
+        <%= f.label :city, class: 'slight-margin-top' %>
+        <%= f.text_field :city, class: 'form-control' %>
+      </div>
+      <div class="col-md-2 text-left">
+        <%= f.label :state, class: 'slighter-margin-top' %>
+        <%= f.select(:state, options_for_select(get_states), {}, { class: 'form-control' })%> 
+      </div>
+    </div>
+
+    <div class="form-group">     
+      <div class="col-md-12 text-left">
+        <%= f.label :webAddress, "Website" %>
+        <%= f.text_field :webAddress, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="text-left col-xs-12">
+      <h4>Business Details</h4>
+    </div>
+
+    <div class="form-group">     
+      <div class="col-md-12 text-left">
+        <%= f.label :imageLink, "Image of Coffeeshop" %>
+        <%= f.text_field :imageLink, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">     
+      <div class="col-md-6 text-left">
+        <%= f.label :opens_at, "Opens at" %>
+        <%= f.text_field :opens_at, class: 'form-control' %>
+      </div>
+      <div class="col-md-6 text-left">
+        <%= f.label :closes_at, "Closes at" %>
+        <%= f.text_field :closes_at, class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-xs-4 text-left slight-margin-top">
+        <%= f.label :accepts_credit %>
+        <%= f.check_box :accepts_credit %>
+      </div>
+      <div class="col-xs-4 text-left slight-margin-top">
+        <%= f.label :veggie_friendly, "Vegetarian Friendly" %>
+        <%= f.check_box :veggie_friendly %>
+      </div>
+      <div class="col-md-4 text-left slight-margin-top">
+        <%= f.label :vegan_friendly, "Vegan Friendly" %>
+        <%= f.check_box :vegan_friendly %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-xs-4 text-left">
+        <%= f.label :style %>
+        <%= f.select(:style, options_for_select(["formal", "casual"]), {}, { class: 'form-control' })%> 
+      </div>
+      <div class="col-xs-4 text-left">
+        <%= f.label :price, "How expensive?" %>
+         <%= f.select(:price, options_for_select([ ["very expensive", 5], ["expensive", 4], ["average", 3], ["cheap", 2], ["dirt cheap", 1]]), {}, { class: 'form-control' })%> 
+      </div>
+      <div class="col-md-4 text-left">
+        <%= f.label :parking %>
+        <%= f.select(:parking, options_for_select(["lots", "some", "none"]), {}, { class: 'form-control' })%> 
+      </div>
+    </div>
+
+    <div class="col-md-12 btn-container">
+      <%= f.submit"List shop", class: 'btn btn-blue' %>
+    </div>
+  <% end %>
+</div>
+
+
+
