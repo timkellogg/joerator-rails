@@ -22,6 +22,7 @@
     <% end %>
 
     <% if current_user && current_user.admin? && @menu %>
+      <%= link_to 'View Menu', coffeeshop_menu_path(@coffeeshop, @coffeeshop.menu), class: 'btn btn-gray' %>
       <%= link_to 'Add an Item to the Menu', new_menu_item_path(@menu) %>
     <% end %>
 
@@ -30,6 +31,7 @@
     <% if logged_in? %>
       <%= link_to 'Add a review', new_coffeeshop_review_path(@coffeeshop), class: 'btn btn-primary' %>
     <% end %>
+
 
     <%= will_paginate @reviews %>
 
@@ -48,12 +50,6 @@
         </div>
       </div>
     <% end %>
-    </div>
-
-        <div class="col-md-5">
-      <div class="info-panel">
-        <p>asdfa</p>
-      </div>
     </div>
 
   <%= link_to 'Edit', edit_coffeeshop_path(@coffeeshop) %> |

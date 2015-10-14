@@ -2,7 +2,10 @@ class Item < ActiveRecord::Base
   belongs_to :menu
   before_save { self.name = name.downcase  }
 
-  validates_presence_of :name, :description, :meal_type, :image_link
+  validates_presence_of :name, :description, :meal_type
+
+  # File uploading 
+  mount_uploader :picture, PictureUploader
 
   validates :name,         uniqueness: true 
   validates :description,  length: { maximum: 64 }

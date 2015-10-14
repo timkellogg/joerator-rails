@@ -11,15 +11,15 @@ Rails.application.routes.draw do
   end
 
   resources :menus do 
-    resources :items
+    resources :items, except: [:show, :index]
   end
 
-  get     'signup' => 'users#new'
-  get     'login'  => 'sessions#new' 
-  post    'login'  => 'sessions#create'
-  delete  'logout' => 'sessions#destroy'
+  get     'signup'    => 'users#new'
+  get     'login'     => 'sessions#new' 
+  post    'login'     => 'sessions#create'
+  delete  'logout'    => 'sessions#destroy'
 
-  get      'dashboard' => 'users#dashboard'
+  get     'dashboard' => 'users#dashboard'
 
   resources :users
 end

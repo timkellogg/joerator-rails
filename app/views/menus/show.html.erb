@@ -1,11 +1,24 @@
+<div id="menu-wrapper" class="container">
+  
 <h2><%= @menu.coffeeshop.name %>'s Menu</h2>
 
 <% if @menu.items.any? %>
-  <ul>
-    <%= @menu.items.each do |item| %>
-      <li><%= item.name %></li>
-    <% end %>
-  </ul>
+  <% @menu.items.each do |item| %>
+  <div class="simple-box">
+    <div class="col-md-4 home-img">
+      <%= image_tag item.picture.url if item.picture? %>
+      <% if current_user && current_user.admin? && @menu %>
+        <%= link_to 'Edit item', edit_menu_item_path(@menu, item) %>
+      <% end %>
+    </div>
+  <% end %>
+
+  </div>
+<% end %>
+
+<% if current_user && current_user.admin? && @menu %>
+  <%= link_to 'Add an item', new_menu_item_path(@menu) %>
 <% end %>
 
 <%= link_to 'Back to Coffeeshop', coffeeshop_path(@menu.coffeeshop) %>
+</div>

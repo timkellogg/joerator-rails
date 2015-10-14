@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:edit, :destroy]
+  before_action :set_item, only: [:edit, :destroy, :update]
 
   def index
     @items = Item.all
@@ -24,20 +24,31 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @menu = Menu.find(params[:menu_id])
   end
 
   def update
+    if @item.update_attributes(item_params)
+      flash[:success] = "Updates saved."
+      redirect_to @item.menu
+    else
+      render 'edit'
+    end
   end
 
   def destroy
   end
 
   private 
+    def set_item 
+      @item = Item.find(params[:id])
+    end
+
     def item_params 
       params.require(:item).permit(:menu_id, :name, 
                                    :description, :veggie_friendly,
                                    :vegan_friendly, :gluten_free, 
-                                   :image_link, :price, :meal_type)
+                                   :picture, :price, :meal_type)
     end
 end
 
