@@ -149,7 +149,12 @@
         color: $blue;
       }
     }
+  }
 
+  form {
+    .btn {
+      margin-top: 2% !important;
+    }
   }
 
 /* general 
@@ -171,8 +176,6 @@ body {
 .banner-row {
   margin-top: $absurd;
 }
-
-
 
 /* Navigation 
 ******************/
