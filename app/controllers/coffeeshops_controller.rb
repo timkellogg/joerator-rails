@@ -54,10 +54,8 @@ class CoffeeshopsController < ApplicationController
     respond_to do |format|
       if @coffeeshop.update(coffeeshop_params)
         format.html { redirect_to @coffeeshop, notice: 'Coffeeshop was successfully updated.' }
-        
       else
         format.html { render :edit }
-        
       end
     end
   end
@@ -78,6 +76,6 @@ class CoffeeshopsController < ApplicationController
       params.require(:coffeeshop).permit(:name, :address, :qualityRating, 
         :studyRating, :laptopRating, :hipsterRating, :imageLink, :webAddress, :city, :state,
         :opens_at, :closes_at, :price, :accepts_credit, :parking, :style, :vegan_friendly, 
-        :veggie_friendly, :city, :state)
+        :veggie_friendly, :city, :state, :picture)
     end
 end

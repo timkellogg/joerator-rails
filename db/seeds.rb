@@ -42,7 +42,6 @@ rand(10..40).times do |n|
     price: rand(1..5),
     parking: ["lots", "some", "none"].sample,
     style: ["formal", "casual"].sample,
-    imageLink: "https://images.unsplash.com/photo-1428550443830-190057dc8098?q=80&fm=jpg&s=1b1da888b3a734385de61e95ab9ade15",
     webAddress: "http://coffeeshop#{n}.com",
     city: ["Portland", "Washington", "Los Angeles", "Denver"].sample,
     state: Faker::Address.state_abbr

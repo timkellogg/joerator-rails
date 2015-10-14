@@ -9,10 +9,9 @@
 
   <div class="banner-2 row">
     <div class="col-xs-12">
-      <img class="coffeeshop-img" src=<%= @coffeeshop.imageLink %> alt="image of coffeeshop">      
+      <%= image_tag @coffeeshop.picture.url if @coffeeshop.picture? %>
     </div>
   </div>
-
 
     <div class="col-md-6">
       <iframe width="425" height="425" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<%= @coffeeshop.address %>&key=AIzaSyC7refRsrpNaOI9TrGEuhjJmI9bJAi1yI0"></iframe>

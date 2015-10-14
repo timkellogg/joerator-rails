@@ -3,7 +3,7 @@ class Coffeeshop < ActiveRecord::Base
   has_one  :menu
 
   validates_presence_of :name, 
-                        :imageLink, :webAddress, 
+                        :webAddress, 
                         :state, :city, 
                         :opens_at, :closes_at, 
                         :price, :parking, :style
@@ -13,8 +13,12 @@ class Coffeeshop < ActiveRecord::Base
   validates :parking,  inclusion:    { :in => %w[lots some none]}
   validates :style,    inclusion:    { :in => %w[casual formal] }
 
+  # Convert addresses into latitude and longitude 
   geocoded_by :full_address
   after_validation :geocode 
+
+  # File uploading 
+  mount_uploader :picture, PictureUploader
 
   def full_address
     return "#{address} #{city} #{state}"

@@ -1,5 +1,5 @@
 <div class="simple-box container">
-  <%= form_for(@coffeeshop) do |f| %>
+  <%= form_for(@coffeeshop, html: { multipart: true }) do |f| %>
     <% if @coffeeshop.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@coffeeshop.errors.count, "error") %> prohibited this coffeeshop from being saved:</h2>
@@ -52,8 +52,8 @@
 
     <div class="form-group">     
       <div class="col-md-12 text-left">
-        <%= f.label :imageLink, "Image of Coffeeshop" %>
-        <%= f.text_field :imageLink, class: 'form-control' %>
+        <%= f.label :picture, "Upload image of Coffeeshop" %>
+        <%= f.file_field :picture %>
       </div>
     </div>
 

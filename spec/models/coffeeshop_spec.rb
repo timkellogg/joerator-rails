@@ -5,7 +5,6 @@ describe Coffeeshop do
   it { should have_one  :menu    }
 
   it { should validate_presence_of :name            }
-  it { should validate_presence_of :imageLink       }
   it { should validate_presence_of :webAddress      }
   it { should validate_presence_of :city            }
   it { should validate_presence_of :state           }
