@@ -1,3 +1,5 @@
+<% provide(:title, "Coffeeshops") %>
+
 <div class="container content-container">
 
   <% if @came_from_search %>
@@ -44,7 +46,8 @@
       <%= link_to coffeeshop_path(coffeeshop) do %>
         <div class="col-md-4">
           <div class="card-header">
-            <img class="card-image" src=<%= coffeeshop.imageLink %>> 
+            <%= image_tag coffeeshop.picture.url, class: 'card-image' if coffeeshop.picture? %>
+            
           </div>
           <div class="card-title">
             <h3><%= truncate(coffeeshop.name, length: 20) %></h3>
