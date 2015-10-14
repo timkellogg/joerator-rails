@@ -138,10 +138,18 @@
   #menu-wrapper { 
     margin: 0 auto;
     text-align: center;
-    .simple-box {
+    .simple-box, p {
       margin: 0 auto;
       text-align: center;
     }
+    p {
+      margin-top: 2%;
+      a {
+        text-decoration: underline !important;
+        color: $blue;
+      }
+    }
+
   }
 
 /* general 
@@ -163,6 +171,8 @@ body {
 .banner-row {
   margin-top: $absurd;
 }
+
+
 
 /* Navigation 
 ******************/

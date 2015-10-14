@@ -1,4 +1,5 @@
 class CoffeeshopsController < ApplicationController
+  before_action :is_logged_in_and_admin, only: [:edit, :new, :update, :destroy]
   before_action :set_coffeeshop, only: [:show, :edit, :update, :destroy]
 
 
@@ -68,6 +69,12 @@ class CoffeeshopsController < ApplicationController
   end
 
   private
+
+    def is_logged_in_and_admin
+      redirect_to(root_url) unless current_user && current_user.admin?
+      flash[:danger] = "You do not have the ability to do that!"
+    end
+
     def set_coffeeshop
       @coffeeshop = Coffeeshop.find(params[:id])
     end

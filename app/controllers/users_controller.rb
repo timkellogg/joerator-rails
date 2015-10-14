@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
-  before_action :is_admin?,      only: [:destroy, :dashboard]
+  before_action :is_logged_in_and_admin, only: [:destroy, :dashboard]
   
   def show
   	@user = User.find(params[:id])
@@ -73,8 +73,9 @@ class UsersController < ApplicationController
       end
     end
 
-    def is_admin?
-      redirect_to(root_url) unless current_user.admin?
+    def is_logged_in_and_admin
+      redirect_to(root_url) unless current_user && current_user.admin?
+      flash[:danger] = "You do not have the ability to do that!"
     end
 
 end

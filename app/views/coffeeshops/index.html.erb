@@ -29,7 +29,10 @@
       </div>
     </div>
 
-    <h2><%= @coffeeshops.count %></h2>
+    <% if @came_from_search %>
+      <h3>Your search returned: <%= @coffeeshops.count %> result(s)</h3> 
+
+    <% end %> 
 
 
     <% if @show_map %>
