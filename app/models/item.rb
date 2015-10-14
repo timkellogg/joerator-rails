@@ -12,5 +12,14 @@ class Item < ActiveRecord::Base
   validates :meal_type,    inclusion: { in: %w[appetizer brunch breakfast lunch dinner holiday] }
 
   validates :price, format:       { with: /\A\d+(?:\.\d{0,2})?\z/ }, numericality: { greater_than: 0 }
+
+  validate :picture_size
+  
+  private 
+    def picture_size
+      if picture.size > 5.megabytes 
+        errors.add(:picture, "should be less than 5M")
+      end
+    end
 end
 

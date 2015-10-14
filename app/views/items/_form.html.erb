@@ -49,7 +49,7 @@
       <div class="form-group">     
         <div class="col-md-12 text-left">
           <%= f.label :picture, "Upload Picture" %>
-          <%= f.file_field :picture %>
+          <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
         </div>
       </div>
 
@@ -78,9 +78,14 @@
     <% end %>
   </div>
 </div>
-  <!-- 
-    create_table "items", force: :cascade do |t|
-      t.string  "meal_type"
-      t.integer "price"
-    end
-   -->
+
+<script type="text/javascript">
+  // Validate picture size 
+  $('#item_picture').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+</script>
+

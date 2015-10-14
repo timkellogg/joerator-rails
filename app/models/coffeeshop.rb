@@ -13,6 +13,8 @@ class Coffeeshop < ActiveRecord::Base
   validates :parking,  inclusion:    { :in => %w[lots some none]}
   validates :style,    inclusion:    { :in => %w[casual formal] }
 
+  validate :picture_size
+
   # Convert addresses into latitude and longitude 
   geocoded_by :full_address
   after_validation :geocode 
@@ -33,5 +35,13 @@ class Coffeeshop < ActiveRecord::Base
   def self.search_location(query)
     where("state= ? OR city= ?", "#{query}", "#{query}")
   end
+
+  private 
+
+    def picture_size
+      if picture.size > 5.megabytes 
+        errors.add(:picture, "should be less than 5M")
+      end
+    end
 end
 
