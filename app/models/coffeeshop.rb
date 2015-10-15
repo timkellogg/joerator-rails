@@ -15,6 +15,11 @@ class Coffeeshop < ActiveRecord::Base
 
   validate :picture_size
 
+  # Calculate average ratings 
+  def self.overall_rating 
+    
+  end
+
   # Convert addresses into latitude and longitude 
   geocoded_by :full_address
   after_validation :geocode 
