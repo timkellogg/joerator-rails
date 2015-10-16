@@ -7,6 +7,7 @@ class CoffeeshopsController < ApplicationController
     @came_from_search = false
     @show_map = false
 
+    # Searching matches 
     if params[:search]
       @coffeeshops = Coffeeshop.search(params[:search]).order(created_at: :desc).paginate(:page => params[:page])
       @came_from_search = true 
@@ -14,10 +15,33 @@ class CoffeeshopsController < ApplicationController
       @coffeeshops = Coffeeshop.search_location(params[:search_location]).order(created_at: :desc)
       @came_from_search = true 
       @show_map  = true 
+
+    # Sorting matches
+    elsif params[:sort] == "highest_rated"
+      @coffeeshops = Coffeeshop.order(overall_average: :desc).paginate(:page => params[:page])
+    elsif params[:sort] == "most_recent"
+      @coffeeshops = Coffeeshop.order(created_at: :desc).paginate(:page => params[:page])
+    elsif params[:sort] == "most_reviewed"
+      # this route currently isn't returning the correct soring and just returns the default scope 
+
+      @coffeeshops = Coffeeshop.all
+      @coffeeshops.each do |coffeeshop|
+        coffeeshop.reviews.count
+      end
+    elsif params[:sort] == "best_study"
+      @coffeeshops = Coffeeshop.order(average_study: :desc).paginate(:page => params[:page])
+    elsif params[:sort] == "best_quality"
+      @coffeeshops = Coffeeshop.order(average_quality: :desc).paginate(:page => params[:page])
+    elsif params[:sort] == "best_hipster"
+      @coffeeshops = Coffeeshop.order(average_hipster: :desc).paginate(:page => params[:page])
+
     else 
-      @coffeeshops = Coffeeshop.all.order(created_at: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop.order(created_at: :desc).paginate(:page => params[:page])
     end
   end
+
+
+
 
   def show
     @reviews        = @coffeeshop.reviews.order(created_at: :desc).paginate(:page => params[:page])

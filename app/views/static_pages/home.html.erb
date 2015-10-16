@@ -27,31 +27,43 @@
 </div>
 
 <div class="sub-content-container">
-  <div class="col-md-4 home-img">
-    <%= image_tag("beans.jpg", alt: "picture of coffee beans") %>
-    <h2>Best Coffee</h2>  
+  <%= link_to coffeeshops_path(:sort => 'best_quality') do %>
+    <div class="col-md-4 home-img">
+      <%= image_tag("beans.jpg", alt: "picture of coffee beans") %>
+      <h2>Best Coffee</h2>  
+  <% end %>
   </div>
 
-  <div class="col-md-4 home-img">
-    <%= image_tag("crowd.jpeg", alt: "picture of coffee cup") %>
-    <h2>Most Popular</h2>  
-  </div>
+<!-- Adapt route for the coffeeshops with the most reviews -->
+  <%= link_to coffeeshops_path(:sort => 'most_reviewed') do %>
+    <div class="col-md-4 home-img"> 
+      <%= image_tag("crowd.jpeg", alt: "picture of coffee cup") %>
+      <h2>Most Popular</h2>  
+    </div>
+  <% end %>
 
-  <div class="col-md-4 home-img">
-    <%= image_tag("cup.jpg", alt: "picture of coffee cup") %>
-    <h2>Best to Study</h2>  
-  </div>
+  <%= link_to coffeeshops_path(:sort => 'best_study') do %>
+    <div class="col-md-4 home-img">
+      <%= image_tag("cup.jpg", alt: "picture of coffee cup") %>
+      <h2>Best to Study</h2>  
+    </div>
+  <% end %>
 
-  <div class="col-md-4 home-img">
-    <%= image_tag("hipster.jpeg", alt: "picture of coffee cup") %>
-    <h2>Hipster Hangouts</h2>  
-  </div>
+  <%= link_to coffeeshops_path(:sort => 'best_hipster') do %>
+    <div class="col-md-4 home-img">
+      <%= image_tag("hipster.jpeg", alt: "picture of coffee cup") %>
+      <h2>Hipster Hangouts</h2>  
+    </div>
+  <% end %>
 
-  <div class="col-md-4 home-img">
-    <%= image_tag("room.jpg", alt: "picture of coffee cup") %>
-    <h2>Most Resources</h2>  
-  </div>
+  <%= link_to coffeeshops_path(:sort => 'best_laptop') do %>
+    <div class="col-md-4 home-img">
+      <%= image_tag("room.jpg", alt: "picture of coffee cup") %>
+      <h2>Most Resources</h2>  
+    </div>
+  <% end %>
 
+<!-- Add route for the coffeeshops with the most items on their menus -->
   <div class="col-md-4 home-img">
     <%= image_tag("food.jpeg", alt: "picture of coffee cup") %>
     <h2>Full Kitchens</h2>  
