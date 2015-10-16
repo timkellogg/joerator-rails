@@ -1,28 +1,36 @@
 module CoffeeshopsHelper
-  def get_ratings(coffeeshop)
-    review_total = coffeeshop.reviews.count
+  def calculate_stars(coffeeshop)
+    output = ""
+    total = coffeeshop.overall_average
 
-    if review_total == 0 
-      return ratings = 
-      {
-          quality_total: 0,
-          study_total:   0,
-          laptop_total:  0,
-          hipster_total: 0
-      }
-    else 
-      return ratings =
-        {
-          quality_total: coffeeshop.qualityRating/review_total,
-          study_total:   coffeeshop.studyRating/review_total,
-          laptop_total:  coffeeshop.laptopRating/review_total,
-          hipster_total: coffeeshop.hipsterRating/review_total
-        }
+    coffeeshop.overall_average.ceil.times do |n| 
+      if total >= 1
+        output += content_tag(:i, "<%= fa_icon 'star' %>")
+        total -= 1
+      else  
+        output += content_tag(:i, "<%= fa_icon 'star-half' %>")
       end
+    end
+    
+    return output
   end
 
-  def get_average_rating(ratings)
-    (ratings[:quality_total] + ratings[:study_total] +
-     ratings[:hipster_total] + ratings[:laptop_total])/4
-  end
 end
+
+# module CoffeeshopsHelper
+#   def calculate_stars(coffeeshop)
+#     output = ""
+#     total = coffeeshop.overall_average
+
+#     coffeeshop.overall_average.ceil.times do |n| 
+#       if total >= 1
+#         output.concat("<%= fa_icon 'star' %>")
+#         total -= 1
+#       else  
+#         output.concat("<%= fa_icon 'star-half %>")
+#       end
+#     end
+    
+#     return output.concat("</span>")
+#   end
+# end

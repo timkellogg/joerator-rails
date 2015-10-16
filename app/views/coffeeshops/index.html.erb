@@ -49,8 +49,18 @@
       <%= link_to coffeeshop_path(coffeeshop) do %>
         <div class="col-md-4">
           <div class="card-header">
-            <h4><%= coffeshop.average_rating %></h4>
-            <%= image_tag coffeeshop.picture.url, class: 'card-image' if coffeeshop.picture? %>
+
+          <% if coffeeshop.overall_average != 0 %>
+            <% coffeeshop.overall_average.floor.times do |star| %>
+              <%= fa_icon "star" %>
+            <% end %>
+
+            <% if coffeeshop.overall_average - coffeeshop.overall_average.floor >= 0.5 %>
+              <%= fa_icon "star-half" %>
+            <% end %>
+          <% end %>
+
+          <%= image_tag coffeeshop.picture.url, class: 'card-image' if coffeeshop.picture? %>
             
           </div>
           <div class="card-title">

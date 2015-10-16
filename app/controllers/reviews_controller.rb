@@ -21,7 +21,7 @@ class ReviewsController < ApplicationController
     @review = @coffeeshop.reviews.new(review_params)
     @review.user = current_user
 
-    # @coffeeshop.calculate_average_ratings
+    @coffeeshop.calculate_average_ratings
 
     if @review.save && @coffeeshop.save
       flash[:success] = "Review was added!"
