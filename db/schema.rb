@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151014055344) do
+ActiveRecord::Schema.define(version: 20151016020051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,10 +19,6 @@ ActiveRecord::Schema.define(version: 20151014055344) do
   create_table "coffeeshops", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
-    t.integer  "qualityRating"
-    t.integer  "studyRating"
-    t.integer  "laptopRating"
-    t.integer  "hipsterRating"
     t.string   "webAddress"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
@@ -39,6 +35,11 @@ ActiveRecord::Schema.define(version: 20151014055344) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "picture"
+    t.float    "overall_average", default: 0.0
+    t.float    "average_hipster", default: 0.0
+    t.float    "average_study",   default: 0.0
+    t.float    "average_laptop",  default: 0.0
+    t.float    "average_quality", default: 0.0
   end
 
   create_table "items", force: :cascade do |t|

@@ -8,7 +8,7 @@ class CoffeeshopsController < ApplicationController
     @show_map = false
 
     if params[:search]
-      @coffeeshops = Coffeeshop.search(params[:search]).order(created_at: :desc)
+      @coffeeshops = Coffeeshop.search(params[:search]).order(created_at: :desc).paginate(:page => params[:page])
       @came_from_search = true 
     elsif params[:search_location]
       @coffeeshops = Coffeeshop.search_location(params[:search_location]).order(created_at: :desc)
@@ -44,6 +44,7 @@ class CoffeeshopsController < ApplicationController
     @coffeeshop.studyRating   = 0
 
     if @coffeeshop.save
+      Coffeeshop.update_ratings 
       flash[:success] = "Coffeeshop was successfully created"
       redirect_to @coffeeshop
     else
@@ -66,6 +67,11 @@ class CoffeeshopsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to coffeeshops_url, notice: 'Coffeeshop was successfully destroyed.' }
     end
+  end
+
+  # Custom routing 
+  def highest 
+    @coffeeshops = Coffeeshop.sort(average_rating: :desc).paginate(:page => params[:page])
   end
 
   private

@@ -15,14 +15,32 @@ class Coffeeshop < ActiveRecord::Base
 
   validate :picture_size
 
-  # Calculate average ratings 
-  def self.overall_rating 
-    
+  # after_update :calculate_average_ratings
+
+  def calculate_average_ratings 
+    total_reviews = self.reviews.count 
+
+    quality_total = 0 
+    study_total   = 0
+    laptop_total  = 0
+    hipster_total = 0
+
+    self.reviews.each { |review| quality_total += review.qualityRating } 
+    self.reviews.each { |review| study_total   += review.studyRating   }
+    self.reviews.each { |review| laptop_total  += review.laptopRating  }
+    self.reviews.each { |review| hipster_total += review.hipsterRating }
+
+    self.average_hipster = hipster_total / total_reviews
+    self.average_study   = study_total   / total_reviews
+    self.average_laptop  = laptop_total  / total_reviews
+    self.average_quality = quality_total / total_reviews
+    self.overall_average = (average_hipster + average_study + average_laptop + average_quality)/4
+    self.save 
   end
 
   # Convert addresses into latitude and longitude 
-  geocoded_by :full_address
-  after_validation :geocode 
+  # geocoded_by :full_address
+  # after_validation :geocode 
 
   # File uploading 
   mount_uploader :picture, PictureUploader

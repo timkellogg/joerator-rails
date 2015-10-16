@@ -21,10 +21,7 @@ class ReviewsController < ApplicationController
     @review = @coffeeshop.reviews.new(review_params)
     @review.user = current_user
 
-    @coffeeshop.increment("studyRating",   by = @review.studyRating)   if !@review.studyRating.nil?
-    @coffeeshop.increment("qualityRating", by = @review.qualityRating) if !@review.qualityRating.nil?
-    @coffeeshop.increment("laptopRating",  by = @review.laptopRating)  if !@review.laptopRating.nil?
-    @coffeeshop.increment("hipsterRating", by = @review.hipsterRating) if !@review.hipsterRating.nil?
+    # @coffeeshop.calculate_average_ratings
 
     if @review.save && @coffeeshop.save
       flash[:success] = "Review was added!"

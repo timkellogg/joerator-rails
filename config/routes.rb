@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   root 'static_pages#home'
+
+  get 'highest' => 'coffeeshops#highest'
   
   resources :coffeeshops do 
     resources :reviews
