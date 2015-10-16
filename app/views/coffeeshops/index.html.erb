@@ -46,15 +46,7 @@
         <div class="col-md-4">
           <div class="card-header">
 
-          <% if coffeeshop.overall_average != 0 %>
-            <% coffeeshop.overall_average.floor.times do |star| %>
-              <%= fa_icon "star" %>
-            <% end %>
-
-            <% if coffeeshop.overall_average - coffeeshop.overall_average.floor >= 0.5 %>
-              <%= fa_icon "star-half" %>
-            <% end %>
-          <% end %>
+          <%= calculate_stars(coffeeshop).html_safe %>
 
           <%= image_tag coffeeshop.picture.url, class: 'card-image' if coffeeshop.picture? %>
             
