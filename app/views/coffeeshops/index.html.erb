@@ -100,25 +100,34 @@
     initialize(coffeeshopLatitude, coffeeshopLongitude, coffeeshopName);
   });
 
+  $('.bs-example-modal-lg').on('shown.bs.modal', function () {
+    var currentCenter = dynamicMap.getCenter();
+    google.maps.event.trigger(dynamicMap, "resize");
+    dynamicMap.setCenter(currentCenter);
+  })
+
   function initialize(lat, lng, name) {
-    var map = new google.maps.Map(document.getElementById('modal-map'), {
-      zoom: 5,
+    // keep dynamicMap as a global in order to create an external reference to the modal
+    // show event to trigger resize. without this, map remains gray because modal changes
+    // the size of the div
+    window.dynamicMap = new google.maps.Map(document.getElementById('modal-map'), {
+      zoom: 10,
       center: {lat: lat, lng: lng }
     });
+    google.maps.event.trigger(dynamicMap, "resize");
     infowindow = new google.maps.InfoWindow({
       content: name
     });
     var marker = new google.maps.Marker({
       position: { lat: lat, lng: lng },
-      map: map,
+      map: dynamicMap,
       animation: google.maps.Animation.DROP,
       title: name
     });
     marker.addListener('click', function() {
-      infowindow.open(map, marker);
+      infowindow.open(dynamicMap, marker);
     });
   }
-
 </script>
 
 
