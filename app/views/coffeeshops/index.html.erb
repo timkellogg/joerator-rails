@@ -42,7 +42,7 @@
   <% end %>
   <div class="card-container text-left">
     <ul class="list-group">
-      <% @coffeeshops.each do |coffeeshop| %>
+      <% @coffeeshops.each_with_index do |coffeeshop, index| %>
         <%= link_to coffeeshop_path(coffeeshop) do %>
           <li class="list-group-item">
             <h3><% if coffeeshop.picture? %>
@@ -50,34 +50,76 @@
               <% else %>
                 <%= image_tag("mug.png", class: 'card-image') %>
               <% end %>
-              <%= coffeeshop.name %>
-              <span>
-                <%= coffeeshop.city %>
-                <%= coffeeshop.state %>
-              </span>
+              <span id="<%= index %>-name"><%= coffeeshop.name %></span>
+              <small id="<%= index %>-address">
+                <%= coffeeshop.full_address %>
+                <span id="<%= index %>-lat" class="hidden"><%= coffeeshop.latitude %></span>
+                <span id="<%= index %>-lng" class="hidden"><%= coffeeshop.longitude %></span>
+              </small>
             </h3>
             <%= calculate_stars(coffeeshop).html_safe %>
+          <% end %>
             <span class="pull-right">
-              Open map <%= fa_icon "map-marker" %>
+              <button id="<%= index %>" type="button" class="btn map-trigger btn-sm btn-blue" data-toggle="modal" data-target=".bs-example-modal-lg">Open map <%= fa_icon "map-marker" %></button>
             </span>
           </li>
-        <% end %>
       <% end %>
     </ul>
   </div>
   <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
 </div>
 
-<!-- Large modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
 
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      ...
+      <h4 class="modal-title"></h4>
+      <div class="modal-body">
+        <div id="modal-map" style="width: 530px; margin: auto; height: 500px">
+
+        </div>
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+     </div>
     </div>
   </div>
 </div>
+
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script>
+  $(".map-trigger").on("click", function(event) {
+    event.preventDefault();
+    var idPrefix = event.target.id;
+    var coffeeshopName = $("#" + idPrefix + "-name").text();
+    var coffeeshopAddress = $("#" + idPrefix + "-address").text();
+    var coffeeshopLatitude = parseFloat( $("#" + idPrefix + "-lat").text() );
+    var coffeeshopLongitude = parseFloat( $("#" + idPrefix + "-lng").text() );
+
+    $(".modal-title").text(coffeeshopName);
+    initialize(coffeeshopLatitude, coffeeshopLongitude, coffeeshopName);
+  });
+
+  function initialize(lat, lng, name) {
+    var map = new google.maps.Map(document.getElementById('modal-map'), {
+      zoom: 5,
+      center: {lat: lat, lng: lng }
+    });
+    infowindow = new google.maps.InfoWindow({
+      content: name
+    });
+    var marker = new google.maps.Marker({
+      position: { lat: lat, lng: lng },
+      map: map,
+      animation: google.maps.Animation.DROP,
+      title: name
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+
+</script>
 
 
 <% if @show_map %>

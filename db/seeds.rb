@@ -44,16 +44,16 @@ rand(10..40).times do |n|
   )
 
   Menu.create(coffeeshop: Coffeeshop.last)
-  
+
   # build menu items
-  rand(8..20).times do 
+  rand(8..20).times do
     Item.create!(
       menu: Menu.last,
       name: Faker::Lorem.name + "n",
       description: Faker::Lorem.words(3),
       vegan_friendly: [true, false].sample,
-      veggie_friendly: [true, false].sample,   
-      gluten_free: [true, false].sample, 
+      veggie_friendly: [true, false].sample,
+      gluten_free: [true, false].sample,
       meal_type: ["appetizer", "brunch", "breakfast", "lunch", "dinner", "holiday"].sample,
       price: rand(1..24.99)
     )
