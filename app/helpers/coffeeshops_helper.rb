@@ -1,5 +1,5 @@
 module CoffeeshopsHelper
-
+  
   def calculate_stars(coffeeshop)
     output = ""
     total = coffeeshop.overall_average

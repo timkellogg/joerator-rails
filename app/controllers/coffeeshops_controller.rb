@@ -2,41 +2,35 @@ class CoffeeshopsController < ApplicationController
   before_action :is_logged_in_and_admin, only: [:edit, :new, :update, :destroy]
   before_action :set_coffeeshop, only: [:show, :edit, :update, :destroy]
 
-
   def index
     @came_from_search = false
     @show_map = false
 
-    # Searching matches 
+    # Searching matches
     if params[:search]
-      @coffeeshops = Coffeeshop.search(params[:search]).order(created_at: :desc).paginate(:page => params[:page])
-      @came_from_search = true 
+      @coffeeshops = Coffeeshop.search(params[:search]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+      @came_from_search = true
     elsif params[:search_location]
-      @coffeeshops = Coffeeshop.search_location(params[:search_location]).order(created_at: :desc)
-      @came_from_search = true 
-      @show_map  = true 
+      @coffeeshops = Coffeeshop.search_location(params[:search_location]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+      @came_from_search = true
+      @show_map  = true
 
     # Sorting matches
     elsif params[:sort] == "highest_rated"
-      @coffeeshops = Coffeeshop.order(overall_average: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop.order(overall_average: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "most_recent"
-      @coffeeshops = Coffeeshop.order(created_at: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop.order(created_at: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "most_reviewed"
-      # this route currently isn't returning the correct soring and just returns the default scope 
-
-      @coffeeshops = Coffeeshop.all
-      @coffeeshops.each do |coffeeshop|
-        coffeeshop.reviews.count
-      end
+      # this route currently isn't returning the correct soring and just returns the default scope
+      @coffeeshops = Coffeeshop.all.paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "best_study"
-      @coffeeshops = Coffeeshop.order(average_study: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop.order(average_study: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "best_quality"
-      @coffeeshops = Coffeeshop.order(average_quality: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop.order(average_quality: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "best_hipster"
-      @coffeeshops = Coffeeshop.order(average_hipster: :desc).paginate(:page => params[:page])
-
-    else 
-      @coffeeshops = Coffeeshop.order(created_at: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop.order(average_hipster: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
+    else
+      @coffeeshops = Coffeeshop.order(created_at: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
     end
   end
 
@@ -45,8 +39,8 @@ class CoffeeshopsController < ApplicationController
 
   def show
     @reviews        = @coffeeshop.reviews.order(created_at: :desc).paginate(:page => params[:page])
-    
-    if @coffeeshop.menu 
+
+    if @coffeeshop.menu
       @menu = @coffeeshop.menu
     end
   end
@@ -60,13 +54,13 @@ class CoffeeshopsController < ApplicationController
 
   def create
     @coffeeshop = Coffeeshop.new(coffeeshop_params)
-    @coffeeshop.qualityRating = 0 
+    @coffeeshop.qualityRating = 0
     @coffeeshop.hipsterRating = 0
     @coffeeshop.laptopRating  = 0
     @coffeeshop.studyRating   = 0
 
     if @coffeeshop.save
-      Coffeeshop.update_ratings 
+      Coffeeshop.update_ratings
       flash[:success] = "Coffeeshop was successfully created"
       redirect_to @coffeeshop
     else
@@ -91,8 +85,8 @@ class CoffeeshopsController < ApplicationController
     end
   end
 
-  # Custom routing 
-  def highest 
+  # Custom routing
+  def highest
     @coffeeshops = Coffeeshop.sort(average_rating: :desc).paginate(:page => params[:page])
   end
 
@@ -108,9 +102,9 @@ class CoffeeshopsController < ApplicationController
     end
 
     def coffeeshop_params
-      params.require(:coffeeshop).permit(:name, :address, :qualityRating, 
+      params.require(:coffeeshop).permit(:name, :address, :qualityRating,
         :studyRating, :laptopRating, :hipsterRating, :imageLink, :webAddress, :city, :state,
-        :opens_at, :closes_at, :price, :accepts_credit, :parking, :style, :vegan_friendly, 
+        :opens_at, :closes_at, :price, :accepts_credit, :parking, :style, :vegan_friendly,
         :veggie_friendly, :city, :state, :picture)
     end
 end

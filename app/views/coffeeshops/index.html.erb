@@ -6,7 +6,7 @@
     <div class="col-xs-12">
       <button id="toggle-form" class="btn btn-blue">Not Satisfied?</button>
     </div>
-    <div id="search-container" class="hidden">    
+    <div id="search-container" class="hidden">
       <div class="col-md-6">
         <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
           <div class="input-group">
@@ -29,38 +29,43 @@
       </div>
     </div>
 
-    <% if @came_from_search %>
-      <h3>Your search returned: <%= @coffeeshops.count %> result(s)</h3> 
-
-    <% end %> 
-
-
     <% if @show_map %>
     <div id="map"></div>
     <% end %>
   <% end %>
 
-  <div class=" card-container text-center">
-    <% @coffeeshops.each do |coffeeshop| %>
-      <%= link_to coffeeshop_path(coffeeshop) do %>
-        <div class="col-md-4">
-          <div class="card-header">
-
-          <%= calculate_stars(coffeeshop).html_safe %>
-
-          <%= image_tag coffeeshop.picture.url, class: 'card-image' if coffeeshop.picture? %>
-            
-          </div>
-          <div class="card-title">
-            <h3><%= truncate(coffeeshop.name, length: 20) %></h3>
-          </div>
-          <div class="card-body">
-            <p><%= fa_icon "map-marker" %> <%= coffeeshop.city %></p>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
+  <div class="text-left">
+    <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
   </div>
+  <% if @came_from_search %>
+    <p>Your search returned: <%= @coffeeshops.count %> result(s)</p>
+  <% end %>
+  <div class="card-container text-left">
+    <ul class="list-group">
+      <% @coffeeshops.each do |coffeeshop| %>
+        <%= link_to coffeeshop_path(coffeeshop) do %>
+          <li class="list-group-item">
+            <h3><% if coffeeshop.picture? %>
+                <%= image_tag coffeeshop.picture.url, class: 'card-image' %>
+              <% else %>
+                <%= image_tag("mug.png", class: 'card-image') %>
+              <% end %>
+              <%= coffeeshop.name %>
+              <span>
+                <%= coffeeshop.city %>
+                <%= coffeeshop.state %>
+              </span>
+            </h3>
+            <%= calculate_stars(coffeeshop).html_safe %>
+            <span class="pull-right">
+              Open map <%= fa_icon "map-marker" %>
+            </span>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+  <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
 </div>
 
 <% if @show_map %>
