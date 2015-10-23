@@ -8,7 +8,7 @@
     <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
       <div class="input-group">
         <span class="input-group-btn">
-          <button type="submit" class="btn btn-gray" type="button"><%= fa_icon "map-marker" %></button>
+          <button type="submit" id="search-location-btn" class="btn btn-gray" type="button"><%= fa_icon "map-marker" %></button>
         </span>
         <%= text_field_tag :search_location, params[:search_location], class: "form-control nudge", placeholder: "Search by location..." %>
       </div>
@@ -18,7 +18,7 @@
     <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
       <div class="input-group ">
         <span class="input-group-btn">
-          <button type="submit" class="btn btn-blue btn-default" type="button"><%= fa_icon "search" %></button>
+          <button type="submit" id="search-name-btn" class="btn btn-blue btn-default" type="button"><%= fa_icon "search" %></button>
         </span>
         <%= text_field_tag :search, params[:search], class: "form-control nudge", placeholder: "Search by name..." %>
       </div>

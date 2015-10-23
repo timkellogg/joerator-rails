@@ -11,7 +11,7 @@ FactoryGirl.define do
   end
 
   factory :coffeeshop do  
-    name "Example Coffeeshop"
+    sequence(:name) { |n| "Example #{n} Coffeeshop"}
     webAddress "https://example_coffeeshop.com"
     state "CA"
     address "123 Main Street"
@@ -26,7 +26,7 @@ FactoryGirl.define do
 
   factory :item do  
     name Faker::Lorem.word
-    description Faker::Lorem.sentences(1)
+    description Faker::Lorem.word
     meal_type "brunch"
     price 3
   end
