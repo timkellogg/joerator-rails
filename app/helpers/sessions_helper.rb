@@ -44,4 +44,12 @@ module SessionsHelper
     cookies.delete(:remember_token)
   end
 
+  # finds the user of the resource and checks to see if the current user is the same or admin
+  def is_logged_in_and_admin
+    unless current_user && current_user.admin?  
+      flash[:danger] = "You do not have the ability to do that!"
+      redirect_to root_url
+    end
+  end
+
 end

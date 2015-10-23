@@ -51,7 +51,7 @@
     <% end %>
     </div>
 
-  <% if current_user %>
+  <% if current_user && current_user.admin? %>
     <%= link_to "Edit #{@coffeeshop.name} ", edit_coffeeshop_path(@coffeeshop) %> 
     <%= link_to "Remove?", coffeeshop_path(@coffeeshop), method: :delete, class: 'btn btn-warning' %>
   <% end %>

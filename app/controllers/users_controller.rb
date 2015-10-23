@@ -73,9 +73,4 @@ class UsersController < ApplicationController
       end
     end
 
-    def is_logged_in_and_admin
-      redirect_to(root_url) unless current_user && current_user.admin?
-      flash[:danger] = "You do not have the ability to do that!"
-    end
-
 end

@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   get     'dashboard' => 'users#dashboard'
 
-  resources :users
+  resources :users 
 end
 
 
