@@ -11,3 +11,12 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore coverage by simplecov
+/coverage
+
+# Ignore zeus server socket
+.zeus.sock
+
+
+

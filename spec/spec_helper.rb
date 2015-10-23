@@ -1,4 +1,7 @@
 require 'capybara/rspec'
+require 'simplecov'
+
+SimpleCov.start
 
 RSpec.configure do |config|
 
