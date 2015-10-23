@@ -2,7 +2,6 @@ require 'rails_helper'
 require_relative '../support/utilities'
 
 describe "searching coffeeshops", :type => :feature do 
-
   context "when visting the highest rated" do 
     before do 
       @highly_rated = FactoryGirl.create(:coffeeshop)

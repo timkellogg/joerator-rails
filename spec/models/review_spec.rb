@@ -17,7 +17,6 @@ describe Review do
 
   it { should_not allow_value(-1).for(:qualityRating)  }
   it { should_not allow_value(6).for(:qualityRating)   }
-
 end
 
 

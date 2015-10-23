@@ -138,8 +138,7 @@ describe "authorizations", :type => :feature do
 
       it "does allow the user to edit a menu item" do 
         item = FactoryGirl.create(:item)
-        
-
+        # 
       end
     end
   end

@@ -4,7 +4,6 @@ require 'simplecov'
 SimpleCov.start
 
 RSpec.configure do |config|
-
   require_relative 'support/database_cleaner'
 
   config.expect_with :rspec do |expectations|
