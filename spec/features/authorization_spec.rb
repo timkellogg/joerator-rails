@@ -3,6 +3,33 @@ require_relative '../support/utilities'
 
 describe "authorizations of users", :type => :feature do 
 
+  context "attempting to access privileged pages " do 
+
+    describe "as non-admin" do 
+      before do 
+        @user = FactoryGirl.create(:user) 
+        log_in(@user)
+      end
+
+      it "should prevent the user from seeing the page and redirect with a msg" do  
+        expect(page).to_not have_content("Admin Dashboard")
+      end
+    end
+
+    describe "as an admin" do 
+      before do 
+        @user = FactoryGirl.create(:admin)
+        log_in(@user)
+      end
+
+      it "should allow the user to visit privileged pages" do 
+        expect(page).to have_content("Admin Dashboard")
+        click_link "Admin Dashboard"
+        expect(page).to_not have_content("ability")
+      end
+    end
+  end
+
   context "attempting to access coffeeshop resources" do 
     
     describe "when not logged in" do 

@@ -56,7 +56,23 @@ describe "searching coffeeshops", :type => :feature do
       expect(page).to have_content @match.name
       expect(page).to_not have_content @mismatch.name
     end
+  end
 
+  context "when searching by name" do 
+    before do 
+      @match = FactoryGirl.create(:coffeeshop)
+      @match.update(name: "Match")
+      @mismatch = FactoryGirl.create(:coffeeshop)
+      @mismatch.update(name: "Mismatch")
+      visit root_path
+    end 
+
+    it "should list only those that apply" do 
+      fill_in "search", with: "Match"
+      click_button "search-name-btn"
+      expect(page).to have_content @match.name
+      expect(page).to_not have_content @mismatch.name
+    end
   end
 end
 
