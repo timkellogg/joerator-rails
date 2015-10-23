@@ -23,15 +23,10 @@ describe Coffeeshop do
 
   describe "#fulladdress" do 
     it "should return the address, state and street combined" do 
-      @coffeeshop = Coffeeshop.create!(
-        name: "Coffeeshop", address: "1600 Pennsylvania Avenue", 
-        qualityRating: 0, studyRating: 0, laptopRating: 0, hipsterRating: 0, opens_at: Time.new(2015, 12, 12),
-        closes_at: Time.new(2015, 12, 12), price: 4, parking: "lots", style: "casual", 
-        imageLink: "https://images.unsplash.com/photo-1428550443830-190057dc8098?q=80&fm=jpg&s=1b1da888b3a734385de61e95ab9ade15",
-        webAddress: "https://coffeeshop.com", city: "Washington DC", state: "District of Columbia"
-        )
-      expect(@coffeeshop.full_address).to eq("1600 Pennsylvania Avenue Washington DC District of Columbia")
+      coffeeshop = FactoryGirl.create(:coffeeshop)
+      expect(coffeeshop.full_address).to eq("123 Main Street Los Angeles CA")
     end
   end
 end
 
+ 

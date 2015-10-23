@@ -4,4 +4,3 @@ $(document).ready(function() {
     $("#toggle-form").remove();
   });
 });
-
