@@ -30,11 +30,13 @@ class Coffeeshop < ActiveRecord::Base
     self.reviews.each { |review| laptop_total  += review.laptopRating  }
     self.reviews.each { |review| hipster_total += review.hipsterRating }
 
-    self.average_hipster = hipster_total / total_reviews
-    self.average_study   = study_total   / total_reviews
-    self.average_laptop  = laptop_total  / total_reviews
-    self.average_quality = quality_total / total_reviews
-    self.overall_average = (average_hipster + average_study + average_laptop + average_quality)/4
+    if total_reviews > 0
+      self.average_hipster = hipster_total / total_reviews
+      self.average_study   = study_total   / total_reviews
+      self.average_laptop  = laptop_total  / total_reviews
+      self.average_quality = quality_total / total_reviews
+      self.overall_average = (average_hipster + average_study + average_laptop + average_quality)/4
+    end
     self.save
   end
 

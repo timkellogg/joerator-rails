@@ -25,7 +25,6 @@ group :production do
 end
 
 group :development do
-  gem 'byebug'
   gem 'web-console'
   gem 'spring'
   gem 'quiet_assets'

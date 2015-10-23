@@ -54,13 +54,8 @@ class CoffeeshopsController < ApplicationController
 
   def create
     @coffeeshop = Coffeeshop.new(coffeeshop_params)
-    @coffeeshop.qualityRating = 0
-    @coffeeshop.hipsterRating = 0
-    @coffeeshop.laptopRating  = 0
-    @coffeeshop.studyRating   = 0
 
     if @coffeeshop.save
-      Coffeeshop.update_ratings
       flash[:success] = "Coffeeshop was successfully created"
       redirect_to @coffeeshop
     else
@@ -93,8 +88,10 @@ class CoffeeshopsController < ApplicationController
   private
 
     def is_logged_in_and_admin
-      redirect_to(root_url) unless current_user && current_user.admin?
-      flash[:danger] = "You do not have the ability to do that!"
+      unless current_user && current_user.admin?  
+        flash[:danger] = "You do not have the ability to do that!"
+        redirect_to root_url
+      end
     end
 
     def set_coffeeshop
