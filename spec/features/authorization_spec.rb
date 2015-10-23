@@ -1,10 +1,9 @@
 require 'rails_helper'
 require_relative '../support/utilities'
 
-describe "authorizations of users", :type => :feature do 
+describe "authorizations", :type => :feature do 
 
   context "attempting to access privileged pages " do 
-
     describe "as non-admin" do 
       before do 
         @user = FactoryGirl.create(:user) 
@@ -31,7 +30,6 @@ describe "authorizations of users", :type => :feature do
   end
 
   context "attempting to access coffeeshop resources" do 
-    
     describe "when not logged in" do 
       it "does not allow the user to create a coffeeshop" do  
         visit new_coffeeshop_path
@@ -140,7 +138,7 @@ describe "authorizations of users", :type => :feature do
 
       it "does allow the user to edit a menu item" do 
         item = FactoryGirl.create(:item)
-        # visit item_path(item)
+        
 
       end
     end

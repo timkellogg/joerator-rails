@@ -1,6 +1,7 @@
 require 'rails_helper'
+require_relative '../support/utilities'
 
-describe "Logging In", :type => :feature do 
+describe "session management", :type => :feature do 
 	describe "when using invalid info to login" do 
 		it 'should render the page with a flash message' do 
 			visit login_path 
@@ -19,6 +20,15 @@ describe "Logging In", :type => :feature do
       fill_in "Password", with: user.password
       click_button 'Log in'
       expect(page).to have_content("#{user.name}")
+    end
+  end
+
+  describe "when logging out" do  
+    it "should have no errors, redirect_to main page and display message" do 
+      user = FactoryGirl.create(:user)
+      log_in user
+      click_link "Log out"
+      expect(page).to have_content("successfully")
     end
   end
 end
