@@ -21,6 +21,7 @@ FactoryGirl.define do
     price 3
     parking "lots"
     style "casual"
+    overall_average 0.0
   end
 
   factory :item do  

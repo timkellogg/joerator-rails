@@ -4,6 +4,8 @@ module CoffeeshopsHelper
     output = ""
     total = coffeeshop.overall_average
 
+    return output if total < 1
+
     coffeeshop.overall_average.ceil.times do |n| 
       if total >= 1
         output += content_tag(:i, "", class: "fa fa-star")
@@ -15,3 +17,4 @@ module CoffeeshopsHelper
     return output
   end
 end
+
