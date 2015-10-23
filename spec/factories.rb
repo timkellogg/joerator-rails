@@ -24,8 +24,9 @@ FactoryGirl.define do
   end
 
   factory :item do  
+    name Faker::Lorem.word
+    description Faker::Lorem.sentences(1)
+    meal_type "brunch"
+    price 3
   end
 end
-
-
-

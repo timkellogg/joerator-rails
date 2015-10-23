@@ -7,7 +7,6 @@ class Item < ActiveRecord::Base
   # File uploading 
   mount_uploader :picture, PictureUploader
 
-  validates :name,         uniqueness: true 
   validates :description,  length: { maximum: 64 }
   validates :meal_type,    inclusion: { in: %w[appetizer brunch breakfast lunch dinner holiday] }
 

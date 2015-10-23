@@ -81,12 +81,9 @@ describe "authorizations of users", :type => :feature do
 
   context "attempting to access menu and item resources" do 
     describe "when not logged in" do  
-      before do 
+      it "does not allow the user to create a menu" do 
         coffeeshop = FactoryGirl.create(:coffeeshop)
         visit coffeeshop_path(coffeeshop)
-      end
-
-      it "does not allow the user to create a menu" do 
         expect(page).to_not have_content("Add a Menu")
         visit new_coffeeshop_menu_path(coffeeshop)
         expect(page).to_not have_content("Create")
@@ -96,6 +93,8 @@ describe "authorizations of users", :type => :feature do
 
     describe "when logged in as an admin" do  
       before do 
+        user = FactoryGirl.create(:admin)
+        log_in(user)
         coffeeshop = FactoryGirl.create(:coffeeshop)
         visit coffeeshop_path(coffeeshop)
       end
@@ -103,13 +102,19 @@ describe "authorizations of users", :type => :feature do
       it "does allow the user to create a menu" do 
         coffeeshop = FactoryGirl.create(:coffeeshop)
         visit coffeeshop_path(coffeeshop)
-        click_button "Add a Menu"
+        click_link "Add a Menu"
         click_button "Create?"
         expect(page).to have_content("Menu was added")
-        click_button "Add Item"
+        click_link "Add an item"
         fill_in_item_form 
         expect(page).to_not have_content("errors")
         expect(Item.count).to eq(1)
+      end
+
+      it "does allow the user to edit a menu item" do 
+        item = FactoryGirl.create(:item)
+        # visit item_path(item)
+
       end
     end
   end

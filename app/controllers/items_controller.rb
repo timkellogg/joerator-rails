@@ -19,7 +19,7 @@ class ItemsController < ApplicationController
     if @item.save 
       redirect_to menu_path(@menu) 
     else
-      redirect_to :back
+      render 'new'
     end
   end
 

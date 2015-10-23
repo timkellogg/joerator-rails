@@ -28,7 +28,7 @@ end
 def fill_in_item_form 
   fill_in "Name", with: "Coffee"
   select "brunch", from: "Dish type?"
-  fill_in "Price", with "9"
   fill_in "Description", with: "A lovely treat"
+  fill_in "Price", with: 9
   click_button "Add item"
 end
