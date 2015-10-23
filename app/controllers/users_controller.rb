@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   def create
   	@user = User.new(user_params)
   	if @user.save
+      UserMailer.welcome_email(@user).deliver_now # Need to configure activejob so that this is a background process
       log_in @user
       remember @user
       flash[:success] = "Account was successfully created!"

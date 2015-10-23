@@ -37,6 +37,8 @@ group :test, :development do
   gem 'launchy'
   gem 'pry'
   gem 'faker'
+  gem "letter_opener"
+  gem 'email_spec'
 end
 
 group :test do

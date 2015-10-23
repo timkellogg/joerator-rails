@@ -1,6 +1,6 @@
 <% provide(:title, "Edit #{@user.name}") %>
 
-  <h2>Update your profile</h2>
+<h2>Update your profile</h2>
 
 <div class="simple-box container">
 
@@ -86,4 +86,8 @@
 
       <%= f.submit "Save changes", class: "btn btn-blue" %>
     <% end %>
+    <br>
+    <div class="row text-center">
+      <%= link_to "Delete Account", user_path(@user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    </div>
 </div>
