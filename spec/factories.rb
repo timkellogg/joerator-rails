@@ -10,7 +10,6 @@ FactoryGirl.define do
     end
   end
 
-
   factory :coffeeshop do  
     name "Example Coffeeshop"
     webAddress "https://example_coffeeshop.com"

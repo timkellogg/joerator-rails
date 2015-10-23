@@ -1,6 +1,9 @@
 require 'capybara/rspec'
 
 RSpec.configure do |config|
+
+  require_relative 'support/database_cleaner'
+
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end

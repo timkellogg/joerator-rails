@@ -45,4 +45,5 @@ group :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'simplecov', require: false
+  gem 'database_cleaner'
 end

@@ -76,6 +76,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
+    database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     docile (1.1.5)
@@ -308,6 +309,7 @@ DEPENDENCIES
   capybara
   carrierwave (= 0.10.0)
   coffee-rails (~> 4.1.0)
+  database_cleaner
   factory_girl_rails
   faker
   fog (= 1.26.0)
@@ -334,3 +336,6 @@ DEPENDENCIES
   web-console
   will_paginate
   will_paginate-bootstrap
+
+BUNDLED WITH
+   1.10.6
