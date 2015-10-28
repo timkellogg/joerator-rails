@@ -32,28 +32,28 @@
       <%= link_to 'Add a review', new_coffeeshop_review_path(@coffeeshop), remote: true, class: 'btn btn-blue' %>
     <% end %>
 
-    <div id="add-review-form">
-      
-
-    </div>
+    <div id="add-review-form"></div>
 
     <%= will_paginate @reviews %>
-    <% @reviews.each do |review| %>
-      <div class="media well">
-        <div class="media-left pull-left">
-          <%= link_to user_path(review.user) do %>
-            <%= gravatar_for review.user %>
-          <% end %>
+    <div id="review-container">
+      <% @reviews.each do |review| %>
+        <div class="media well">
+          <div class="media-left pull-left">
+            <%= link_to user_path(review.user) do %>
+              <%= gravatar_for review.user %>
+            <% end %>
+          </div>
+          <div class="media-body media-left">
+            <h4 class="media-heading"><span class="pull-left"><%= review.title %></span><br>
+              <em class="pull-right"><%= time_ago_in_words(review.created_at) %> ago</em>
+            </h4>
+            <p class=" text-center pull-left">
+              <%= review.body %>
+            </p>
+          </div>
         </div>
-        <div class="media-body media-left">
-          <h4 class="media-heading"><%= review.title %>
-            <em class="pull-right"><%= time_ago_in_words(review.created_at) %> ago</em>
-          </h4>
-          <%= review.body %>
-        </div>
-      </div>
-    <% end %>
-    </div>
+      <% end %>
+    <div>
 
   <% if current_user && current_user.admin? %>
     <%= link_to "Edit #{@coffeeshop.name} ", edit_coffeeshop_path(@coffeeshop) %>

@@ -27,8 +27,7 @@ class ReviewsController < ApplicationController
     @coffeeshop.calculate_average_ratings
 
     if @review.save && @coffeeshop.save
-      flash[:success] = "Review was added!"
-      redirect_to coffeeshop_path(@coffeeshop)
+
     else
       render :new
     end

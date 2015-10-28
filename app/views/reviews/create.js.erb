@@ -1,0 +1,21 @@
+// flash container
+$("#flash-container").text("Review was created successfully!");
+
+// append to reviews container
+$("#review-container").prepend(
+  "<div class='media well'>" +
+    "<div class='media-left pull-left'>" +
+      '<%= link_to user_path(@review.user) do %>' +
+        '<%= gravatar_for @review.user %>' +
+      "<% end %>" +
+    "</div>" +
+    "<div class='media-body media-left'>" +
+      "<h4 class='media-heading'><span class='pull-left'><%= @review.title %></span><br>" +
+        "<em class='pull-right'><%= time_ago_in_words(@review.created_at) %> ago</em>" +
+      "</h4>" +
+      "<p class=' text-center pull-left'>" +
+        "<%= @review.body %>" +
+      "</p>" +
+    "</div>" +
+  "</div>"
+);
