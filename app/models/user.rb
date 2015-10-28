@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
-  has_many :assessments
 
 	attr_accessor :remember_token
 	before_save { self.email = email.downcase }

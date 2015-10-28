@@ -1,16 +1,16 @@
-FactoryGirl.define do 
-  factory :user do 
-    sequence(:name)  { |n| "user#{n}" } 
+FactoryGirl.define do
+  factory :user do
+    sequence(:name)  { |n| "user#{n}" }
     sequence(:email) { |n| "user#{n}@example.com"}
     password "password"
     password_confirmation "password"
 
-    factory :admin do 
-      admin true 
+    factory :admin do
+      admin true
     end
   end
 
-  factory :coffeeshop do  
+  factory :coffeeshop do
     sequence(:name) { |n| "Example #{n} Coffeeshop"}
     webAddress "https://example_coffeeshop.com"
     state "CA"
@@ -24,7 +24,7 @@ FactoryGirl.define do
     overall_average 0.0
   end
 
-  factory :item do  
+  factory :item do
     name Faker::Lorem.word
     description Faker::Lorem.word
     meal_type "brunch"

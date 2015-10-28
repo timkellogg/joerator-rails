@@ -1,7 +1,6 @@
 class Coffeeshop < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_one  :menu
-  has_many :assessments
 
   validates_presence_of :name,
                         :webAddress,
@@ -15,8 +14,6 @@ class Coffeeshop < ActiveRecord::Base
   validates :style,    inclusion:    { :in => %w[casual formal] }
 
   validate :picture_size
-
-  # after_update :calculate_average_ratings
 
   def calculate_average_ratings
     total_reviews = self.reviews.count

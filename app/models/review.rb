@@ -5,14 +5,14 @@ class Review < ActiveRecord::Base
   validates :title, length: { maximum: 100 }
   validates :body,  length: { in: 10..255  }
 
+  validates_uniqueness_of :user_id, :scope => [:coffeeshop_id]
+
   validates_presence_of :title, :body, :qualityRating, :studyRating, :laptopRating, :hipsterRating
 
-  validates_numericality_of :qualityRating,:studyRating,:laptopRating, :hipsterRating, 
+  validates_numericality_of :qualityRating,:studyRating,:laptopRating, :hipsterRating,
      {
         less_than_or_equal_to: 5,
         greater_than: 0,
         only_integer: true
      }
 end
-
-
