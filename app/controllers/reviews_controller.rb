@@ -11,6 +11,9 @@ class ReviewsController < ApplicationController
   def new
     @coffeeshop = Coffeeshop.find(params[:coffeeshop_id])
     @review = @coffeeshop.reviews.new
+    respond_to do |format|
+      format.js
+    end
   end
 
   def edit
