@@ -110,7 +110,8 @@ describe "authorizations", :type => :feature do
                                title: "The title", qualityRating: 1, hipsterRating: 1,
                                studyRating: 1, laptopRating: 1, coffeeshop: coffeeshop)
         visit coffeeshop_path(coffeeshop)
-        expect(page).to have_link "Delete"
+        # Need a way to find the link of the delete trash icon
+        expect(page).to have_css(".fa-trash-o")
       end
     end
   end

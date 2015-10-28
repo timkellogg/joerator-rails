@@ -46,8 +46,10 @@
           <div class="media-body media-left">
             <h4 class="media-heading"><span class="pull-left"><%= review.title %></span><br>
               <em class="pull-right"><%= time_ago_in_words(review.created_at) %> ago</em>
-              <%= link_to coffeeshop_review_path(@coffeeshop, review), remote: true, data: { confirm: 'are you sure?', method: :delete } do %>
-                <%= fa_icon "trash-o" %>
+              <% if current_user && current_user.admin? %>
+                <%= link_to coffeeshop_review_path(@coffeeshop, review), remote: true, data: { confirm: 'are you sure?', method: :delete } do %>
+                  <%= fa_icon "trash-o" %>
+                <% end %>
               <% end %>
             </h4>
             <p class=" text-center pull-left">

@@ -1,5 +1,4 @@
 module ReviewsHelper
-
   # Checks if a user has reviewed a coffeeshop
   def already_reviewed?(coffeeshop, user)
     coffeeshop.reviews.each do |review|
