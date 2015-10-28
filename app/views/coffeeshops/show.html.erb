@@ -9,7 +9,7 @@
 
     <% if current_user && current_user.admin? %>
       <%= link_to "Edit #{@coffeeshop.name} ", edit_coffeeshop_path(@coffeeshop) %>
-      <%= link_to "Remove?", coffeeshop_path(@coffeeshop), remote: true, data: { confirm: 'are you sure?', method: :delete } %>
+      <%= link_to "Remove?", coffeeshop_path(@coffeeshop), id: 'remove-coffeeshop-link', remote: true, data: { confirm: 'are you sure?', method: :delete } %>
     <% end %>
 
   <div class="banner-2 row">

@@ -1,5 +1,5 @@
 class CoffeeshopsController < ApplicationController
-  before_action :is_logged_in_and_admin, only: [:edit, :new, :update, :destroy]
+  before_action :is_logged_in_and_admin, only: [:edit, :update, :destroy]
   before_action :set_coffeeshop, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -76,6 +76,7 @@ class CoffeeshopsController < ApplicationController
   def destroy
     @coffeeshop.destroy
     respond_to do |format|
+      format.js   { render :js => "window.location = '/'" }
       format.html { redirect_to coffeeshops_url, notice: 'Coffeeshop was successfully destroyed.' }
     end
   end
@@ -88,7 +89,7 @@ class CoffeeshopsController < ApplicationController
   private
 
     def is_logged_in_and_admin
-      unless current_user && current_user.admin?  
+      unless current_user && current_user.admin?
         flash[:danger] = "You do not have the ability to do that!"
         redirect_to root_url
       end
