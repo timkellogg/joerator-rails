@@ -1,4 +1,4 @@
-# Joerator 
+# Joerator
 
 ##### _A Rails Yelp Clone for Coffeeshops_
 
@@ -12,9 +12,9 @@ _Joerator is a Yelp clone written in Ruby on Rails 4.2 that focuses on Coffeesho
 
 * `git clone` this file
 * `cd` into the root of the app
-* `bundle install` to install gem dependencies 
+* `bundle install` to install gem dependencies
 * You may have to install imagemagick using `brew install` or `sudo-apt-get`
-* `rake db:create` to create db 
+* `rake db:create` to create db
 * `rake db:migrate` to build the tables
 * `rake db:seed` to seed the db
 * `rails s` to start the server
@@ -30,7 +30,13 @@ _Joerator is a Yelp clone written in Ruby on Rails 4.2 that focuses on Coffeesho
 * Testing: Rspec/Capybara/Shoulda-matchers/FactoryGirl
 * Server: Puma
 * Other Dependencies: listed in Gemfile.lock
-* Front-End: Bootstrap/jQuery 
+* Front-End: Bootstrap/jQuery
+
+### Features to Add
+
+* Make users able to add coffeeshops & reviews (not only admin)
+* Make it so users can only review a coffeeshop once 
+
 
 ### Legal
 
