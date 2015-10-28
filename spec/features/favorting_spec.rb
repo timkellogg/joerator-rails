@@ -16,8 +16,15 @@ describe "favorting" do
 
   context "as a logged in user" do
     describe "when having not favorited the item before" do
+      before do
+        coffeeshop = FactoryGirl.create(:coffeeshop)
+        user = FactoryGirl.create(:user)
+        log_in(user)
+        visit coffeeshop_path(coffeeshop)
+      end
 
       it "should show the button to favorite" do
+        expect(page).to have_content("Favorite")
       end
 
       it "should allow the user to favorite" do
