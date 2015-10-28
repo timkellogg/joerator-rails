@@ -111,7 +111,7 @@ describe "authorizations", :type => :feature do
         expect(page).to have_content("Remove?")
       end
 
-      it "does allow the admin to delete reviews" do
+      it "does allow the admin to delete reviews", js: true do
         non_admin = FactoryGirl.create(:user)
         coffeeshop = FactoryGirl.create(:coffeeshop)
         admin_user = FactoryGirl.create(:admin)
@@ -120,6 +120,8 @@ describe "authorizations", :type => :feature do
                                studyRating: 1, laptopRating: 1, coffeeshop: coffeeshop)
         visit coffeeshop_path(coffeeshop)
         expect(page).to have_css(".fa-trash-o")
+        page.find('.fa-trash-o').click
+        expect(page).to_not have_content review.body
       end
     end
   end

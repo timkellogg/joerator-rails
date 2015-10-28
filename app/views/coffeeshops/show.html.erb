@@ -7,6 +7,11 @@
     <h2><small><%= @coffeeshop.full_address %></small></h2>
   </div>
 
+    <% if current_user && current_user.admin? %>
+      <%= link_to "Edit #{@coffeeshop.name} ", edit_coffeeshop_path(@coffeeshop) %>
+      <%= link_to "Remove?", coffeeshop_path(@coffeeshop), remote: true, data: { confirm: 'are you sure?', method: :delete } %>
+    <% end %>
+
   <div class="banner-2 row">
     <div class="col-xs-12">
       <%= image_tag @coffeeshop.picture.url if @coffeeshop.picture? %>
@@ -61,8 +66,5 @@
       <% end %>
     <div>
 
-  <% if current_user && current_user.admin? %>
-    <%= link_to "Edit #{@coffeeshop.name} ", edit_coffeeshop_path(@coffeeshop) %>
-    <%= link_to "Remove?", coffeeshop_path(@coffeeshop), method: :delete, class: 'btn btn-warning' %>
-  <% end %>
+
 </div>

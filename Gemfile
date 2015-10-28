@@ -48,4 +48,5 @@ group :test do
   gem 'simplecov', require: false
   gem 'database_cleaner'
   gem 'orderly'
+  gem 'poltergeist'
 end
