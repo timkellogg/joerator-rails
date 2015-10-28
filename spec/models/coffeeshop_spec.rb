@@ -3,7 +3,6 @@ require 'rails_helper'
 describe Coffeeshop do
   it { should have_many :reviews }
   it { should have_one  :menu    }
-  it { should have_many :assessments }
 
   it { should validate_presence_of :name            }
   it { should validate_presence_of :webAddress      }

@@ -5,6 +5,7 @@ class Review < ActiveRecord::Base
   validates :title, length: { maximum: 100 }
   validates :body,  length: { in: 10..255  }
 
+  # Prevents user from submitting multiple reviews to the same coffeeshop 
   validates_uniqueness_of :user_id, :scope => [:coffeeshop_id]
 
   validates_presence_of :title, :body, :qualityRating, :studyRating, :laptopRating, :hipsterRating
