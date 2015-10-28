@@ -1,13 +1,13 @@
 def log_in(user)
   visit login_path
-  fill_in "Email", with: user.email 
+  fill_in "Email", with: user.email
   fill_in "Password", with: user.password
   click_button 'Log in'
-end  
+end
 
 def log_out
   visit root_path
-  click_link 'Log out' 
+  click_link 'Log out'
 end
 
 def fill_in_coffeeshop_form
@@ -25,10 +25,14 @@ def fill_in_coffeeshop_form
   click_button "List shop"
 end
 
-def fill_in_item_form 
+def fill_in_item_form
   fill_in "Name", with: "Coffee"
   select "brunch", from: "Dish type?"
   fill_in "Description", with: "A lovely treat"
   fill_in "Price", with: 9
   click_button "Add item"
+end
+
+def favorite_coffeeshop(user, coffeeshop)
+  coffeeshop.users << user
 end

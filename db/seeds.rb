@@ -1,5 +1,5 @@
 # Create admin user
-@user = User.create(
+@user = User.create!(
   name: "admin",
   email: "admin@joerator.com",
   password: "password",
@@ -16,7 +16,7 @@
 
 rand(10..40).times do |n|
 
-  User.create(
+  User.create!(
     name: "regular#{n}",
     email: "user#{n}@joerator.com",
     password: "password",
@@ -43,9 +43,8 @@ rand(10..40).times do |n|
     state: Faker::Address.state_abbr
   )
 
-  Menu.create(coffeeshop: Coffeeshop.last)
+  Menu.create!(coffeeshop: Coffeeshop.last)
 
-  # build menu items
   rand(8..20).times do
     Item.create!(
       menu: Menu.last,
@@ -59,17 +58,16 @@ rand(10..40).times do |n|
     )
   end
 
-  rand(1..10).times do
-    review = Review.create!(
-      user: User.last,
-      body: Faker::Lorem.sentence(rand(5..10)),
-      title: Faker::Book.title,
-      qualityRating: rand(1..5),
-      studyRating: rand(1..5),
-      laptopRating: rand(1..5),
-      hipsterRating: rand(1..5),
-      coffeeshop: Coffeeshop.last
-    )
-    Coffeeshop.last.calculate_average_ratings
-  end
+  review = Review.create!(
+    user: User.last,
+    body: Faker::Lorem.sentence(rand(5..10)),
+    title: Faker::Book.title,
+    qualityRating: rand(1..5),
+    studyRating: rand(1..5),
+    laptopRating: rand(1..5),
+    hipsterRating: rand(1..5),
+    coffeeshop: Coffeeshop.last
+  )
+
+  Coffeeshop.last.calculate_average_ratings
 end

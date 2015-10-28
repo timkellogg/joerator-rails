@@ -1,7 +1,8 @@
 class Coffeeshop < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_one  :menu
-  has_and_belongs_to_many :users, uniq: true
+  has_and_belongs_to_many :users 
+  # has_and_belongs_to_many :users, uniq: true
 
   validates_presence_of :name,
                         :webAddress,

@@ -44,7 +44,13 @@
   <div class="simple-box">
     <p><span class="lead">Bio: </span><%= @user.bio %></p>
     <p><span class="lead">Fav Coffee: </span><%= @user.favorite_coffee %></p>
-    <p><span class="lead">Fav Coffeeshops: </span><%= @user.favorite_coffee %></p>
+    <p><span class="lead">Fav Coffeeshops: </span>
+      <% @user.coffeeshops.each do |coffeeshop| %>
+        <%= link_to coffeeshop_path(coffeeshop) do %>
+          <%= coffeeshop.name %><br>
+        <% end %>
+      <% end %>
+    </p>
   </div>
 
   <div class="title">

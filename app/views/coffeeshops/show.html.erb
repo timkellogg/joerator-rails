@@ -8,7 +8,7 @@
   </div>
 
   <% if current_user && !favorited?(current_user, @coffeeshop) %>
-    <div class="row">
+    <div id="fav-container" class="row">
       <%= link_to "Favorite", { :controller => "coffeeshops", :action => "favorite", :id => @coffeeshop.id }, :method => :post, :remote => true %>
     </div>
   <% end %>

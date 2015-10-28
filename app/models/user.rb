@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
-  has_and_belongs_to_many :coffeeshops, uniq: true
+  # has_and_belongs_to_many :coffeeshops, uniq: true
+  has_and_belongs_to_many :coffeeshops
 
 	attr_accessor :remember_token
 	before_save { self.email = email.downcase }

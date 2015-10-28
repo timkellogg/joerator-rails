@@ -27,19 +27,19 @@ describe "favorting" do
         expect(page).to have_content("Favorite")
       end
 
-      it "should allow the user to favorite" do
+      it "should allow the user to favorite only once", js: true do
+        click_link("Favorite")
+        expect(page).to have_content "has been added to your favs"
+        expect(page).to_not have_content "Favorite"
       end
 
-    end
-
-    describe "when having favorited the item before" do
-
-      it "should not show the button" do
-      end
-
-      it "should not allow the relationship to be created" do
+      it "should list the coffeeshop names favorited on the user's profile" do
+        coffeeshop = FactoryGirl.create(:coffeeshop)
+        user = FactoryGirl.create(:user)
+        favorite_coffeeshop(user, coffeeshop)
+        visit user_path(user)
+        expect(page).to have_content coffeeshop.name
       end
     end
   end
-
 end
