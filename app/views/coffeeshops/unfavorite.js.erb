@@ -1,0 +1,9 @@
+// flash container
+$("#flash-container").html(
+  "<div class='alert alert-success'><%= @coffeeshop.name %> has been removed from your favs</div>"
+);
+
+// Hide the unfav button
+$("#unfav-container").remove();
+
+// Show the fav button

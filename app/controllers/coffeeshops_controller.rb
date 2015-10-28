@@ -87,8 +87,14 @@ class CoffeeshopsController < ApplicationController
     if current_user.coffeeshops << @coffeeshop
       respond_to do |format|
         format.js
+        # in favorite.js.erb should render the unfavorite link
       end
     end
+  end
+
+  def unfavorite
+    # find the relationship
+    # remove the relationship
   end
 
   private

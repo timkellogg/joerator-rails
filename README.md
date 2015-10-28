@@ -36,6 +36,9 @@ _Joerator is a Yelp clone written in Ruby on Rails 4.2 that focuses on Coffeesho
 
 * Allow users the ability to delete their own reviews, or update coffeeshops that they added
 * Add ability to unfavorite coffeeshop
+* Make sure that when you unfavorite you are deleting the inverse of the association
+  (:dependent => :destroy)
+* Currently still working on the favorites/unfavorites views/controller/route actions
 
 ### Legal
 

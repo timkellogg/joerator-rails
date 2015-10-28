@@ -1,4 +1,3 @@
-# Create admin user
 @user = User.create!(
   name: "admin",
   email: "admin@joerator.com",
