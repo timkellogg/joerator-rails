@@ -4,10 +4,10 @@
 
   <% if @user == current_user %>
     <div id="profile-edit">
-      <%= link_to 'Edit Profile', edit_user_path(@user), class: 'btn btn-default' %> 
+      <%= link_to 'Edit Profile', edit_user_path(@user), class: 'btn btn-default' %>
     </div>
   <% end %>
-  
+
   <div id="profile-picture" class="row" >
     <%= gravatar_for @user %>
     <% if @user == current_user %>
@@ -47,15 +47,16 @@
     <p><span class="lead">Fav Coffeeshops: </span><%= @user.favorite_coffee %></p>
   </div>
 
-
   <div class="title">
-    <h4>Recent Reviews</h4>
+    <h4>Recent Reviews Submitted</h4>
   </div>
-  <div class="simple-box">
-    <p><% @user.reviews.each do |review| %>
-        <%= review.title %>
-       <% end %>
-    </p>
+  <div class="simple-box text-left">
+    <% @user.reviews.each do |review| %>
+      <%= link_to coffeeshop_path(review.coffeeshop) do %>
+        <%= calculate_stars(review.coffeeshop).html_safe %>
+        <%= review.title %>, <%= time_ago_in_words(review.created_at) %> ago
+      <% end %>
+    <% end %>
+
   </div>
 </div>
-

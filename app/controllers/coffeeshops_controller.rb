@@ -34,11 +34,8 @@ class CoffeeshopsController < ApplicationController
     end
   end
 
-
-
-
   def show
-    @reviews        = @coffeeshop.reviews.order(created_at: :desc).paginate(:page => params[:page])
+    @reviews = @coffeeshop.reviews.order(created_at: :desc).paginate(:page => params[:page])
 
     if @coffeeshop.menu
       @menu = @coffeeshop.menu
