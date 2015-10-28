@@ -1,6 +1,6 @@
 class CoffeeshopsController < ApplicationController
   before_action :is_logged_in_and_admin, only: [:edit, :update, :destroy]
-  before_action :set_coffeeshop, only: [:show, :edit, :update, :destroy]
+  before_action :set_coffeeshop, only: [:show, :edit, :update, :destroy, :favorite]
 
   def index
     @came_from_search = false
@@ -81,6 +81,11 @@ class CoffeeshopsController < ApplicationController
   # Custom routing
   def highest
     @coffeeshops = Coffeeshop.sort(average_rating: :desc).paginate(:page => params[:page])
+  end
+
+  def favorite
+    current_user.coffeeshops << @coffeeshop
+    redirect_to :back
   end
 
   private

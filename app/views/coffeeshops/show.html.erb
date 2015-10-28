@@ -7,6 +7,12 @@
     <h2><small><%= @coffeeshop.full_address %></small></h2>
   </div>
 
+  <div class="row">
+    <%= form_tag(controller: "coffeeshops", action: "favorite", method: "post") do %>
+      <%= submit_tag "Favorite"%>
+    <% end %>
+  </div>
+
     <% if current_user && current_user.admin? %>
       <%= link_to "Edit #{@coffeeshop.name} ", edit_coffeeshop_path(@coffeeshop) %>
       <%= link_to "Remove?", coffeeshop_path(@coffeeshop), id: 'remove-coffeeshop-link', remote: true, data: { confirm: 'are you sure?', method: :delete } %>
