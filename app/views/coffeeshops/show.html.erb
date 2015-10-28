@@ -37,7 +37,7 @@
     <%= will_paginate @reviews %>
     <div id="review-container">
       <% @reviews.each do |review| %>
-        <div class="media well">
+        <div id="review-<%= review.id %>" class="media well">
           <div class="media-left pull-left">
             <%= link_to user_path(review.user) do %>
               <%= gravatar_for review.user %>
@@ -46,10 +46,14 @@
           <div class="media-body media-left">
             <h4 class="media-heading"><span class="pull-left"><%= review.title %></span><br>
               <em class="pull-right"><%= time_ago_in_words(review.created_at) %> ago</em>
+              <%= link_to coffeeshop_review_path(@coffeeshop, review), remote: true, data: { confirm: 'are you sure?', method: :delete } do %>
+                <%= fa_icon "trash-o" %>
+              <% end %>
             </h4>
             <p class=" text-center pull-left">
               <%= review.body %>
             </p>
+
           </div>
         </div>
       <% end %>

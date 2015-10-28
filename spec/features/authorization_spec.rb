@@ -101,6 +101,17 @@ describe "authorizations", :type => :feature do
         visit coffeeshop_path(coffeeshop)
         expect(page).to have_content("Remove?")
       end
+
+      it "does allow the admin to delete reviews" do
+        non_admin = FactoryGirl.create(:user)
+        coffeeshop = FactoryGirl.create(:coffeeshop)
+        admin_user = FactoryGirl.create(:admin)
+        review = Review.create(user: non_admin, body: "This is the body of the review",
+                               title: "The title", qualityRating: 1, hipsterRating: 1,
+                               studyRating: 1, laptopRating: 1, coffeeshop: coffeeshop)
+        visit coffeeshop_path(coffeeshop)
+        expect(page).to have_link "Delete"
+      end
     end
   end
 
