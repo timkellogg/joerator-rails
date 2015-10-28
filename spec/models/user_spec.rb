@@ -3,6 +3,7 @@ require 'rails_helper'
 describe User do
   it { should validate_presence_of   :name           }
   it { should validate_presence_of   :email          }
+  it { should have_and_belong_to_many :coffeeshops   }
 
   it { should validate_uniqueness_of :email          }
 

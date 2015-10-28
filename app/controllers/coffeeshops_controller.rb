@@ -83,7 +83,6 @@ class CoffeeshopsController < ApplicationController
     @coffeeshops = Coffeeshop.sort(average_rating: :desc).paginate(:page => params[:page])
   end
 
-
   def favorite
     if current_user.coffeeshops << @coffeeshop
       respond_to do |format|
