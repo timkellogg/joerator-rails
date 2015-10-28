@@ -8,9 +8,7 @@
   </div>
 
   <div class="row">
-    <%= form_tag(controller: "coffeeshops", action: "favorite", method: "post") do %>
-      <%= submit_tag "Favorite"%>
-    <% end %>
+    <%= link_to "Favorite", { :controller => "coffeeshops", :action => "favorite", :id => @coffeeshop.id }, :method => :post, :remote => true %>
   </div>
 
     <% if current_user && current_user.admin? %>
