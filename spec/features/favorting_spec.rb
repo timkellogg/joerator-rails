@@ -4,7 +4,12 @@ describe "favorting" do
 
   context "as a non-logged in user" do
     describe "when visiting the page" do
+      before do
+        coffeeshop = FactoryGirl.create(:coffeeshop)
+        visit coffeeshop_path(coffeeshop)
+      end
       it "should not show the button to favorite a coffeeshop" do
+        expect(page).to_not have_content("Favorite")
       end
     end
   end

@@ -7,9 +7,11 @@
     <h2><small><%= @coffeeshop.full_address %></small></h2>
   </div>
 
-  <div class="row">
-    <%= link_to "Favorite", { :controller => "coffeeshops", :action => "favorite", :id => @coffeeshop.id }, :method => :post, :remote => true %>
-  </div>
+  <% if current_user && !favorited?(current_user, @coffeeshop) %>
+    <div class="row">
+      <%= link_to "Favorite", { :controller => "coffeeshops", :action => "favorite", :id => @coffeeshop.id }, :method => :post, :remote => true %>
+    </div>
+  <% end %>
 
     <% if current_user && current_user.admin? %>
       <%= link_to "Edit #{@coffeeshop.name} ", edit_coffeeshop_path(@coffeeshop) %>
