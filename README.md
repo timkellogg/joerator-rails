@@ -35,6 +35,9 @@ _Joerator is a Yelp clone written in Ruby on Rails 4.2 that focuses on Coffeesho
 ### Features to Add
 
 * Make users able to add coffeeshops (not only admin)
+ - assessment model is created when user has made a review with a coffeeshop.
+ - check if there's an association between the user and the coffeeshop before allow
+ - review to be saved
 * Make it so users can only review a coffeeshop once
 * Make admin able to remove reviews
 * Show the reviews that the users has submitted on their profile page

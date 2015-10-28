@@ -3,13 +3,14 @@ require 'rails_helper'
 describe Coffeeshop do
   it { should have_many :reviews }
   it { should have_one  :menu    }
+  it { should have_many :assessments }
 
   it { should validate_presence_of :name            }
   it { should validate_presence_of :webAddress      }
   it { should validate_presence_of :city            }
   it { should validate_presence_of :state           }
-  it { should validate_length_of   :state           } 
-  it { should validate_presence_of :opens_at        } 
+  it { should validate_length_of   :state           }
+  it { should validate_presence_of :opens_at        }
   it { should validate_presence_of :closes_at       }
   it { should validate_presence_of :price           }
   it { should validate_presence_of :parking         }
@@ -21,12 +22,10 @@ describe Coffeeshop do
   it { should validate_inclusion_of(:parking).in_array(%w[lots some none]) }
   it { should validate_inclusion_of(:style).in_array(%w[casual formal])    }
 
-  describe "#fulladdress" do 
-    it "should return the address, state and street combined" do 
+  describe "#fulladdress" do
+    it "should return the address, state and street combined" do
       coffeeshop = FactoryGirl.create(:coffeeshop)
       expect(coffeeshop.full_address).to eq("123 Main Street Los Angeles CA")
     end
   end
 end
-
- 

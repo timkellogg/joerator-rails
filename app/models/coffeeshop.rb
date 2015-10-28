@@ -1,6 +1,7 @@
 class Coffeeshop < ActiveRecord::Base
-  has_many :reviews, dependent: :destroy 
+  has_many :reviews, dependent: :destroy
   has_one  :menu
+  has_many :assessments
 
   validates_presence_of :name,
                         :webAddress,

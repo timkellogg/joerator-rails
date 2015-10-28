@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
-  
+  has_many :assessments
+
 	attr_accessor :remember_token
 	before_save { self.email = email.downcase }
   validates :name,  presence: true, length: { maximum: 50 }
@@ -8,9 +9,9 @@ class User < ActiveRecord::Base
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: true }
   has_secure_password
-  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true 
+  validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
 
-  # validates :bio, length: { maximum: 255 }, allow_nil: true 
+  # validates :bio, length: { maximum: 255 }, allow_nil: true
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
