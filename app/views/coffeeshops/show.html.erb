@@ -28,7 +28,7 @@
 
     <div class="container">
 
-    <% if current_user && already_reviewed?(@coffeeshop, current_user) %>
+    <% if current_user && !already_reviewed?(@coffeeshop, current_user) %>
       <%= link_to 'Add a review', new_coffeeshop_review_path(@coffeeshop), remote: true, id: 'review-add-btn', class: 'btn btn-blue' %>
     <% end %>
 

@@ -109,14 +109,15 @@ describe "authorizations", :type => :feature do
       before do
         user = FactoryGirl.create(:user)
         log_in(user)
-        coffeeshop = FactoryGirl.create(:coffeeshop)
-        visit coffeeshop_path(coffeeshop)
+        @coffeeshop = FactoryGirl.create(:coffeeshop)
+
         review = Review.create(user: user, body: "This is the body of the review",
                                title: "The title", qualityRating: 1, hipsterRating: 1,
-                               studyRating: 1, laptopRating: 1, coffeeshop: coffeeshop)
-                               save_and_open_page
+                               studyRating: 1, laptopRating: 1, coffeeshop: @coffeeshop)
+
       end
       it "should not allow the user to see the review button" do
+        visit coffeeshop_path(@coffeeshop)
         expect(page).to_not have_content("Add a review")
       end
     end
