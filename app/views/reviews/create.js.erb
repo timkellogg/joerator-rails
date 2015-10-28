@@ -1,5 +1,8 @@
 // flash container
-$("#flash-container").text("Review was created successfully!");
+$("#flash-container").html(
+  "<div class='alert alert-success'>Review was added successfully!</div>"
+);
+
 
 // append to reviews container
 $("#review-container").prepend(
