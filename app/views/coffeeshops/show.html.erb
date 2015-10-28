@@ -29,7 +29,7 @@
     <div class="container">
 
     <% if logged_in? %>
-      <%= link_to 'Add a review', new_coffeeshop_review_path(@coffeeshop), remote: true, class: 'btn btn-blue' %>
+      <%= link_to 'Add a review', new_coffeeshop_review_path(@coffeeshop), remote: true, id: 'review-add-btn', class: 'btn btn-blue' %>
     <% end %>
 
     <div id="add-review-form"></div>
