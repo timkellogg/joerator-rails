@@ -54,8 +54,8 @@ describe "authorizations", :type => :feature do
     describe "when logged in but not as an admin" do
       before do
         @coffeeshop = FactoryGirl.create(:coffeeshop)
-        user = FactoryGirl.create(:user)
-        log_in(user)
+        @user = FactoryGirl.create(:user)
+        log_in(@user)
         visit new_coffeeshop_path(@coffeeshop)
       end
 
@@ -69,6 +69,15 @@ describe "authorizations", :type => :feature do
 
       it "does not allow the user to delete a coffeeshop" do
         expect(page).to_not have_content("Remove?")
+      end
+
+      it "does not allow the user to delete reviews" do
+        coffeeshop = FactoryGirl.create(:coffeeshop)
+        review = Review.create(user: @user, body: "This is the body of the review",
+                               title: "The title", qualityRating: 1, hipsterRating: 1,
+                               studyRating: 1, laptopRating: 1, coffeeshop: coffeeshop)
+        visit coffeeshop_path(coffeeshop)
+        expect(page).to_not have_css(".fa-trash-o")
       end
     end
 
@@ -110,7 +119,6 @@ describe "authorizations", :type => :feature do
                                title: "The title", qualityRating: 1, hipsterRating: 1,
                                studyRating: 1, laptopRating: 1, coffeeshop: coffeeshop)
         visit coffeeshop_path(coffeeshop)
-        # Need a way to find the link of the delete trash icon
         expect(page).to have_css(".fa-trash-o")
       end
     end
@@ -169,7 +177,7 @@ describe "authorizations", :type => :feature do
 
       it "does allow the user to edit a menu item" do
         item = FactoryGirl.create(:item)
-        #
+
       end
     end
   end
