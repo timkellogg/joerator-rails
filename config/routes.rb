@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   post  'coffeeshops/:id/favorite'   => 'coffeeshops#favorite'
   patch 'coffeeshops/:id/unfavorite' => 'coffeeshops#unfavorite'
 
+  # Approve coffeeshop
+  patch 'coffeeshops/:id/approve' => 'coffeeshops#approve'
+
   resources :coffeeshops do
     resources :reviews
   end

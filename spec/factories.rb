@@ -22,6 +22,11 @@ FactoryGirl.define do
     parking "lots"
     style "casual"
     overall_average 0.0
+    approved true
+
+    factory :unseen do
+      approved false
+    end
   end
 
   factory :item do

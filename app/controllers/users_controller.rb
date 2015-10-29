@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
   before_action :is_logged_in_and_admin, only: [:destroy, :dashboard]
-  
+
   def show
   	@user = User.find(params[:id])
   end
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   	end
   end
 
-  def edit 
+  def edit
   end
 
   def update
@@ -47,15 +47,16 @@ class UsersController < ApplicationController
   def dashboard
     @users = User.all.order(name: :desc)
     @ordered_users = @users.paginate(:page => params[:page], :per_page => 5)
-    # @active_users  = @users.sort(revi)
+    @coffeeshops = Coffeeshop.where(approved: false)
   end
+
 
   private
   	def user_params
   		params.require(:user).permit(:name, :email, :password,
   			                           :password_confirmation, :bio,
-                                   :location, :facebook_link, 
-                                   :twitter_link, :google_link, 
+                                   :location, :facebook_link,
+                                   :twitter_link, :google_link,
                                    :instagram_link )
   	end
 

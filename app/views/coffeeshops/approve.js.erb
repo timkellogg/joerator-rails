@@ -1,0 +1,4 @@
+// Send message that coffeeshop has been approved
+$("#coffeeshop-<%= @coffeeshop.id %>").empty().html(
+  "<h4><%= @coffeeshop.name %> has been approved!</h4>"
+);

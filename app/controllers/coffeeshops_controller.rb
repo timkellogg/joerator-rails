@@ -1,6 +1,6 @@
 class CoffeeshopsController < ApplicationController
-  before_action :is_logged_in_and_admin, only: [:edit, :update, :destroy ]
-  before_action :set_coffeeshop, only: [:show, :edit, :update, :destroy, :favorite, :unfavorite ]
+  before_action :is_logged_in_and_admin, only: [:edit, :update, :destroy, :approve ]
+  before_action :set_coffeeshop, only: [:show, :edit, :update, :destroy, :favorite, :unfavorite, :approve ]
 
   def index
     @came_from_search = false
@@ -8,29 +8,29 @@ class CoffeeshopsController < ApplicationController
 
     # Searching matches
     if params[:search]
-      @coffeeshops = Coffeeshop.search(params[:search]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).search(params[:search]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
       @came_from_search = true
     elsif params[:search_location]
-      @coffeeshops = Coffeeshop.search_location(params[:search_location]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).search_location(params[:search_location]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
       @came_from_search = true
       @show_map  = true
 
     # Sorting matches
     elsif params[:sort] == "highest_rated"
-      @coffeeshops = Coffeeshop.order(overall_average: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(overall_average: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "most_recent"
-      @coffeeshops = Coffeeshop.order(created_at: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(created_at: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "most_reviewed"
       # this route currently isn't returning the correct soring and just returns the default scope
-      @coffeeshops = Coffeeshop.all.paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "best_study"
-      @coffeeshops = Coffeeshop.order(average_study: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(average_study: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "best_quality"
-      @coffeeshops = Coffeeshop.order(average_quality: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(average_quality: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "best_hipster"
-      @coffeeshops = Coffeeshop.order(average_hipster: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(average_hipster: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
     else
-      @coffeeshops = Coffeeshop.order(created_at: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(created_at: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
     end
   end
 
@@ -96,6 +96,16 @@ class CoffeeshopsController < ApplicationController
     @coffeeshop.users.delete(User.find current_user.id)
     respond_to do |format|
       format.js
+    end
+  end
+
+  # Approves the coffeeshop
+  def approve
+    @coffeeshop.approved = true
+    if @coffeeshop.save
+      respond_to do |format|
+        format.js
+      end
     end
   end
 

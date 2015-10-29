@@ -28,4 +28,11 @@ describe Coffeeshop do
       expect(coffeeshop.full_address).to eq("123 Main Street Los Angeles CA")
     end
   end
+
+  describe "when a new coffeeshop is created" do
+    it "should at first be unapproved" do
+      coffeeshop = FactoryGirl.create(:unseen)
+      expect(coffeeshop.approved?).to eq false
+    end
+  end
 end
