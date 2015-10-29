@@ -44,7 +44,11 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-    @review.destroy
+    @user = @review.user
+    @coffeeshop = @review.coffeeshop
+    if @review.destroy
+      UserMailer.review_removed_email(@user, @coffeeshop).deliver_now # Need to configure activejob so that this is a background process
+    end
   end
 
   private
