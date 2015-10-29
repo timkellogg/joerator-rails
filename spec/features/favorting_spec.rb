@@ -29,8 +29,6 @@ describe "favorting and unfavoriting" do
 
       it "should allow the user to favorite only once then render unfavorite", js: true do
         click_link("Favorite")
-        save_and_open_screenshot
-
         expect(page).to have_content "has been added to your favs"
         expect(page).to_not have_content "Favorite"
         expect(page).to have_content "Unfavorite"
@@ -39,13 +37,21 @@ describe "favorting and unfavoriting" do
         expect(page).to have_content "removed from your favs"
       end
 
-
       it "should list the coffeeshop names favorited on the user's profile" do
         coffeeshop = FactoryGirl.create(:coffeeshop)
         user = FactoryGirl.create(:user)
         favorite_coffeeshop(user, coffeeshop)
         visit user_path(user)
         expect(page).to have_content coffeeshop.name
+      end
+
+      it "should remove coffeeshop names that have been unfavorited from profile" do
+        coffeeshop = FactoryGirl.create(:coffeeshop)
+        user = FactoryGirl.create(:user)
+        favorite_coffeeshop(user, coffeeshop)
+        unfavorite_coffeeshop(user, coffeeshop)
+        visit user_path(user)
+        expect(page).to_not have_content coffeeshop.name
       end
     end
 
@@ -54,10 +60,13 @@ describe "favorting and unfavoriting" do
         coffeeshop = FactoryGirl.create(:coffeeshop)
         user = FactoryGirl.create(:user)
         log_in(user)
+        favorite_coffeeshop(user, coffeeshop)
         visit coffeeshop_path(coffeeshop)
       end
 
-      it "should render the unfavorite button" do
+      it "should show the unfavorite button by default" do
+        expect(page).to have_content("Unfavorite")
+        expect(page).to_not have_content("Favorite")
       end
     end
   end

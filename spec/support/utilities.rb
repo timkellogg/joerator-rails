@@ -36,3 +36,7 @@ end
 def favorite_coffeeshop(user, coffeeshop)
   coffeeshop.users << user
 end
+
+def unfavorite_coffeeshop(user, coffeeshop)
+  coffeeshop.users.delete(User.find user.id)
+end
