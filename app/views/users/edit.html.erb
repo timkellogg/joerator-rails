@@ -20,7 +20,7 @@
           <%= f.label :email %>
           <%= f.email_field :email, class: 'form-control' %>
         </div>
-      </div>  
+      </div>
 
       <div class="form-group text-left">
         <div class="col-md-6">
@@ -88,6 +88,6 @@
     <% end %>
     <br>
     <div class="row text-center">
-      <%= link_to "Delete Account", user_path(@user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      <%= link_to "Delete Account", user_path(@user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-red' %>
     </div>
 </div>

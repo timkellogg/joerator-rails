@@ -3,11 +3,11 @@
 <div id="coffeeshop-wrapper">
   <% if current_user && !favorited?(current_user, @coffeeshop) %>
     <div id="fav-container" class="row">
-      <%= link_to "Favorite", { :controller => "coffeeshops", :action => "favorite", :id => @coffeeshop.id }, :method => :post, :remote => true %>
+      <%= link_to "Favorite", { :controller => "coffeeshops", :action => "favorite", :id => @coffeeshop.id }, :method => :post, :remote => true, class: 'btn btn-gray' %>
     </div>
   <% elsif current_user && favorited?(current_user, @coffeeshop) %>
     <div id="unfav-container" class="row">
-      <%= link_to "Unfavorite", { :controller => "coffeeshops", :action => "unfavorite", :id => @coffeeshop.id }, :method => :patch, :remote => true %>
+      <%= link_to "Unfavorite", { :controller => "coffeeshops", :action => "unfavorite", :id => @coffeeshop.id }, :method => :patch, :remote => true, class: 'btn btn-blue' %>
     </div>
   <% else %>
     <div class="row">
@@ -20,38 +20,53 @@
     <h2><small><%= @coffeeshop.full_address %></small></h2>
   </div>
 
-    <% if current_user && current_user.admin? %>
-      <%= link_to "Edit #{@coffeeshop.name} ", edit_coffeeshop_path(@coffeeshop) %>
-      <%= link_to "Remove?", coffeeshop_path(@coffeeshop), id: 'remove-coffeeshop-link', remote: true, data: { confirm: 'are you sure?', method: :delete } %>
-    <% end %>
+  <% if current_user && current_user.admin? %>
+    <%= link_to "Edit #{@coffeeshop.name} ", edit_coffeeshop_path(@coffeeshop) %>
+    <%= link_to "Remove?", coffeeshop_path(@coffeeshop), id: 'remove-coffeeshop-link', remote: true, data: { confirm: 'are you sure?', method: :delete }, class: 'btn btn-red' %>
+  <% end %>
 
   <div class="banner-2 row">
     <div class="col-xs-12">
-      <%= image_tag @coffeeshop.picture.url if @coffeeshop.picture? %>
+      <span class="pull-left">
+        <% if @coffeeshop.picture? %>
+          <%= image_tag @coffeeshop.picture.url %>
+          <% else %>
+          <%= image_tag("mug.png", class: 'card-image') %>
+        <% end %>
+      </span>
     </div>
   </div>
 
-    <div class="col-md-12">
-      <iframe width="425" height="425" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<%= @coffeeshop.address %>&key=AIzaSyC7refRsrpNaOI9TrGEuhjJmI9bJAi1yI0"></iframe>
-     </div>
+  <div class="col-md-12">
+    <iframe width="200" height="200" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<%= @coffeeshop.address %>&key=AIzaSyC7refRsrpNaOI9TrGEuhjJmI9bJAi1yI0"></iframe>
+  </div>
 
-    <% if current_user && current_user.admin? && @coffeeshop.menu.nil? %>
-      <%= link_to 'Add a Menu', new_coffeeshop_menu_path(@coffeeshop), class: 'btn btn-default' %>
-    <% end %>
+  <% if current_user && current_user.admin? && @coffeeshop.menu.nil? %>
+    <%= link_to 'Add a Menu', new_coffeeshop_menu_path(@coffeeshop), class: 'btn btn-default' %>
+  <% end %>
 
-    <% if current_user && current_user.admin? && @menu %>
-      <%= link_to 'View Menu', coffeeshop_menu_path(@coffeeshop, @coffeeshop.menu), class: 'btn btn-gray' %>
-      <%= link_to 'Add an Item to the Menu', new_menu_item_path(@menu) %>
-    <% end %>
+  <% if current_user && current_user.admin? && @menu %>
+    <%= link_to 'View Menu', coffeeshop_menu_path(@coffeeshop, @coffeeshop.menu), class: 'btn btn-gray' %>
+    <%= link_to 'Add an Item to the Menu', new_menu_item_path(@menu), class: 'btn btn-blue' %>
+  <% end %>
 
-    <div class="container">
+  <hr>
+    <div>
+      <h3 class="text-left">Average ratings out of  <%= @coffeeshop.reviews_count %> reviews</h3>
+      <h4 class="text-left"><i>Coffee Quality:</i>  <%= @coffeeshop.average_quality %></h4>
+      <h4 class="text-left"><i>Atmosphere:</i>      <%= @coffeeshop.average_study %></h4>
+      <h4 class="text-left"><i>Amenities:</i>       <%= @coffeeshop.average_laptop %></h4>
+      <h4 class="text-left"><i>Hipster Factor:</i>  <%= @coffeeshop.average_hipster %></h4>
+    </div>
+  <hr>
 
+
+  <div class="container">
     <% if current_user && !already_reviewed?(@coffeeshop, current_user) %>
       <%= link_to 'Add a review', new_coffeeshop_review_path(@coffeeshop), remote: true, id: 'review-add-btn', class: 'btn btn-blue' %>
     <% end %>
 
     <div id="add-review-form"></div>
-
     <%= will_paginate @reviews %>
     <div id="review-container">
       <% @reviews.each do |review| %>
@@ -59,22 +74,22 @@
           <div class="media-left pull-left">
             <%= link_to user_path(review.user) do %>
               <%= gravatar_for review.user %>
-            <% end %>
+              <% end %>
           </div>
           <div class="media-body media-left">
             <h4 class="media-heading"><span class="pull-left"><%= review.title %></span><br>
-              <em class="pull-right"><%= time_ago_in_words(review.created_at) %> ago</em>
-              <% if current_user && current_user.admin? %>
-                <%= link_to coffeeshop_review_path(@coffeeshop, review), remote: true, data: { confirm: 'are you sure?', method: :delete } do %>
-                  <%= fa_icon "trash-o" %>
+              <em class="pull-right"><%= time_ago_in_words(review.created_at) %> ago
+                <% if current_user && current_user.admin? %>
+                  <%= link_to coffeeshop_review_path(@coffeeshop, review), remote: true, data: { confirm: 'are you sure?', method: :delete } do %>
+                    <%= fa_icon "trash-o" %>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </em>
             </h4>
-            <p class=" text-center pull-left">
-              <%= review.body %>
-            </p>
+            <p class=" text-center pull-left"><%= review.body %></p>
           </div>
         </div>
       <% end %>
-    <div>
+    </div>
+  </div>
 </div>

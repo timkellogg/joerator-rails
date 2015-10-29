@@ -24,7 +24,6 @@ describe "searching coffeeshops", :type => :feature do
 
     it "should order the results from most to least reviewed" do
       click_link "Most Reviewed"
-      save_and_open_page
       @most_reviewed.name.should appear_before(@medium_reviewed.name)
       @medium_reviewed.name.should appear_before(@least_reviewed.name)
     end

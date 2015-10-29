@@ -20,7 +20,8 @@
   $gray-hover: #e4e5e7;
   $steel: #333;
   $gray-dark: #aaa;
-
+  $red: #B80000;
+  $red-hover: #980000;
   /*
   *************/
 
@@ -117,8 +118,7 @@
     text-decoration: none !important;
     &:hover {
       text-decoration: none;
-      color: inherit !important;
-      background-color: inherit !important;
+
     }
   }
 
@@ -273,7 +273,6 @@ h1 .fa-coffee {
   }
 }
 
-
 /* subtitle-block
 *****************/
 .subtitle-block {
@@ -362,9 +361,6 @@ $brown: #666;
   }
   a {
     color: $darkgray;
-    &:visited {
-      color: inherit !important;
-    }
   }
 }
 
@@ -376,9 +372,17 @@ $brown: #666;
   }
   a {
     color: $white;
-    &:visited {
-      color: inherit !important;
-    };
+  }
+}
+
+.btn-red {
+  background-color: $red;
+  color: $white !important;
+  &:hover {
+    background-color: $red-hover;
+  }
+  a {
+    color: $white;
   }
 }
 
@@ -444,9 +448,9 @@ button,
 .btn-default,
 .btn-primary,
 .input-group,
+.btn-red,
 .input-group-addon {
   border-radius: 0 !important;
-
 }
 
 select,
