@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'highest' => 'coffeeshops#highest'
 
   # adds favorite
-  post  'coffeeshops/:id/favorite' => 'coffeeshops#favorite'
+  post  'coffeeshops/:id/favorite'   => 'coffeeshops#favorite'
   patch 'coffeeshops/:id/unfavorite' => 'coffeeshops#unfavorite'
 
   resources :coffeeshops do

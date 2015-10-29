@@ -1,6 +1,6 @@
 class CoffeeshopsController < ApplicationController
-  before_action :is_logged_in_and_admin, only: [:edit, :update, :destroy]
-  before_action :set_coffeeshop, only: [:show, :edit, :update, :destroy, :favorite]
+  before_action :is_logged_in_and_admin, only: [:edit, :update, :destroy ]
+  before_action :set_coffeeshop, only: [:show, :edit, :update, :destroy, :favorite, :unfavorite ]
 
   def index
     @came_from_search = false
@@ -93,8 +93,10 @@ class CoffeeshopsController < ApplicationController
   end
 
   def unfavorite
-    # find the relationship
-    # remove the relationship
+    @coffeeshop.users.delete(User.find current_user.id)
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

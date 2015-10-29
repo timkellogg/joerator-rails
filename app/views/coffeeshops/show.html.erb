@@ -11,9 +11,9 @@
     <div id="fav-container" class="row">
       <%= link_to "Favorite", { :controller => "coffeeshops", :action => "favorite", :id => @coffeeshop.id }, :method => :post, :remote => true %>
     </div>
-  <% else if current_user && favorited(current_user, @coffeeshop) %>
+  <% elsif current_user && favorited?(current_user, @coffeeshop) %>
     <div id="unfav-container" class="row">
-      <%= link_to "Unfavorite", { :controller => "coffeeshops", :action => "unfavorite", :id => @coffeeshop.id }, :method => :post, :remote => true %>
+      <%= link_to "Unfavorite", { :controller => "coffeeshops", :action => "unfavorite", :id => @coffeeshop.id }, :method => :patch, :remote => true %>
     </div>
   <% else %>
     <div class="row">
