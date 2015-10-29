@@ -24,12 +24,17 @@ class ReviewsController < ApplicationController
     @review = @coffeeshop.reviews.new(review_params)
     @review.user = current_user
 
-    @coffeeshop.calculate_average_ratings
-
     if @review.save && @coffeeshop.save
+      @coffeeshop.calculate_average_ratings
+      respond_to do |format|
+        format.js { render :create }
+      end
     else
-      render :new
+      respond_to do |format|
+        format.js { render :new }
+      end
     end
+
   end
 
   def update
@@ -46,7 +51,8 @@ class ReviewsController < ApplicationController
     @user = @review.user
     @coffeeshop = @review.coffeeshop
     if @review.destroy
-      UserMailer.review_removed_email(@user, @coffeeshop).deliver_now # Need to configure activejob so that this is a background process
+      # Need to configure activejob so that this is a background process
+      UserMailer.review_removed_email(@user, @coffeeshop).deliver_now
     end
   end
 
@@ -57,6 +63,8 @@ class ReviewsController < ApplicationController
     end
 
     def review_params
-      params.require(:review).permit(:user_id, :body, :title, :qualityRating, :hipsterRating, :studyRating, :laptopRating, :coffeeshop_id)
+      params.require(:review).permit(:user_id, :body, :title,
+                    :qualityRating, :hipsterRating, :studyRating,
+                    :laptopRating, :coffeeshop_id)
     end
 end
