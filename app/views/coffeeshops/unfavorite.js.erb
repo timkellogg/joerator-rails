@@ -6,4 +6,9 @@ $("#flash-container").html(
 // Hide the unfav button
 $("#unfav-container").remove();
 
-// Show the fav button
+// Add the unfav button
+$("#coffeeshop-wrapper").prepend(
+  "<div id='fav-container' class='row'>" +
+    '<a data-remote="true" rel="nofollow" data-method="post" href="/coffeeshops/<%= @coffeeshop.id %>/favorite">Favorite</a>' +
+  "</div>"
+);

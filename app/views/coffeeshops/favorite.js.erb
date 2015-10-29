@@ -5,3 +5,10 @@ $("#flash-container").html(
 
 // Hide the fav button
 $("#fav-container").remove();
+
+// Add the unfavorite button
+$("#coffeeshop-wrapper").prepend(
+  "<div id='unfav-container' class='row'>" +
+    '<a data-remote="true" rel="nofollow" data-method="patch" href="/coffeeshops/<%= @coffeeshop.id %>/unfavorite">Unfavorite</a>' +
+  "</div>"
+);
