@@ -1,51 +1,29 @@
 <% provide(:title, "Admin Dashboard") %>
-<div>
-  <h2>Admin Dashboard</h2>
-</div>
-
-<div id="admin-controls">
-  <button id="show-shop-stats" class="btn btn-gray">View Coffeeshop Stats </button>
-  <button id="show-user-stats" class="btn btn-blue">View User Stats</button>
-</div>
-
-<div id="coffeeshop-stats" class="hidden">
-
-  <%= will_paginate @ordered_users, renderer: BootstrapPagination::Rails %>
-  <ul>
-    <% @ordered_users.each do |user| %>
-      <li>
-        <%= link_to user_path(user) do %>
-          <%= user.name %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-
-</div>
-
-<div id="user-stats" class="hidden">
-  <p>Show</p>
-</div>
-
-<% if current_user && current_user.admin? %>
-  <%= link_to 'New Coffeeshop', new_coffeeshop_path %>
-<% end %>
-
-<div class="row simple-box text-center">
-  <% @coffeeshops.each do |coffeeshop| %>
-  <div id="coffeeshop-<%= coffeeshop.id %>">
-    <%= link_to "Approve", { :controller => "coffeeshops", :action => "approve", :id => coffeeshop.id }, :method => :patch, :remote => true %>
-    <ul>
-      <li>Name: <%= coffeeshop.name %></li>
-      <li>Address: <%= coffeeshop.address %></li>
-      <li>Website: <%= coffeeshop.webAddress %></li>
-      <li>Style: <%= coffeeshop.style %></li>
-      <li>City: <%= coffeeshop.city %></li>
-      <li>State: <%= coffeeshop.state %></li>
-      <li>Picture: <%= coffeeshop.picture %></li>
-    </ul>
+<div id="admin-wrapper" class="text-center">
+  <div class="text-center row">
+    <h2>Admin Dashboard</h2>
   </div>
+
+  <% if current_user && current_user.admin? %>
+    <%= link_to 'New Coffeeshop', new_coffeeshop_path, class: 'btn btn-blue' %>
   <% end %>
+
+  <div class="container simple-box text-center">
+    <% @coffeeshops.each do |coffeeshop| %>
+    <div id="coffeeshop-<%= coffeeshop.id %>">
+      <%= link_to "Approve", { :controller => "coffeeshops", :action => "approve", :id => coffeeshop.id }, :method => :patch, :remote => true %>
+      <ul>
+        <li>Name: <%= coffeeshop.name %></li>
+        <li>Address: <%= coffeeshop.address %></li>
+        <li>Website: <%= coffeeshop.webAddress %></li>
+        <li>Style: <%= coffeeshop.style %></li>
+        <li>City: <%= coffeeshop.city %></li>
+        <li>State: <%= coffeeshop.state %></li>
+        <li>Picture: <%= coffeeshop.picture %></li>
+      </ul>
+    </div>
+    <% end %>
+  </div>
 </div>
 
 <!-- Top Users -->
