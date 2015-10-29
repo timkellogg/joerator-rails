@@ -35,7 +35,8 @@ _Joerator is a Yelp clone written in Ruby on Rails 4.2 that focuses on Coffeesho
 ### Features to Add
 
 * Allow users the ability to delete their own reviews, or update coffeeshops that they added
-* Fill out admin 
+* Fill out admin
+* Send email when coffeeshop that the user added has been approved 
 
 ### Legal
 

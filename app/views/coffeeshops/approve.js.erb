@@ -1,4 +1,7 @@
-// Send message that coffeeshop has been approved
-$("#coffeeshop-<%= @coffeeshop.id %>").empty().html(
-  "<h4><%= @coffeeshop.name %> has been approved!</h4>"
+// flash container
+$("#flash-container").html(
+  "<div class='alert alert-success'><%= @coffeeshop.name %> has been approved</div>"
 );
+
+// Remove the div
+$("#coffeeshop-<%= @coffeeshop.id %>").remove();

@@ -26,6 +26,16 @@ describe "authorizations", :type => :feature do
         click_link "Admin Dashboard"
         expect(page).to_not have_content("ability")
       end
+
+      it "shoud allow the user to mark coffeeshops as approved", js: true do
+        coffeeshop = FactoryGirl.create(:unseen)
+        visit dashboard_path
+        expect(page).to have_content coffeeshop.name
+        expect(page).to have_content("Approve")
+        click_link("Approve")
+        expect(page).to have_content "#{coffeeshop.name} has been approved"
+        expect(page).to_not have_content coffeeshop.address
+      end
     end
   end
 
