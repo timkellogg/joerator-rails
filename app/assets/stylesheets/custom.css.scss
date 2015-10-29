@@ -467,7 +467,14 @@ select,
 /* admin dashboard
 ****************/
 #admin-wrapper {
-  margin: 0 auto;
+  margin: 5px auto;
+}
+
+.list-group-item-heading {
+  margin-top: 2%;
+  &:hover {
+    background-color: inherit;
+  }
 }
 
 

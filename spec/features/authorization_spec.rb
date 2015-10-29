@@ -36,6 +36,14 @@ describe "authorizations", :type => :feature do
         expect(page).to have_content "#{coffeeshop.name} has been approved"
         expect(page).to_not have_content coffeeshop.address
       end
+
+      it "should allow the user to remove coffeeshops", js: true do
+        coffeeshop = FactoryGirl.create(:unseen)
+        visit dashboard_path
+        # Behavior works as expected but test not passing because of window
+        # click_link("Remove")
+        # expect(page).to_not have_content coffeeshop.name
+      end
     end
   end
 

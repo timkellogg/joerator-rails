@@ -4,29 +4,33 @@
     <h2>Admin Dashboard</h2>
   </div>
 
-  <% if current_user && current_user.admin? %>
-    <%= link_to 'New Coffeeshop', new_coffeeshop_path, class: 'btn btn-blue' %>
-  <% end %>
-
-  <div class="container simple-box text-center">
-    <% @coffeeshops.each do |coffeeshop| %>
-    <div id="coffeeshop-<%= coffeeshop.id %>">
-      <%= link_to "Approve", { :controller => "coffeeshops", :action => "approve", :id => coffeeshop.id }, :method => :patch, :remote => true %>
-      <ul>
-        <li>Name: <%= coffeeshop.name %></li>
-        <li>Address: <%= coffeeshop.address %></li>
-        <li>Website: <%= coffeeshop.webAddress %></li>
-        <li>Style: <%= coffeeshop.style %></li>
-        <li>City: <%= coffeeshop.city %></li>
-        <li>State: <%= coffeeshop.state %></li>
-        <li>Picture: <%= coffeeshop.picture %></li>
-      </ul>
-    </div>
-    <% end %>
+  <div class="text-center row">
+    <h3>Recent Coffeeshop Submissions</h3>
   </div>
-</div>
 
-<!-- Top Users -->
-<!-- Recent posts -->
-<!-- Approve coffeeshops -->
-  <!-- Send email when approved -->
+  <% @coffeeshops.each do |coffeeshop| %>
+    <div class="container text-left">
+      <div id="coffeeshop-<%= coffeeshop.id %>">
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-heading">
+            <% if coffeeshop.picture? %>
+              <%= image_tag coffeeshop.picture.url, class: 'card-image' %>
+            <% else %>
+              <%= image_tag("mug.png", class: 'card-image') %>
+            <% end %>
+            <span class="pull-right">
+              <%= link_to "Approve", { :controller => "coffeeshops", :action => "approve", :id => coffeeshop.id }, :method => :patch, :remote => true, class: 'btn btn-default' %>
+              <%= link_to "Remove", coffeeshop_path(coffeeshop), id: 'remove-coffeeshop-link', remote: true, data: { confirm: 'are you sure?', method: :delete }, class: 'btn btn-default' %>
+            </span>
+          </li>
+          <li class="list-group-item"><b>Name:</b> <%= truncate(coffeeshop.name) %></li>
+          <li class="list-group-item"><b>Address:</b> <%= truncate(coffeeshop.address) %></li>
+          <li class="list-group-item"><b>Website:</b> <%= truncate(coffeeshop.webAddress) %></li>
+          <li class="list-group-item"><b>Style:</b> <%= truncate(coffeeshop.style) %></li>
+          <li class="list-group-item"><b>City:</b> <%= truncate(coffeeshop.city) %></li>
+          <li class="list-group-item"><b>State:</b> <%= truncate(coffeeshop.state) %></li>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+</div>
