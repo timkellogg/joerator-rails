@@ -22,7 +22,9 @@ class CoffeeshopsController < ApplicationController
       @coffeeshops = Coffeeshop.where(approved: true).order(created_at: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "most_reviewed"
       # this route currently isn't returning the correct soring and just returns the default scope
-      @coffeeshops = Coffeeshop.where(approved: true).paginate(:page => params[:page], :per_page => 10)
+
+      @coffeeshops = Coffeeshop.where(approved: true).order(reviews_count: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
+
     elsif params[:sort] == "best_study"
       @coffeeshops = Coffeeshop.where(approved: true).order(average_study: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "best_quality"

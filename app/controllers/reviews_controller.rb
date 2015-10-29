@@ -27,7 +27,6 @@ class ReviewsController < ApplicationController
     @coffeeshop.calculate_average_ratings
 
     if @review.save && @coffeeshop.save
-
     else
       render :new
     end
