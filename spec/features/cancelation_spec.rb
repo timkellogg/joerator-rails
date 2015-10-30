@@ -20,8 +20,4 @@ describe "when removing a user's account" do
       end
     end 
   end
-
-  context "as an admin user" do 
-
-  end
 end

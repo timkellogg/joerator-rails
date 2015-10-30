@@ -1,4 +1,4 @@
-<div class="simple-box container">
+<div id="review-form-container" class="simple-box container">
   <%= form_for([@coffeeshop, @review], remote: true) do |f| %>
     <% if @review.errors.any? %>
       <div id="error_explanation">
@@ -24,19 +24,19 @@
 
     <div class="form-group text-center">
       <div class="col-md-3">
-        <%= f.label :qualityRating %>
+        <%= f.label :qualityRating, "Coffee Quality" %>
         <%= f.number_field :qualityRating, min: 1, max: 5, class: 'form-control' %>
       </div>
       <div class="col-md-3">
-        <%= f.label :hipsterRating %>
+        <%= f.label :hipsterRating, "Hip Factor" %>
         <%= f.number_field :hipsterRating, min: 1, max: 5, class: 'form-control' %>
       </div>
       <div class="col-md-3">
-        <%= f.label :studyRating %>
+        <%= f.label :studyRating, "Atmosphere" %>
         <%= f.number_field :studyRating, min: 1, max: 5, class: 'form-control' %>
       </div>
       <div class="col-md-3">
-        <%= f.label :laptopRating %>
+        <%= f.label :laptopRating, "Amenities" %>
         <%= f.number_field :laptopRating, min: 1, max: 5, class: 'form-control' %>
       </div>
     </div>
