@@ -4,7 +4,6 @@
     <h2>Admin Dashboard</h2>
   </div>
 
-
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#coffeeshops" aria-controls="coffeeshops" role="tab" data-toggle="tab">Approve Coffeeshops</a></li>
@@ -71,7 +70,42 @@
       <% end %>
 
     </div>
-    <div role="tabpanel" class="tab-pane" id="statistics">Statistics</div>
+    <div role="tabpanel" class="tab-pane" id="statistics">
+      <div class="text-center row">
+        <h3>Statistics</h3>
+      </div>
+
+      <p><b>Total Users:</b> <%= @user_count %></p>
+      <p><b>Total Reviews:</b> <%= @review_count %></p>
+      <p><b>Total Items:</b> <%= @item_count %></p>
+      <p><b>Highest Rated Coffeeshop</b><%= @highest_rated_coffeeshop.name %></p>
+      <p><b>Lowest Rated Coffeeshop</b><%= @lowest_rated_coffeeshop.name %></p>
+
+      <div class="text-center row">
+        <h3>New Users</h3>
+      </div>
+
+      <% @new_users.each do |user| %>
+        <div class="text-left">
+          <div id="user-<%= user.id %>">
+            <ul class="list-group">
+              <%= link_to user_path(user) do %>
+                <li class="list-group-item">
+                  <span class="icon-tile">
+                    <%= gravatar_for(user) %>
+                  </span>
+                  <%= user.name %>, 
+                  <%= user.email %>
+              <% end %>
+              <%= link_to user_path(user), remote: true, data: { confirm: 'are you sure?', method: :delete }, id: "remove-user-#{user.id}", class: 'pull-right'  do %>
+                <%= fa_icon "trash-o" %>
+              <% end %>
+                </li>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 
 </div>

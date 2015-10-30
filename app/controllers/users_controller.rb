@@ -52,6 +52,12 @@ class UsersController < ApplicationController
   def dashboard
     @users = User.order(name: :desc)
     @coffeeshops = Coffeeshop.where(approved: false)
+    @user_count = User.count 
+    @review_count = Review.count 
+    @item_count = Item.count 
+    @highest_rated_coffeeshop = Coffeeshop.order(overall_average: :desc).limit(1)
+    @lowest_rated_coffeeshop = Coffeeshop.order(overall_average: :asc).limit(1)
+    @new_users = User.order(created_at: :desc).limit(10)
   end
 
 
