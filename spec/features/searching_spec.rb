@@ -72,6 +72,26 @@ describe "searching coffeeshops", :type => :feature do
     end
   end
 
+  context "when sorting by number of items" do 
+    before do 
+      @most_items = FactoryGirl.create(:coffeeshop)
+      menu1 = FactoryGirl.create(:menu, coffeeshop: @most_items)
+      item1 = FactoryGirl.create(:item, menu: menu1)
+      item2 = FactoryGirl.create(:item, menu: menu1)
+      @medium_items = FactoryGirl.create(:coffeeshop)
+      menu2 = FactoryGirl.create(:menu, coffeeshop: @medium_items)
+      item3 = FactoryGirl.create(:item, menu: menu2)
+      @no_items = FactoryGirl.create(:coffeeshop)
+      visit root_path
+    end
+
+    it "should order coffeeshops by the highest number of items on their menus" do 
+      visit "/coffeeshops?sort=biggest_menu"
+      @most_items.name.should appear_before(@medium_items.name)
+      @medium_items.name.should appear_before(@no_items.name)
+    end
+  end
+
   context "when searching by state or city" do
     before do
       @match = FactoryGirl.create(:coffeeshop)
@@ -107,4 +127,25 @@ describe "searching coffeeshops", :type => :feature do
       expect(page).to_not have_content @mismatch.name
     end
   end
+
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
