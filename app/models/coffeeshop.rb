@@ -16,6 +16,12 @@ class Coffeeshop < ActiveRecord::Base
 
   validate :picture_size
 
+  # Default paginate for will_paginate
+  def self.per_page
+    10
+  end
+
+  # Determines the average coffeeshop rating on categories
   def calculate_average_ratings
     total_reviews = self.reviews.count
 

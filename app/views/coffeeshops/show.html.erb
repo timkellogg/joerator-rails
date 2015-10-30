@@ -52,14 +52,13 @@
 
   <hr>
     <div>
-      <h3 class="text-left">Average ratings out of  <%= @coffeeshop.reviews_count %> reviews</h3>
-      <h4 class="text-left"><i>Coffee Quality:</i>  <%= @coffeeshop.average_quality %></h4>
-      <h4 class="text-left"><i>Atmosphere:</i>      <%= @coffeeshop.average_study %></h4>
-      <h4 class="text-left"><i>Amenities:</i>       <%= @coffeeshop.average_laptop %></h4>
-      <h4 class="text-left"><i>Hipster Factor:</i>  <%= @coffeeshop.average_hipster %></h4>
+      <h3 class="text-left">Average ratings out of  <%= pluralize(@coffeeshop.reviews_count, 'review' )%></h3>
+      <h4 class="text-left"><i>Coffee Quality:</i>  <%= calculate_stars(@coffeeshop, "average_quality").html_safe %></h4>
+      <h4 class="text-left"><i>Atmosphere:</i>      <%= calculate_stars(@coffeeshop, "average_study").html_safe %></h4>
+      <h4 class="text-left"><i>Amenities:</i>       <%= calculate_stars(@coffeeshop, "average_laptop").html_safe %></h4>
+      <h4 class="text-left"><i>Hipster Factor:</i>  <%= calculate_stars(@coffeeshop, "average_hipster").html_safe %></h4>
     </div>
   <hr>
-
 
   <div class="container">
     <% if current_user && !already_reviewed?(@coffeeshop, current_user) %>

@@ -45,7 +45,7 @@
       <% @coffeeshops.each_with_index do |coffeeshop, index| %>
         <%= link_to coffeeshop_path(coffeeshop) do %>
           <li class="list-group-item">
-            <h3><% if coffeeshop.picture? %>
+            <h4><% if coffeeshop.picture? %>
                 <%= image_tag coffeeshop.picture.url, class: 'card-image' %>
               <% else %>
                 <%= image_tag("mug.png", class: 'card-image') %>
@@ -56,8 +56,8 @@
                 <span id="<%= index %>-lat" class="hidden"><%= coffeeshop.latitude %></span>
                 <span id="<%= index %>-lng" class="hidden"><%= coffeeshop.longitude %></span>
               </small>
-            </h3>
-            <%= calculate_stars(coffeeshop, "overall_average").html_safe %>
+            </h4>
+            Overall: <%= calculate_stars(coffeeshop, "overall_average").html_safe %> 
           <% end %>
             <span class="pull-right">
               <button id="<%= index %>" type="button" class="btn map-trigger btn-sm btn-blue" data-toggle="modal" data-target=".bs-example-modal-lg">Open map <%= fa_icon "map-marker" %></button>
@@ -68,7 +68,6 @@
   </div>
   <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
 </div>
-
 
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog modal-lg">

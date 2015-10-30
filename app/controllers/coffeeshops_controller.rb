@@ -8,30 +8,30 @@ class CoffeeshopsController < ApplicationController
 
     # Searching matches
     if params[:search]
-      @coffeeshops = Coffeeshop.where(approved: true).search(params[:search]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).search(params[:search]).order(created_at: :desc).paginate(:page => params[:page])
       @came_from_search = true
     elsif params[:search_location]
-      @coffeeshops = Coffeeshop.where(approved: true).search_location(params[:search_location]).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).search_location(params[:search_location]).order(created_at: :desc).paginate(:page => params[:page])
       @came_from_search = true
       @show_map  = true
 
     # Sorting matches
     elsif params[:sort] == 'biggest_menu'
-      @coffeeshops = Coffeeshop.where(approved: true).order(items_count: :desc).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(items_count: :desc).paginate(:page => params[:page])
     elsif params[:sort] == "highest_rated"
-      @coffeeshops = Coffeeshop.where(approved: true).order(overall_average: :desc).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(overall_average: :desc).paginate(:page => params[:page])
     elsif params[:sort] == "most_recent"
-      @coffeeshops = Coffeeshop.where(approved: true).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(created_at: :desc).paginate(:page => params[:page])
     elsif params[:sort] == "most_reviewed"
-      @coffeeshops = Coffeeshop.where(approved: true).order(reviews_count: :desc).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(reviews_count: :desc).paginate(:page => params[:page])
     elsif params[:sort] == "best_study"
-      @coffeeshops = Coffeeshop.where(approved: true).order(average_study: :desc).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(average_study: :desc).paginate(:page => params[:page])
     elsif params[:sort] == "best_quality"
-      @coffeeshops = Coffeeshop.where(approved: true).order(average_quality: :desc).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(average_quality: :desc).paginate(:page => params[:page])
     elsif params[:sort] == "best_hipster"
-      @coffeeshops = Coffeeshop.where(approved: true).order(average_hipster: :desc).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(average_hipster: :desc).paginate(:page => params[:page])
     else
-      @coffeeshops = Coffeeshop.where(approved: true).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(created_at: :desc).paginate(:page => params[:page])
     end
   end
 
