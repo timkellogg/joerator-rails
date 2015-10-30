@@ -2,13 +2,13 @@ module CoffeeshopsHelper
 
   # Calculates the number of starts/half starts to print out
   # Based upon rating of coffeeshop
-  def calculate_stars(coffeeshop)
+  def calculate_stars(coffeeshop, rate_on)
     output = ""
-    total = coffeeshop.overall_average
+    total = coffeeshop.send(rate_on)
 
     return output if total < 1
 
-    coffeeshop.overall_average.ceil.times do |n|
+    coffeeshop.send(rate_on).ceil.times do |n|
       if total >= 1
         output += content_tag(:i, "", class: "fa fa-star")
         total -= 1
@@ -27,3 +27,5 @@ module CoffeeshopsHelper
     return false
   end
 end
+
+

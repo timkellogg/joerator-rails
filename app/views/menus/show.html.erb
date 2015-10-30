@@ -3,21 +3,6 @@
 <h2><%= @menu.coffeeshop.name %>'s Menu</h2>
 
 <div id="menu-wrapper" class="container simple-box">
-  
-  <% if @menu.items.any? %>
-    <% @menu.items.each do |item| %>
-      <div class="col-md-4 menu-item">
-        <%= image_tag item.picture.url if item.picture? %>
-        <% if current_user && current_user.admin? && @menu %>
-          <%= link_to 'Edit item', edit_menu_item_path(@menu, item) %>
-        <% end %>
-      
-    <% end %>
-
-    </div>
-  <% end %>
-
-
   <div class="row text-center">
     <div class="col-xs-12">
       <% if current_user && current_user.admin? && @menu %>
@@ -26,4 +11,14 @@
       <%= link_to 'Back to Coffeeshop', coffeeshop_path(@menu.coffeeshop), class: 'btn btn-gray' %>
     </div>
   </div>
+  <% if @menu.items.any? %>
+    <% @menu.items.each do |item| %>
+      <div class="col-md-12 menu-item">
+        <%= image_tag item.picture.url if item.picture? %>
+        <% if current_user && current_user.admin? && @menu %>
+          <%= link_to 'Edit item', edit_menu_item_path(@menu, item) %>
+        <% end %>
+    <% end %>
+    </div>
+  <% end %>
 </div>

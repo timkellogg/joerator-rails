@@ -59,7 +59,7 @@
   <div class="simple-box text-left">
     <% @user.reviews.each do |review| %>
       <%= link_to coffeeshop_path(review.coffeeshop) do %>
-        <%= calculate_stars(review.coffeeshop).html_safe %>
+        <%= calculate_stars(review.coffeeshop, "overall_average").html_safe %>
         <%= review.title %>, <%= time_ago_in_words(review.created_at) %> ago
       <% end %>
     <% end %>

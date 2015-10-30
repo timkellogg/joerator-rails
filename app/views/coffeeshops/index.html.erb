@@ -57,7 +57,7 @@
                 <span id="<%= index %>-lng" class="hidden"><%= coffeeshop.longitude %></span>
               </small>
             </h3>
-            <%= calculate_stars(coffeeshop).html_safe %>
+            <%= calculate_stars(coffeeshop, "overall_average").html_safe %>
           <% end %>
             <span class="pull-right">
               <button id="<%= index %>" type="button" class="btn map-trigger btn-sm btn-blue" data-toggle="modal" data-target=".bs-example-modal-lg">Open map <%= fa_icon "map-marker" %></button>
