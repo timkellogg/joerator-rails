@@ -1,0 +1,6 @@
+// flash container
+$("#flash-container").html(
+  "<div class='alert alert-success'><%= @user.name %>'s account has been removed.</div>"
+);
+
+$("#user-<%= @user.id %>").remove();

@@ -4,33 +4,74 @@
     <h2>Admin Dashboard</h2>
   </div>
 
-  <div class="text-center row">
-    <h3>Recent Coffeeshop Submissions</h3>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#coffeeshops" aria-controls="coffeeshops" role="tab" data-toggle="tab">Approve Coffeeshops</a></li>
+    <li role="presentation"><a href="#users" aria-controls="users" role="tab" data-toggle="tab">Users</a></li>
+    <li role="presentation"><a href="#statistics" aria-controls="statistics" role="tab" data-toggle="tab">Statistics</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="coffeeshops">
+      <div class="text-center row">
+        <h3>Recent Coffeeshop Submissions</h3>
+      </div>
+      <% @coffeeshops.each do |coffeeshop| %>
+        <div class="text-left">
+          <div id="coffeeshop-<%= coffeeshop.id %>">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-heading">
+                <% if coffeeshop.picture? %>
+                  <%= image_tag coffeeshop.picture.url, class: 'card-image' %>
+                <% else %>
+                  <%= image_tag("mug.png", class: 'card-image') %>
+                <% end %>
+                <span class="pull-right">
+                  <%= link_to "Approve", { :controller => "coffeeshops", :action => "approve", :id => coffeeshop.id }, :method => :patch, :remote => true, class: 'btn btn-default' %>
+                  <%= link_to "Remove", coffeeshop_path(coffeeshop), id: 'remove-coffeeshop-link', remote: true, data: { confirm: 'are you sure?', method: :delete }, class: 'btn btn-default' %>
+                </span>
+              </li>
+              <li class="list-group-item"><b>Name:</b> <%= truncate(coffeeshop.name) %></li>
+              <li class="list-group-item"><b>Address:</b> <%= truncate(coffeeshop.address) %></li>
+              <li class="list-group-item"><b>Website:</b> <%= truncate(coffeeshop.webAddress) %></li>
+              <li class="list-group-item"><b>Style:</b> <%= truncate(coffeeshop.style) %></li>
+              <li class="list-group-item"><b>City:</b> <%= truncate(coffeeshop.city) %></li>
+              <li class="list-group-item"><b>State:</b> <%= truncate(coffeeshop.state) %></li>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="users">
+      <div class="text-center row">
+        <h3>Users</h3>
+      </div>
+
+      <% @users.each do |user| %>
+        <div class="text-left">
+          <div id="user-<%= user.id %>">
+            <ul class="list-group">
+              <%= link_to user_path(user) do %>
+                <li class="list-group-item">
+                  <span class="icon-tile">
+                    <%= gravatar_for(user) %>
+                  </span>
+                  <%= user.name %>, 
+                  <%= user.email %>
+              <% end %>
+              <%= link_to user_path(user), remote: true, data: { confirm: 'are you sure?', method: :delete }, id: "remove-user-#{user.id}", class: 'pull-right'  do %>
+                <%= fa_icon "trash-o" %>
+              <% end %>
+                </li>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="statistics">Statistics</div>
   </div>
 
-  <% @coffeeshops.each do |coffeeshop| %>
-    <div class="container text-left">
-      <div id="coffeeshop-<%= coffeeshop.id %>">
-        <ul class="list-group">
-          <li class="list-group-item list-group-item-heading">
-            <% if coffeeshop.picture? %>
-              <%= image_tag coffeeshop.picture.url, class: 'card-image' %>
-            <% else %>
-              <%= image_tag("mug.png", class: 'card-image') %>
-            <% end %>
-            <span class="pull-right">
-              <%= link_to "Approve", { :controller => "coffeeshops", :action => "approve", :id => coffeeshop.id }, :method => :patch, :remote => true, class: 'btn btn-default' %>
-              <%= link_to "Remove", coffeeshop_path(coffeeshop), id: 'remove-coffeeshop-link', remote: true, data: { confirm: 'are you sure?', method: :delete }, class: 'btn btn-default' %>
-            </span>
-          </li>
-          <li class="list-group-item"><b>Name:</b> <%= truncate(coffeeshop.name) %></li>
-          <li class="list-group-item"><b>Address:</b> <%= truncate(coffeeshop.address) %></li>
-          <li class="list-group-item"><b>Website:</b> <%= truncate(coffeeshop.webAddress) %></li>
-          <li class="list-group-item"><b>Style:</b> <%= truncate(coffeeshop.style) %></li>
-          <li class="list-group-item"><b>City:</b> <%= truncate(coffeeshop.city) %></li>
-          <li class="list-group-item"><b>State:</b> <%= truncate(coffeeshop.state) %></li>
-        </ul>
-      </div>
-    </div>
-  <% end %>
 </div>

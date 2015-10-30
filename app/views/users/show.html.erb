@@ -9,7 +9,7 @@
   <% end %>
 
   <div id="profile-picture" class="row" >
-    <%= gravatar_for @user %>
+    <%= gravatar_for @user %><br>
     <% if @user == current_user %>
       <a href="http://gravatar.com/emails">change</a>
     <% end %>

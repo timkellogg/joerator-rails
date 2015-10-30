@@ -15,6 +15,6 @@ describe "when removing a review" do
 
   it "lets sends an email to the user informing them that their review was deleted" do
     page.find('.fa-trash-o').click
-    ActionMailer::Base.deliveries.first.subject.should == "Your Joerator email was removed by admin"
+    ActionMailer::Base.deliveries.first.subject.should == "Your Joerator review was removed by admin"
   end
 end

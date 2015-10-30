@@ -11,7 +11,13 @@ class UserMailer < ApplicationMailer
     @user = user
     @coffeeshop = coffeeshop
 
-    mail to: @user.email, subject: "Your Joerator email was removed by admin"
+    mail to: @user.email, subject: "Your Joerator review was removed by admin"
+  end
+
+  def account_cancelation_email(user)
+    @user = user 
+
+    mail to: @user.email, subject: "Your Joerator account has been removed."
   end
 
 

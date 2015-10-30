@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update, :destroy]
-  before_action :correct_user,   only: [:edit, :update]
-  before_action :is_logged_in_and_admin, only: [:destroy, :dashboard]
+  before_action :correct_user,   only: [:edit, :update, :destroy ]
+  before_action :is_logged_in_and_admin, only: [:dashboard]
+  before_action :set_user, only: [:show, :update, :destroy ]
 
   def show
-  	@user = User.find(params[:id])
   end
 
   def new
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+
     if @user.update_attributes(user_params)
       flash[:success] = "Profile successfully updated!"
       redirect_to @user
@@ -39,19 +39,28 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User account has been removed"
-    redirect_to root_url
+    @user.destroy
+    UserMailer.account_cancelation_email(@user).deliver_now # Need to configure activejob so that this is a background process
+    respond_to do |format|
+      format.html { 
+        redirect_to root_url
+        flash[:success] = "User account has been removed" }
+      format.js 
+    end
   end
 
   def dashboard
-    @users = User.all.order(name: :desc)
-    @ordered_users = @users.paginate(:page => params[:page], :per_page => 5)
+    @users = User.order(name: :desc)
     @coffeeshops = Coffeeshop.where(approved: false)
   end
 
 
   private
+
+    def set_user 
+      @user = User.find(params[:id])
+    end
+
   	def user_params
   		params.require(:user).permit(:name, :email, :password,
   			                           :password_confirmation, :bio,
