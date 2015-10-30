@@ -63,11 +63,12 @@
     </div>
   <% end %>
 
-<!-- Add route for the coffeeshops with the most items on their menus -->
-  <div class="col-md-4 home-img">
-    <%= image_tag("food.jpeg", alt: "picture of coffee cup") %>
-    <h2>Full Kitchens</h2>  
-  </div>
+  <%= link_to coffeeshops_path(:sort => 'biggest_menu') do %>
+    <div class="col-md-4 home-img">
+      <%= image_tag("food.jpeg", alt: "picture of coffee cup") %>
+      <h2>Full Kitchens</h2>  
+    </div>
+  <% end %>
 </div>
 
 <% if logged_in? %>

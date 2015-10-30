@@ -16,23 +16,22 @@ class CoffeeshopsController < ApplicationController
       @show_map  = true
 
     # Sorting matches
+    elsif params[:sort] == 'biggest_menu'
+      @coffeeshops = Coffeeshop.where(approved: true).order(items_count: :desc).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "highest_rated"
-      @coffeeshops = Coffeeshop.where(approved: true).order(overall_average: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(overall_average: :desc).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "most_recent"
-      @coffeeshops = Coffeeshop.where(approved: true).order(created_at: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "most_reviewed"
-      # this route currently isn't returning the correct soring and just returns the default scope
-
-      @coffeeshops = Coffeeshop.where(approved: true).order(reviews_count: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
-
+      @coffeeshops = Coffeeshop.where(approved: true).order(reviews_count: :desc).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "best_study"
-      @coffeeshops = Coffeeshop.where(approved: true).order(average_study: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(average_study: :desc).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "best_quality"
-      @coffeeshops = Coffeeshop.where(approved: true).order(average_quality: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(average_quality: :desc).paginate(:page => params[:page], :per_page => 10)
     elsif params[:sort] == "best_hipster"
-      @coffeeshops = Coffeeshop.where(approved: true).order(average_hipster: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(average_hipster: :desc).paginate(:page => params[:page], :per_page => 10)
     else
-      @coffeeshops = Coffeeshop.where(approved: true).order(created_at: :desc).paginate(:page => params[:page]).paginate(:page => params[:page], :per_page => 10)
+      @coffeeshops = Coffeeshop.where(approved: true).order(created_at: :desc).paginate(:page => params[:page], :per_page => 10)
     end
   end
 
