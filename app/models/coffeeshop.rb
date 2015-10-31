@@ -46,8 +46,8 @@ class Coffeeshop < ActiveRecord::Base
   end
 
   # Convert addresses into latitude and longitude
-  # geocoded_by :full_address
-  # after_validation :geocode
+  geocoded_by :full_address
+  after_validation :geocode
 
   # File uploading
   mount_uploader :picture, PictureUploader

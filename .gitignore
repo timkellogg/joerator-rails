@@ -18,5 +18,6 @@
 # Ignore zeus server socket
 .zeus.sock
 
+/public/uploads
 
 

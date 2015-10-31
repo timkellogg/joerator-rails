@@ -29,18 +29,14 @@
       </div>
     </div>
 
-    <% if @show_map %>
-    <div id="map"></div>
-    <% end %>
+
   <% end %>
 
-  <div class="text-left">
-    <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
-  </div>
   <% if @came_from_search %>
     <p>Your search returned: <%= @coffeeshops.count %> result(s)</p>
   <% end %>
-  <div class="card-container text-left">
+  <div class="card-container text-left col-md-7">
+    <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
     <ul class="list-group">
       <% @coffeeshops.each_with_index do |coffeeshop, index| %>
         <%= link_to coffeeshop_path(coffeeshop) do %>
@@ -60,13 +56,18 @@
             Overall: <%= calculate_stars(coffeeshop, "overall_average").html_safe %> 
           <% end %>
             <span class="pull-right">
-              <button id="<%= index %>" type="button" class="btn map-trigger btn-sm btn-blue" data-toggle="modal" data-target=".bs-example-modal-lg">Open map <%= fa_icon "map-marker" %></button>
+              <button id="<%= index %>" type="button" class="btn map-trigger btn-sm btn-blue" data-toggle="modal" data-target=".bs-example-modal-lg">Map <%= fa_icon "map-marker" %></button>
             </span>
           </li>
       <% end %>
     </ul>
-  </div>
   <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
+  </div>
+
+  <div id="map">
+    
+  </div>
+
 </div>
 
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
@@ -130,30 +131,29 @@
 </script>
 
 
-<% if @show_map %>
-  <script>
-    function initMap() {
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 8,
-        center: {lat: 41.8369, lng: 87.6847}
-      });
-      <% i = 0 %>
-      <% @coffeeshops.each do |coffeeshop| %>
-      var infowindow<%= i %> = new google.maps.InfoWindow({
-        content: "<%= coffeeshop.name %>"
-      });
-      var marker<%= i %> = new google.maps.Marker({
-        position: {lat: <%= coffeeshop.latitude %>, lng: <%= coffeeshop.longitude %>},
-        map: map,
-        animation: google.maps.Animation.DROP,
-        title: "<%= coffeeshop.name %>"
-      })
-      marker<%= i %>.addListener('click', function() {
-        infowindow<%= i %>.open(map, marker<%= i %>);
-      });
-      <% i = i+1 %>
-      <% end %>
-    }
-  </script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxb-nwbVf_TPsKG2BygPDyK8-AJUM_JtY&signed_in=true&callback=initMap"></script>
-<% end %>
+<script>
+// Script conflicts with individual maps script above
+//   function initMap() {
+//     var map = new google.maps.Map(document.getElementById('map'), {
+//       zoom: 8,
+//       center: {lat: 41.8369, lng: 87.6847}
+//     });
+//     <% i = 0 %>
+//     <% @coffeeshops.each do |coffeeshop| %>
+//     var infowindow<%= i %> = new google.maps.InfoWindow({
+//       content: "<%= coffeeshop.name %>"
+//     });
+//     var marker<%= i %> = new google.maps.Marker({
+//       position: {lat: <%= coffeeshop.latitude %>, lng: <%= coffeeshop.longitude %>},
+//       map: map,
+//       animation: google.maps.Animation.DROP,
+//       title: "<%= coffeeshop.name %>"
+//     })
+//     marker<%= i %>.addListener('click', function() {
+//       infowindow<%= i %>.open(map, marker<%= i %>);
+//     });
+//     <% i = i+1 %>
+//     <% end %>
+//   }
+// </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxb-nwbVf_TPsKG2BygPDyK8-AJUM_JtY&signed_in=true&callback=initMap"></script>
