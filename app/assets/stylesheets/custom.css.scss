@@ -77,6 +77,12 @@
     letter-spacing: 2px;
 	}
 
+  h3 {
+    color: $steel;
+    font-weight: 300;
+    letter-spacing: 1px;
+  }
+
 
   .main-heading {
     margin-bottom: 0px;
@@ -464,8 +470,8 @@ select,
 }
 
 #map {
-  height: 500px;
-  width: 500px;
+  height: 320px;
+  width: 320px;
 }
 
 /* admin dashboard
