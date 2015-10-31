@@ -1,7 +1,11 @@
 require 'capybara/rspec'
 require 'simplecov'
 
-SimpleCov.start
+SimpleCov.start do 
+  # exclude external code from testing (tested at source)
+  add_filter "support/wait_for_ajax"
+  add_filter "../uploaders/picture_uploader"
+end
 
 RSpec.configure do |config|
   require_relative 'support/database_cleaner'
