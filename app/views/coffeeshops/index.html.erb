@@ -131,9 +131,10 @@
   function initMap() {
     console.log("got inside");
     var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 8,
-      center: {lat: 41.8369, lng: 87.6847}
+      zoom: 8
+      // center: {lat: 41.8369, lng: 87.6847}
     });
+    var latlngbounds = new google.maps.LatLngBounds();
     <% i = 0 %>
     <% @coffeeshops.each do |coffeeshop| %>
       var infowindow<%= i %> = new google.maps.InfoWindow({
@@ -144,12 +145,14 @@
         map: map,
         animation: google.maps.Animation.DROP,
         title: "<%= coffeeshop.name %>"
-      })
+      });
+      latlngbounds.extend(marker<%= i %>.position);
       marker<%= i %>.addListener('click', function() {
         infowindow<%= i %>.open(map, marker<%= i %>);
       });
       <% i = i+1 %>
     <% end %>
+    map.fitBounds(latlngbounds);
   }
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxb-nwbVf_TPsKG2BygPDyK8-AJUM_JtY&signed_in=true&callback=initMap"></script>
