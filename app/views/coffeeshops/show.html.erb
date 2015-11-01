@@ -102,10 +102,10 @@
         <p class="lead"> 
           Hours: <%= (@coffeeshop.opens_at).strftime("%-I:%M a.m.") %> &ndash; <%= (@coffeeshop.closes_at).strftime("%-I:%M p.m.") %> <br>
           Parking: <%= @coffeeshop.parking %><br>
-          Accepts Credit: <%= @coffeeshop.accepts_credit %><br>
+          Accepts Credit: <%= friendly_bool(@coffeeshop.accepts_credit) %><br>
           Atmosphere: <%= @coffeeshop.style %><br>
-          Vegan Friendly: <%= @coffeeshop.vegan_friendly %><br>
-          Vegetarian Friendly: <%= @coffeeshop.veggie_friendly %><br>
+          Vegan Friendly: <%= friendly_bool(@coffeeshop.vegan_friendly) %><br>
+          Vegetarian Friendly: <%= friendly_bool(@coffeeshop.veggie_friendly) %><br>
         </p>
       </div>
       <br>

@@ -1,4 +1,10 @@
 module ApplicationHelper
+
+  # Converts true/false into yes/no 
+  def friendly_bool(bool)
+    bool == true ? "Yes" : "No"
+  end
+
 	def full_title(page_title)
     base_title = "Joerator"
     if page_title.empty?
