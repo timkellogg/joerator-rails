@@ -41,7 +41,6 @@ _Joerator is a Yelp clone written in Ruby on Rails 4.2 that focuses on Coffeesho
 * look up bulk upload for pictures / drag and drop
 * Attributes for coffeeshops: bike_parking, handicapped_accessible, 
 * Calculate total number of favorites / add that as a list to sort by
-* Add friendly boolean print (convert false/true to yes and no )
 
 
 ### Legal

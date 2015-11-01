@@ -25,6 +25,12 @@
         <%= link_to "Unfavorite", { :controller => "coffeeshops", :action => "unfavorite", :id => @coffeeshop.id }, :method => :patch, :remote => true, class: 'btn btn-blue' %>
       </div>
     <% end %>
+  <div
+    class="fb-like pull-left"
+    data-share="true"
+    data-width="450"
+    data-show-faces="true">
+  </div>
     <div id="coffeeshop-glance" class="row">    
       <% if @coffeeshop.reviews.any? %>
         <h3>Coffee Quality: <%= calculate_stars(@coffeeshop, "average_quality").html_safe %></h3>
@@ -118,4 +124,20 @@
 </div>
 
 
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1487977554839339',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
 
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
