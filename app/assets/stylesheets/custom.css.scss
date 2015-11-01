@@ -98,13 +98,15 @@
     }
   }
 
-
 	h2 {
     color: $steel;
 		font-size: $large;
-		font-weight: 200;
+		font-weight: 100;
     letter-spacing: 1px;
 	}
+  h2 small {
+    font-weight: 200;
+  }
 
 	/* subtitles */
 	.subtitle {
@@ -266,6 +268,16 @@ h1 .fa-coffee {
   color: $accent;
   font-size: $tiny;
   color: gold;
+}
+
+.fa-star,
+.fa-star-half {
+  color: gold;
+}
+
+i.fa-usd {
+  padding: -1px;
+  letter-spacing: -5px;
 }
 
 .icon-tile {
@@ -492,8 +504,54 @@ select,
 }
 
 
+/* Coffeeshop page
+****************/
+#coffeeshop-glance {
+
+
+}
+
+#coffeeshop-aside {
+  border-left: 1px solid $gray;
+  border-right: 1px solid $gray;
+}
+
+#coffeeshop-map {
+}
+
+.review-pic .card-image {
+  max-width: 60px;
+  max-height: 60px;
+}
+.review-pic {
+  padding-left: -10px;
+  margin-left: -10px;
+}
+.media-body {
+  padding-left: 20px;
+}
+
+#restaurant-info-box {
+  background-color: darken($white, 2.5%);
+  border: 1px solid darken($white, 12%);
+  padding: 3%;
+  padding-top: 1%;
+  p {
+    line-height: 1.5;
+    text-align: left;
+    color: darken($gray-dark, 15%);
+  }
+  .lead {
+    font-variant: small-caps;
+    font-size: 18px;
+    padding-right: 8px;
+  }
+}
+
+
 /* miscellaneous
 ****************/
+
 .debug_dump {
   clear: both;
   float: left;

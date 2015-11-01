@@ -121,8 +121,8 @@ describe "authorizations", :type => :feature do
       it "does allow the user to edit a coffeeshop" do
         coffeeshop = FactoryGirl.create(:coffeeshop)
         visit coffeeshop_path(coffeeshop)
-        expect(page).to have_content("Edit #{coffeeshop.name}")
-        click_link "Edit #{coffeeshop.name}"
+        expect(page).to have_content("Edit Shop")
+        click_link("Edit Shop")
         fill_in "Name", with: "New Name"
         click_button "List shop"
         expect(page).to have_content("New Name")
@@ -133,7 +133,7 @@ describe "authorizations", :type => :feature do
       it "does allow the user to delete a coffeeshop", js: true do
         coffeeshop = FactoryGirl.create(:coffeeshop)
         visit coffeeshop_path(coffeeshop)
-        expect(page).to have_content("Remove?")
+        expect(page).to have_content("Remove")
 
         # Test fails but code works as expected. Problem is with ajax redirect
 
@@ -198,7 +198,7 @@ describe "authorizations", :type => :feature do
       it "does allow the user to create a menu" do
         coffeeshop = FactoryGirl.create(:coffeeshop)
         visit coffeeshop_path(@coffeeshop)
-        click_link "Add a Menu"
+        click_link "Add Menu"
         click_button "Create?"
         expect(page).to have_content("Menu was added")
         click_link "Add an item"

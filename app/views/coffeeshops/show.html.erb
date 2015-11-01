@@ -1,94 +1,121 @@
 <% provide(:title, @coffeeshop.name) %>
 
-<div id="coffeeshop-wrapper">
-  <% if current_user && !favorited?(current_user, @coffeeshop) %>
-    <div id="fav-container" class="row">
-      <%= link_to "Favorite", { :controller => "coffeeshops", :action => "favorite", :id => @coffeeshop.id }, :method => :post, :remote => true, class: 'btn btn-gray' %>
-    </div>
-  <% elsif current_user && favorited?(current_user, @coffeeshop) %>
-    <div id="unfav-container" class="row">
-      <%= link_to "Unfavorite", { :controller => "coffeeshops", :action => "unfavorite", :id => @coffeeshop.id }, :method => :patch, :remote => true, class: 'btn btn-blue' %>
-    </div>
-  <% else %>
-    <div class="row">
-      <p class="lead">Log in to favorite!</p>
-    </div>
-  <% end %>
+<div id="coffeeshop-wrapper" class="container">
 
-  <div id="coffeeshop-header" class="banner row">
-    <h2><%= @coffeeshop.name %></h2>
-    <h2><small><%= @coffeeshop.full_address %></small></h2>
+  <div class="row">
+    <h2><%= @coffeeshop.name %><br>
+    <small><%= @coffeeshop.city %>, <%= @coffeeshop.state %></small>
+    </h2> 
+    <h3><%= calculate_stars(@coffeeshop, "overall_average").html_safe %> <%= pluralize(@coffeeshop.reviews_count, 'review') %></h3>
   </div>
 
-  <% if current_user && current_user.admin? %>
-    <%= link_to "Edit #{@coffeeshop.name} ", edit_coffeeshop_path(@coffeeshop) %>
-    <%= link_to "Remove?", coffeeshop_path(@coffeeshop), id: 'remove-coffeeshop-link', remote: true, data: { confirm: 'are you sure?', method: :delete }, class: 'btn btn-red' %>
-  <% end %>
-
-  <div class="banner-2 row">
-    <div class="col-xs-12">
-      <span class="pull-left">
-        <% if @coffeeshop.picture? %>
-          <%= image_tag @coffeeshop.picture.url %>
-          <% else %>
-          <%= image_tag("mug.png", class: 'card-image') %>
-        <% end %>
-      </span>
-    </div>
-  </div>
-
-  <div class="col-md-12">
-    <iframe width="200" height="200" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<%= @coffeeshop.address %>&key=AIzaSyC7refRsrpNaOI9TrGEuhjJmI9bJAi1yI0"></iframe>
-  </div>
-
-  <% if current_user && current_user.admin? && @coffeeshop.menu.nil? %>
-    <%= link_to 'Add a Menu', new_coffeeshop_menu_path(@coffeeshop), class: 'btn btn-default' %>
-  <% end %>
-
-  <% if current_user && current_user.admin? && @menu %>
-    <%= link_to 'View Menu', coffeeshop_menu_path(@coffeeshop, @coffeeshop.menu), class: 'btn btn-gray' %>
-    <%= link_to 'Add an Item to the Menu', new_menu_item_path(@menu), class: 'btn btn-blue' %>
-  <% end %>
-
-  <hr>
-    <div>
-      <h3 class="text-left">Average ratings out of  <%= pluralize(@coffeeshop.reviews_count, 'review' )%></h3>
-      <h4 class="text-left"><i>Coffee Quality:</i>  <%= calculate_stars(@coffeeshop, "average_quality").html_safe %></h4>
-      <h4 class="text-left"><i>Atmosphere:</i>      <%= calculate_stars(@coffeeshop, "average_study").html_safe %></h4>
-      <h4 class="text-left"><i>Amenities:</i>       <%= calculate_stars(@coffeeshop, "average_laptop").html_safe %></h4>
-      <h4 class="text-left"><i>Hipster Factor:</i>  <%= calculate_stars(@coffeeshop, "average_hipster").html_safe %></h4>
-    </div>
-  <hr>
-
-  <div class="container">
-    <% if current_user && !already_reviewed?(@coffeeshop, current_user) %>
-      <%= link_to 'Add a review', new_coffeeshop_review_path(@coffeeshop), remote: true, id: 'review-add-btn', class: 'btn btn-blue' %>
+  <div class="row">
+    <% if @coffeeshop.picture? %>
+      <%= image_tag @coffeeshop.picture.url %>
+      <% else %>
+      <%= image_tag("mug.png", class: 'card-image') %>
     <% end %>
-
-    <div id="add-review-form"></div>
-    <%= will_paginate @reviews %>
-    <div id="review-container">
-      <% @reviews.each do |review| %>
-        <div id="review-<%= review.id %>" class="media well">
-          <div class="media-left pull-left">
-            <%= link_to user_path(review.user) do %>
-              <%= gravatar_for review.user %>
-              <% end %>
-          </div>
-          <div class="media-body media-left">
-            <h4 class="media-heading"><span class="pull-left"><%= review.title %></span><br>
-              <em class="pull-right"><%= time_ago_in_words(review.created_at) %> ago
-                <% if current_user && current_user.admin? %>
-                  <%= link_to coffeeshop_review_path(@coffeeshop, review), remote: true, data: { confirm: 'are you sure?', method: :delete } do %>
-                    <%= fa_icon "trash-o" %>
-                  <% end %>
-                <% end %>
-              </em>
-            </h4>
-            <p class=" text-center pull-left"><%= review.body %></p>
-          </div>
-        </div>
+  </div><br>
+      <% if current_user && !favorited?(current_user, @coffeeshop) %>
+      <div id="fav-container" class="row">
+        <%= link_to "Favorite", { :controller => "coffeeshops", :action => "favorite", :id => @coffeeshop.id }, :method => :post, :remote => true, class: 'btn btn-gray' %>
+      </div>
+    <% elsif current_user && favorited?(current_user, @coffeeshop) %>
+      <div id="unfav-container" class="row">
+        <%= link_to "Unfavorite", { :controller => "coffeeshops", :action => "unfavorite", :id => @coffeeshop.id }, :method => :patch, :remote => true, class: 'btn btn-blue' %>
+      </div>
+    <% end %>
+    <div id="coffeeshop-glance" class="row">    
+      <% if @coffeeshop.reviews.any? %>
+        <h3>Coffee Quality: <%= calculate_stars(@coffeeshop, "average_quality").html_safe %></h3>
+        <h3>Atmosphere:     <%= calculate_stars(@coffeeshop, "average_study").html_safe %></h3>
+        <h3>Amenities:      <%= calculate_stars(@coffeeshop, "average_laptop").html_safe %></h3>
+        <h3>Hipster Factor: <%= calculate_stars(@coffeeshop, "average_hipster").html_safe %></h3>  
       <% end %>
     </div>
-  </div>
+  <% if current_user && current_user.admin? %>
+    <hr>
+
+    <div class="btn-group" role="group" aria-label="Navigation">
+      <%= link_to edit_coffeeshop_path(@coffeeshop) do %>
+        <button type="button" class="btn btn-default">Edit Shop</button>
+      <% end %>
+      <%= link_to coffeeshop_path(@coffeeshop), id: 'remove-coffeeshop-link', remote: true, data: { confirm: 'are you sure?', method: :delete } do %>
+        <button type="button" class="btn btn-default">Remove</button>
+      <% end %>
+      <% if @coffeeshop.menu.nil? %>
+        <%= link_to new_coffeeshop_menu_path(@coffeeshop) do %>
+          <button type="button" class="btn btn-default">Add Menu</button>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+  <hr>
+    <div class="row">      
+    <div id="review-container" class="col-md-8">
+        <% if current_user && !already_reviewed?(@coffeeshop, current_user) %>
+      <%= link_to 'Add a review', new_coffeeshop_review_path(@coffeeshop), remote: true, id: 'review-add-btn', class: 'btn btn-blue' %>
+    <% end %>
+      <div id="add-review-form">
+      </div>
+      <% if @reviews.any? %>
+
+        <%= will_paginate @reviews %>
+        <% @reviews.each do |review| %>
+          <div id="review-<%= review.id %>">
+            <div class="media-left pull-left">
+              <%= link_to user_path(review.user) do %>
+                <span class="review-pic"><%= gravatar_for review.user %></span>
+                <% end %>
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading"><span class="pull-left"><%= review.user.name %>
+                  <% if current_user && current_user.admin? %>
+                    <%= link_to coffeeshop_review_path(@coffeeshop, review), remote: true, data: { confirm: 'are you sure?', method: :delete } do %>
+                      <%= fa_icon "trash-o" %>
+                    <% end %>
+                  <% end %>
+                </span><br>
+              </h4>
+              <p class="text-center pull-left"><%= review.body %></p>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+
+      <% end %>
+    </div>
+    <aside id="coffeeshop-aside" class="col-md-4">
+      <div id="restaurant-info-box">
+        <p class="lead">
+          <% if @coffeeshop.menu %>
+            <%= link_to coffeeshop_menu_path(@coffeeshop, @coffeeshop.menu) do %>
+              <%= fa_icon "cutlery" %> Menu
+            <% end %><br>
+          <% end %>
+          <% @coffeeshop.price.times do |n| %>
+            <i class="fa fa-usd"></i>
+          <% end %>
+          Price
+        </p>
+        <hr>
+        <p class="lead"> 
+          Hours: <%= (@coffeeshop.opens_at).strftime("%-I:%M a.m.") %> &ndash; <%= (@coffeeshop.closes_at).strftime("%-I:%M p.m.") %> <br>
+          Parking: <%= @coffeeshop.parking %><br>
+          Accepts Credit: <%= @coffeeshop.accepts_credit %><br>
+          Atmosphere: <%= @coffeeshop.style %><br>
+          Vegan Friendly: <%= @coffeeshop.vegan_friendly %><br>
+          Vegetarian Friendly: <%= @coffeeshop.veggie_friendly %><br>
+        </p>
+      </div>
+      <br>
+      <div id="coffeeshop-map">
+        <iframe width="300" height="300" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<%= @coffeeshop.address %>&key=AIzaSyC7refRsrpNaOI9TrGEuhjJmI9bJAi1yI0">
+        </iframe>
+      </div>
+    </aside>
+    </div>
 </div>
+
+
+
