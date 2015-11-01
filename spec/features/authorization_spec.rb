@@ -191,13 +191,13 @@ describe "authorizations", :type => :feature do
       before do
         user = FactoryGirl.create(:admin)
         log_in(user)
-        coffeeshop = FactoryGirl.create(:coffeeshop)
-        visit coffeeshop_path(coffeeshop)
+        @coffeeshop = FactoryGirl.create(:coffeeshop)
+        visit coffeeshop_path(@coffeeshop)
       end
 
       it "does allow the user to create a menu" do
         coffeeshop = FactoryGirl.create(:coffeeshop)
-        visit coffeeshop_path(coffeeshop)
+        visit coffeeshop_path(@coffeeshop)
         click_link "Add a Menu"
         click_button "Create?"
         expect(page).to have_content("Menu was added")
@@ -207,9 +207,25 @@ describe "authorizations", :type => :feature do
         expect(Item.count).to eq(1)
       end
 
-      it "does allow the user to edit a menu item" do
-        item = FactoryGirl.create(:item)
+      it "does allow the user to edit a menu item", js: true do
+        @menu = FactoryGirl.create(:menu, coffeeshop: @coffeeshop)
+        item = FactoryGirl.create(:item, menu: @menu)
+        visit menu_path(@menu)
+        expect(page).to have_content "Edit"
+        click_link "Edit"
+        expect(page).to have_content("Editing #{item.name}")
+        fill_in "Name", with: "Changed"
+        click_button "Add item"
+        expect(page).to have_content "Updates saved."
+      end
 
+      it "does allow the user to remove a menu item", js: true do 
+        @menu = FactoryGirl.create(:menu, coffeeshop: @coffeeshop)
+        item = FactoryGirl.create(:item, menu: @menu)
+        visit menu_path(@menu)
+        click_link "Remove"
+        expect(page).to have_content("Item has been removed")
+        expect(page).to_not have_content(item.name)
       end
     end
   end
