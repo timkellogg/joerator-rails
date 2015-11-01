@@ -37,6 +37,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    @item.destroy 
   end
 
   private 
@@ -45,6 +46,7 @@ class ItemsController < ApplicationController
     end
 
     def item_params 
+ 
       params.require(:item).permit(:menu_id, :name, 
                                    :description, :veggie_friendly,
                                    :vegan_friendly, :gluten_free, 

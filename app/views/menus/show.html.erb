@@ -1,8 +1,8 @@
-<% provide(:title, "#{@coffeeshop}'s Menu") %>
+<%= provide(:title, "#{@menu.coffeeshop.name}'s Menu") %>
 
 <h2><%= @menu.coffeeshop.name %>'s Menu</h2>
-
-<div id="menu-wrapper" class="container simple-box">
+<hr>
+<div id="menu-wrapper" class="container">
   <div class="row text-center">
     <div class="col-xs-12">
       <% if current_user && current_user.admin? && @menu %>
@@ -11,14 +11,20 @@
       <%= link_to 'Back to Coffeeshop', coffeeshop_path(@menu.coffeeshop), class: 'btn btn-gray' %>
     </div>
   </div>
+ 
   <% if @menu.items.any? %>
+  <div id="menu">
     <% @menu.items.each do |item| %>
-      <div class="col-md-12 menu-item">
+      <div id="item-<%= item.id %>" class="col-md-3 menu-item">
         <%= image_tag item.picture.url if item.picture? %>
+        <%= item.name %>
         <% if current_user && current_user.admin? && @menu %>
-          <%= link_to 'Edit item', edit_menu_item_path(@menu, item) %>
+          <%= link_to 'Edit', edit_menu_item_path(@menu, item), class: 'btn btn-gray' %>
+          <%= link_to 'Remove', menu_item_path(item.menu, item), remote: true, data: { confirm: 'Are you sure?', method: :delete }, class: 'btn btn-red' %>
         <% end %>
-    <% end %>
     </div>
+    <% end %>
   <% end %>
+  </div>
 </div>
+
