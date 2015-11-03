@@ -68,24 +68,34 @@
       <% @coffeeshops.each_with_index do |coffeeshop, index| %>
         <%= link_to coffeeshop_path(coffeeshop) do %>
           <li class="list-group-item">
-            <h4><%= index + 1 %><% if coffeeshop.picture? %>
-                <%= image_tag coffeeshop.picture.url, class: 'card-image' %>
-              <% else %>
-                <%= image_tag("mug.png", class: 'card-image') %>
-              <% end %>
-              <span id="<%= index %>-name"><%= coffeeshop.name %></span>
-              <small id="<%= index %>-address">
-                <%= coffeeshop.full_address %>
-                <span id="<%= index %>-lat" class="hidden"><%= coffeeshop.latitude %></span>
-                <span id="<%= index %>-lng" class="hidden"><%= coffeeshop.longitude %></span>
-              </small>
-            </h4>
-            Overall: <%= calculate_stars(coffeeshop, "overall_average").html_safe %> 
+                      Overall: <%= calculate_stars(coffeeshop, "overall_average").html_safe %>
+              <h4 class="row list-group-body">
+                <span class="number"><%= index + 1 %></span>
+                <% if coffeeshop.picture? %>
+                  <%= image_tag coffeeshop.picture.url, class: 'card-image' %>
+                <% else %>
+                  <%= image_tag("mug.png", class: 'card-image') %>
+                <% end %>
+                <span id="<%= index %>-name"><%= coffeeshop.name %></span>
+                <small id="<%= index %>-address">
+                  <%= coffeeshop.full_address %>
+                  <span id="<%= index %>-lat" class="hidden"><%= coffeeshop.latitude %></span>
+                  <span id="<%= index %>-lng" class="hidden"><%= coffeeshop.longitude %></span>
+                </small>
+              </h4>
+            <span class="coffeeshop-rating">
+
+            <% if coffeeshop.reviews.any? %>
+              <span class="tiny"><%= gravatar_for(coffeeshop.reviews.first.user) %></span>
+              <%= coffeeshop.reviews.first.body %>
+            <% end %>
+            </span>
           <% end %>
             <span class="pull-right">
-              <button id="<%= index %>" type="button" class="btn map-trigger btn-sm btn-blue" data-toggle="modal" data-target=".bs-example-modal-lg">Map <%= fa_icon "map-marker" %></button>
+              <button id="<%= index %>" type="button" class="btn map-trigger btn-sm btn-blue" data-toggle="modal" data-target=".bs-example-modal-lg"><%= fa_icon "map-marker" %></button>
             </span>
-          </li>
+
+        </li>
       <% end %>
     </ul>
   <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>

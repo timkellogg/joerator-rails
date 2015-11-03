@@ -168,6 +168,17 @@
   }
 }
 
+.list-group-body {
+  padding: 10px;
+}
+.coffeeshop-rating {
+  padding-left: 28px;
+}
+
+.tiny .card-image {
+  height: 40px;
+  width: 40px;
+}
 /* general
 ****************/
 body {
@@ -370,6 +381,10 @@ div.btn-group-xs.text-left > a > button  {
 
 .btn-container {
 
+}
+
+.number {
+  padding: 10px;
 }
 
 .btn-panel {
