@@ -2,33 +2,60 @@
 
 <div class="container content-container">
 
-  <% if @came_from_search %>
-    <div class="col-xs-12">
-      <button id="toggle-form" class="btn btn-blue">Not Satisfied?</button>
+<div class=" banner-row">
+  <h2 class="main-heading">Results</h2>
+</div>
+
+  <div id="search-container">
+    <div class="col-md-6">
+      <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
+        <div class="input-group">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-gray" type="button"><%= fa_icon "map-marker" %></button>
+          </span>
+          <%= text_field_tag :search_location, params[:search_location], class: "form-control nudge", placeholder: "Search by location..." %>
+        </div>
+      <% end %>
     </div>
-    <div id="search-container" class="hidden">
-      <div class="col-md-6">
-        <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
-          <div class="input-group">
-            <span class="input-group-btn">
-              <button type="submit" class="btn btn-gray" type="button"><%= fa_icon "map-marker" %></button>
-            </span>
-            <%= text_field_tag :search_location, params[:search_location], class: "form-control nudge", placeholder: "Search by location..." %>
-          </div>
-        <% end %>
-      </div>
-      <div class="col-md-6">
-        <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
-          <div class="input-group ">
-            <span class="input-group-btn">
-              <button type="submit" class="btn btn-blue btn-default" type="button"><%= fa_icon "search" %></button>
-            </span>
-            <%= text_field_tag :search, params[:search], class: "form-control nudge", placeholder: "Search by name..." %>
-          </div>
-        <% end %>
-      </div>
+    <div class="col-md-6">
+      <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
+        <div class="input-group ">
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-blue btn-default" type="button"><%= fa_icon "search" %></button>
+          </span>
+          <%= text_field_tag :search, params[:search], class: "form-control nudge", placeholder: "Search by name..." %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
+
+  <div class="btn-group-xs text-left container" role="group" aria-label="filters">
+    <%= link_to params.merge(:filter => "1"), :method => "get" do %>
+      <button type="button" class="filter-btn btn btn-default">$</button>
+    <% end %>
+    <%= link_to params.merge(:filter => "2"), :method => "get" do %>
+      <button type="button" class="filter-btn btn btn-default">$$</button>
+    <% end %>
+    <%= link_to params.merge(:filter => "3"), :method => "get" do %>
+      <button type="button" class="filter-btn btn btn-default">$$$</button>
+    <% end %>
+    <%= link_to params.merge(:filter => "4"), :method => "get" do %>
+      <button type="button" class="filter-btn btn btn-default">$$$$</button>
+    <% end %>
+    <%= link_to params.merge(:filter => "5"), :method => "get" do %>
+      <button type="button" class="filter-btn btn btn-default">$$$$$</button>
+    <% end %>
+    <%= link_to params.merge(:filter => "vegan"), :method => "get" do %>
+      <button type="button" class="filter-btn btn btn-default">Vegan</button>
+    <% end %>
+    <%= link_to params.merge(:filter => "veggie"), :method => "get" do %>
+      <button type="button" class="filter-btn btn btn-default">Veggie</button>
+    <% end %>
+
+    <%= link_to coffeeshops_path do %>
+      <button type="button" class="filter-btn btn btn-default">Clear All Filters</button>
+    <% end %>
+  </div>
 
   <% if @came_from_search %>
     <p>Your search returned: <%= pluralize(@coffeeshops.count, 'result') %></p>
@@ -61,9 +88,11 @@
     </ul>
   <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
   </div>
+  <% if @coffeeshops.any? %>
   <div id="map-container" class="col-md-5 card-container text-right">
     <div id="map"></div>
   </div>
+  <% end %>
 </div>
 
 
@@ -89,9 +118,14 @@
   // affix 
   $("#map-container").affix({
     offset: {
-      top: $("#results-listing"),
+      top: $("#results-listing")
     }
-  })
+  });
+
+  $(".filter-btn").on("click", function() {
+    $(this).addClass("filter-active");
+  });
+
 </script>
 
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>

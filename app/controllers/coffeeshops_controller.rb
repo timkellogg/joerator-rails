@@ -6,6 +6,9 @@ class CoffeeshopsController < ApplicationController
     @came_from_search = false
     @show_map = false
 
+    # # Sanitizing (prevents XSS attacks)
+    # params = params.slice(:sort, :search, :search_location)
+
     # Searching matches
     if params[:search]
       @coffeeshops = Coffeeshop.where(approved: true).search(params[:search]).order(created_at: :desc).paginate(:page => params[:page])
@@ -15,6 +18,26 @@ class CoffeeshopsController < ApplicationController
       @came_from_search = true
       @show_map  = true
 
+    # Filtering matches 
+    elsif params[:filter] == "1"
+      sanitize_params
+      @coffeeshops = Coffeeshop.where(approved: true).where(price: 1).paginate(:page => params[:page])
+    elsif params[:filter] == "2"
+      sanitize_params
+      @coffeeshops = Coffeeshop.where(approved: true).where(price: 2).paginate(:page => params[:page])
+    elsif params[:filter] == "3"
+      sanitize_params
+      @coffeeshops = Coffeeshop.where(approved: true).where(price: 3).paginate(:page => params[:page])
+    elsif params[:filter] == "4"
+      sanitize_params
+      @coffeeshops = Coffeeshop.where(approved: true).where(price: 4).paginate(:page => params[:page])
+    elsif params[:filter] == "5"
+      @coffeeshops = Coffeeshop.where(approved: true).where(price: 5).paginate(:page => params[:page])
+    elsif params[:filter] == "vegan"
+      @coffeeshops = Coffeeshop.where(approved: true).where(vegan_friendly: true).paginate(:page => params[:page])
+    elsif params[:filter] == "veggie"
+      @coffeeshops = Coffeeshop.where(approved: true).where(veggie_friendly: true).paginate(:page => params[:page])
+      
     # Sorting matches
     elsif params[:sort] == 'biggest_menu'
       @coffeeshops = Coffeeshop.where(approved: true).order(items_count: :desc).paginate(:page => params[:page])
@@ -111,6 +134,16 @@ class CoffeeshopsController < ApplicationController
   end
 
   private
+
+    # Keeps params but prevents XSS by sanitizing params that are acceptable 
+    def sanitize_params
+      begin 
+        return params = params.slice(:search) if params[:search]
+        return params = params.slice(:search_location) if params[:search_location]
+      rescue NoMethodError
+        return params
+      end
+    end
 
     def is_logged_in_and_admin
       unless current_user && current_user.admin?
