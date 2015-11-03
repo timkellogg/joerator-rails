@@ -68,7 +68,7 @@
       <% @coffeeshops.each_with_index do |coffeeshop, index| %>
         <%= link_to coffeeshop_path(coffeeshop) do %>
           <li class="list-group-item">
-            <h4><% if coffeeshop.picture? %>
+            <h4><%= index + 1 %><% if coffeeshop.picture? %>
                 <%= image_tag coffeeshop.picture.url, class: 'card-image' %>
               <% else %>
                 <%= image_tag("mug.png", class: 'card-image') %>
