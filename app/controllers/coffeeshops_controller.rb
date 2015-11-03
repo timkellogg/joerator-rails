@@ -37,7 +37,6 @@ class CoffeeshopsController < ApplicationController
       @coffeeshops = Coffeeshop.where(approved: true).where(vegan_friendly: true).paginate(:page => params[:page])
     elsif params[:filter] == "veggie"
       @coffeeshops = Coffeeshop.where(approved: true).where(veggie_friendly: true).paginate(:page => params[:page])
-      
     # Sorting matches
     elsif params[:sort] == 'biggest_menu'
       @coffeeshops = Coffeeshop.where(approved: true).order(items_count: :desc).paginate(:page => params[:page])

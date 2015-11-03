@@ -105,7 +105,6 @@ describe "searching coffeeshops", :type => :feature do
       fill_in "search_location", with: "Match"
       click_button "search-location-btn"
       expect(page).to have_content "Your search returned"
-      expect(page).to have_content "Not Satisfied?"
       expect(page).to have_content @match.name
       expect(page).to_not have_content @mismatch.name
     end
@@ -125,6 +124,28 @@ describe "searching coffeeshops", :type => :feature do
       click_button "search-name-btn"
       expect(page).to have_content @match.name
       expect(page).to_not have_content @mismatch.name
+    end
+  end
+
+  context "when filtering" do  
+    before do 
+      @only_match_first = FactoryGirl.create(:coffeeshop)
+      @match_both = FactoryGirl.create(:coffeeshop)
+      @match_both.update(price: 1)
+      visit root_path
+    end
+
+    # Could improve this test by having only_math_first checking but parmas aren't passed
+    # From button. Behavior works as expected however
+    it "should return matches that take into account previous parameters" do  
+      fill_in "search", with: "Coffeeshop"
+      click_button "search-name-btn"
+      expect(page).to have_content @only_match_first.name
+      expect(page).to have_content @match_both.name
+      click_button "$"
+      expect(page.current_url.include?("&search")).to eq true 
+      expect(page).to have_content @match_both.name
+      expect(page.status_code).to eq 200
     end
   end
 

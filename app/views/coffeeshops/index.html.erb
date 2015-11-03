@@ -31,7 +31,7 @@
 
   <div class="btn-group-xs text-left container" role="group" aria-label="filters">
     <%= link_to params.merge(:filter => "1"), :method => "get" do %>
-      <button type="button" class="filter-btn btn btn-default">$</button>
+      <button id="m1" type="button" class="filter-btn btn btn-default">$</button>
     <% end %>
     <%= link_to params.merge(:filter => "2"), :method => "get" do %>
       <button type="button" class="filter-btn btn btn-default">$$</button>
