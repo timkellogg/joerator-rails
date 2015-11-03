@@ -337,9 +337,16 @@ i.fa-usd {
 
 /* buttons
 ***************/
+.btn-group-xs {
+  margin-left: 15px;
+}
 
 .filter-active {
   background-color: #2b6cb5; 
+}
+
+div.btn-group-xs.text-left > a > button  {
+  margin: 0;
 }
 
 .nudge {
@@ -435,6 +442,16 @@ $brown: #666;
   }
 }
 
+#search-container {
+  margin-left: 1px;
+  .col-md-6 {
+    margin-top: 5px;
+  }
+}
+.input-group {
+  margin-left: -7px !important;
+}
+
 #home-search {
   margin-top: $huge-amount;
   margin-left: 8%;
@@ -484,6 +501,9 @@ select,
 #modal-map {
   height: 250px;
   width: 250px;
+}
+
+.affix {
 }
 
 #map {

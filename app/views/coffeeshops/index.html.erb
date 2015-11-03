@@ -2,11 +2,12 @@
 
 <div class="container content-container">
 
-<div class=" banner-row">
-  <h2 class="main-heading">Results</h2>
+<div class="banner-row container">
+  <h2>Coffeeshops</h2>
+  <p>Your search returned: <%= pluralize(@coffeeshops.count, 'result') %></p>
 </div>
 
-  <div id="search-container">
+  <div id="search-container" class="row">
     <div class="col-md-6">
       <%= form_tag(coffeeshops_path, :method => "get", id: "search-form") do %>
         <div class="input-group">
@@ -29,7 +30,7 @@
     </div>
   </div>
 
-  <div class="btn-group-xs text-left container" role="group" aria-label="filters">
+  <div class="btn-group-xs text-left row card-container " role="group" aria-label="filters">
     <%= link_to params.merge(:filter => "1"), :method => "get" do %>
       <button id="m1" type="button" class="filter-btn btn btn-default">$</button>
     <% end %>
@@ -57,9 +58,10 @@
     <% end %>
   </div>
 
-  <% if @came_from_search %>
-    <p>Your search returned: <%= pluralize(@coffeeshops.count, 'result') %></p>
-  <% end %>
+  <div class="card-container text-center">
+    
+  </div>
+  
   <div id="results-listing" class="card-container text-left col-md-7">
     <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
     <ul class="list-group">
