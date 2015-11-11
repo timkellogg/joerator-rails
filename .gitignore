@@ -20,4 +20,5 @@
 
 /public/uploads
 
-
+# Ingore environmental variables
+.env
