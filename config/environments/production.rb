@@ -16,6 +16,31 @@ Rails.application.configure do
       :enable_starttls_auto => true
     }
 
+  # Setup default caching server
+  client = Dalli::Client.new((ENV["MEMCACHIER_SERVERS"] || "").split(","),
+                           :username => ENV["MEMCACHIER_USERNAME"],
+                           :password => ENV["MEMCACHIER_PASSWORD"],
+                           :failover => true,
+                           :socket_timeout => 1.5,
+                           :socket_failure_delay => 0.2,
+                           :value_max_bytes => 10485760)
+  config.action_dispatch.rack_cache = {
+    :metastore    => client,
+    :entitystore  => client
+  }
+
+  # Configure rails to serve assets managed via caching
+  config.serve_static_assets = true
+
+  # Configure default caching age for public assets
+  config.static_cache_control = "public, max-age=2592000"
+
+  # Configure proper cache invalidation
+  config.assets.digest = true
+
+  # Confirm that caching is turned on in production
+  config.action_controller.perform_caching = true
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

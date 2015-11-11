@@ -19,6 +19,10 @@ gem 'carrierwave', '0.10.0'
 gem 'mini_magick', '3.8.0'
 gem 'fog', '1.26.0'
 gem 'dotenv'
+gem 'rack-cache'
+gem 'dalli'
+gem 'kgio'
+gem "memcachier"
 
 group :production do
   gem 'puma'

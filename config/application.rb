@@ -25,7 +25,10 @@ module JoeRator
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
 
-    # Configure custom validator path 
+    # Configure caching store 
+    config.cache_store = :dalli_store
+
+    # Configure custom validator path
     config.autoload_paths += %W["#{config.root}/app/validators/"]
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
