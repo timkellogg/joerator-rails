@@ -4,7 +4,7 @@
   password: "password",
   password_confirmation: "password",
   admin: true,
-  bio: Faker::Lorem.sentence(3),
+  bio: "The administrative user!",
   favorite_coffee: 'americano',
   location: "Portland",
   facebook_link: "https://www.facebook.com/admin_user",
