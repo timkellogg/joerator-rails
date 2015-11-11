@@ -5,7 +5,7 @@
   <div class="row">
     <h2><%= @coffeeshop.name %><br>
     <small><%= @coffeeshop.city %>, <%= @coffeeshop.state %></small>
-    </h2> 
+    </h2>
     <h3><%= calculate_stars(@coffeeshop, "overall_average").html_safe %> <%= pluralize(@coffeeshop.reviews_count, 'review') %></h3>
   </div>
 
@@ -30,15 +30,14 @@
     <a href="https://twitter.com/share" class="twitter-share-button " data-via="timkellogg">Tweet</a>
   <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
     <div class="fb-like pull-right" data-share="true" data-width="450" data-show-faces="true"></div>
-  </div>
+  </div><br>
 
-
-    <div id="coffeeshop-glance" class="row">    
+    <div id="coffeeshop-glance" class="row">
       <% if @coffeeshop.reviews.any? %>
         <h3>Coffee Quality: <%= calculate_stars(@coffeeshop, "average_quality").html_safe %></h3>
         <h3>Atmosphere:     <%= calculate_stars(@coffeeshop, "average_study").html_safe %></h3>
         <h3>Amenities:      <%= calculate_stars(@coffeeshop, "average_laptop").html_safe %></h3>
-        <h3>Hipster Factor: <%= calculate_stars(@coffeeshop, "average_hipster").html_safe %></h3>  
+        <h3>Hipster Factor: <%= calculate_stars(@coffeeshop, "average_hipster").html_safe %></h3>
       <% end %>
     </div>
   <% if current_user && current_user.admin? %>
@@ -59,22 +58,21 @@
     </div>
   <% end %>
   <hr>
-    <div class="row">      
+    <div class="row">
     <div id="review-container" class="col-md-8">
-        <% if current_user && !already_reviewed?(@coffeeshop, current_user) %>
+    <% if current_user && !already_reviewed?(@coffeeshop, current_user) %>
       <%= link_to 'Add a review', new_coffeeshop_review_path(@coffeeshop), remote: true, id: 'review-add-btn', class: 'btn btn-blue' %>
     <% end %>
-      <div id="add-review-form">
-      </div>
-      <% if @reviews.any? %>
+      <div id="add-review-form"></div>
 
+      <% if @reviews.any? %>
         <%= will_paginate @reviews %>
         <% @reviews.each do |review| %>
           <div id="review-<%= review.id %>">
             <div class="media-left pull-left">
               <%= link_to user_path(review.user) do %>
                 <span class="review-pic"><%= gravatar_for review.user %></span>
-                <% end %>
+              <% end %>
             </div>
             <div class="media-body">
               <h4 class="media-heading"><span class="pull-left"><%= review.user.name %>
@@ -87,7 +85,7 @@
               </h4>
               <p class="text-center pull-left"><%= review.body %></p>
             </div>
-          </div>
+          </div><br><hr>
         <% end %>
       <% else %>
 
@@ -107,7 +105,7 @@
           Price
         </p>
         <hr>
-        <p class="lead"> 
+        <p class="lead">
           Hours: <%= (@coffeeshop.opens_at).strftime("%-I:%M a.m.") %> &ndash; <%= (@coffeeshop.closes_at).strftime("%-I:%M p.m.") %> <br>
           Parking: <%= @coffeeshop.parking %><br>
           Accepts Credit: <%= friendly_bool(@coffeeshop.accepts_credit) %><br>
