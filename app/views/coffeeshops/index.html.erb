@@ -64,38 +64,44 @@
 
   <div id="results-listing" class="card-container text-left col-md-7">
     <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
+
     <ul class="list-group">
       <% @coffeeshops.each_with_index do |coffeeshop, index| %>
         <%= link_to coffeeshop_path(coffeeshop) do %>
           <li class="list-group-item">
-                      Overall: <%= calculate_stars(coffeeshop, "overall_average").html_safe %>
-              <h4 class="row list-group-body">
-                <span class="number"><%= index + 1 %></span>
-                <% if coffeeshop.picture? %>
-                  <%= image_tag coffeeshop.picture.url, class: 'card-image' %>
-                <% else %>
-                  <%= image_tag("mug.png", class: 'card-image') %>
-                <% end %>
-                <span id="<%= index %>-name"><%= coffeeshop.name %></span>
+            <div class="list-group-container">
+              <% if coffeeshop.picture? %>
+                <%= image_tag Coffeeshop.first.picture.url, class: 'card-image pull-left' %>
+              <% else %>
+                <%= image_tag("mug.png", class: 'card-image') %>
+              <% end %>
+              <div class="main-listing">
+                <span id="<%= index %>-name" class="biz-name"><%= truncate(coffeeshop.name )%></span><br>
+                <span class="biz-rating"><%= calculate_stars(Coffeeshop.first, "overall_average").html_safe %></span>
+                <span class="biz-review-number"><%= pluralize(Coffeeshop.first.reviews_count, "review") %></span><br>
+                <span class="biz-cost">
+                  <% Coffeeshop.first.price.times do %>
+                    $
+                  <% end %>
+                </span>
+              </div>
+              <div class="secondary-listing pull-right">
                 <small id="<%= index %>-address">
-                  <%= coffeeshop.full_address %>
                   <span id="<%= index %>-lat" class="hidden"><%= coffeeshop.latitude %></span>
                   <span id="<%= index %>-lng" class="hidden"><%= coffeeshop.longitude %></span>
                 </small>
-              </h4>
-            <span class="coffeeshop-rating">
-
-            <% if coffeeshop.reviews.any? %>
-              <span class="tiny"><%= gravatar_for(coffeeshop.reviews.first.user) %></span>
-              <%= coffeeshop.reviews.first.body %>
-            <% end %>
-            </span>
-          <% end %>
-            <span class="pull-right">
-              <button id="<%= index %>" type="button" class="btn map-trigger btn-sm btn-blue" data-toggle="modal" data-target=".bs-example-modal-lg"><%= fa_icon "map-marker" %></button>
-            </span>
-
-        </li>
+                <address>
+                  <%= truncate(Coffeeshop.first.address) %><br>
+                  <%= truncate(Coffeeshop.first.city) %>,
+                  <%= truncate(Coffeeshop.first.state) %>
+                </address>
+                <span>
+                  <a id="<%= index %>" type="button" class="btn map-trigger btn-sm btn-blue" data-toggle="modal" data-target=".bs-example-modal-lg"><%= fa_icon "map-marker" %></a>
+                </span>
+              </div>
+            </div>
+          </li>
+        <% end %>
       <% end %>
     </ul>
   <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
@@ -127,18 +133,11 @@
 
 <script>
 
-  // affix
   $("#map-container").affix({
     offset: {
       top: $("#map-container").offset().top
     }
   })
-  // affix
-  // $("#map-container").affix({
-  //   offset: {
-  //     top: $("#results-listing").offset().top
-  //   }
-  // });
 
   $(".filter-btn").on("click", function() {
     $(this).addClass("filter-active");

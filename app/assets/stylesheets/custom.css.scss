@@ -122,6 +122,7 @@
 	/*body { text-align: center; } */ /* Uncheck to have everything centered */
 	h1, h2, p { text-align: center; }
 
+
   a {
     text-decoration: none !important;
     &:hover {
@@ -256,6 +257,8 @@ body {
     z-index: -999;
   }
 }
+
+
 
 .coffeeshop-img {
   height: 300px;
@@ -589,6 +592,31 @@ select,
   }
 }
 
+/* Coffeeshop index
+********************/
+.list-group-container {
+  min-height: 100px;
+}
+.biz-name {
+  font-size: 16px;
+  font-weight: 300;
+  padding-left: 10px;
+}
+.biz-rating {
+  padding-left: 10px;
+}
+.biz-cost {
+  padding-left: 10px;
+}
+
+address {
+  font-size: 12px;
+  font-weight: 300;
+}
+.main-listing,
+.secondary-listing {
+  display: inline-block;
+}
 
 /* miscellaneous
 ****************/

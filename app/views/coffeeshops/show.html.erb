@@ -75,7 +75,8 @@
               <% end %>
             </div>
             <div class="media-body">
-              <h4 class="media-heading"><span class="pull-left"><%= review.user.name %>
+              <h4 class="media-heading"><span class="pull-left"><%= truncate(review.user.name) %>,
+                  <%= time_ago_in_words(review.created_at) %> ago
                   <% if current_user && current_user.admin? %>
                     <%= link_to coffeeshop_review_path(@coffeeshop, review), remote: true, data: { confirm: 'are you sure?', method: :delete } do %>
                       <%= fa_icon "trash-o" %>
