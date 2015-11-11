@@ -77,8 +77,8 @@
               <% end %>
               <div class="main-listing">
                 <span id="<%= index %>-name" class="biz-name"><%= truncate(coffeeshop.name )%></span><br>
-                <span class="biz-rating"><%= calculate_stars(Coffeeshop.first, "overall_average").html_safe %></span>
-                <span class="biz-review-number"><%= pluralize(Coffeeshop.first.reviews_count, "review") %></span><br>
+                <span class="biz-rating"><%= calculate_stars(coffeshop, "overall_average").html_safe %></span>
+                <span class="biz-review-number"><%= pluralize(coffeshop.reviews_count, "review") %></span><br>
                 <span class="biz-cost">
                   <% Coffeeshop.first.price.times do %>
                     $
@@ -91,9 +91,9 @@
                   <span id="<%= index %>-lng" class="hidden"><%= coffeeshop.longitude %></span>
                 </small>
                 <address>
-                  <%= truncate(Coffeeshop.first.address) %><br>
-                  <%= truncate(Coffeeshop.first.city) %>,
-                  <%= truncate(Coffeeshop.first.state) %>
+                  <%= truncate(coffeeshop.address) %><br>
+                  <%= truncate(coffeeshop.city) %>,
+                  <%= truncate(coffeeshop.state) %>
                 </address>
                 <span>
                   <a id="<%= index %>" type="button" class="btn map-trigger btn-sm btn-blue" data-toggle="modal" data-target=".bs-example-modal-lg"><%= fa_icon "map-marker" %></a>
@@ -112,8 +112,6 @@
     </div>
   <% end %>
 </div>
-
-
 
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
   <div class="modal-dialog modal-lg">
