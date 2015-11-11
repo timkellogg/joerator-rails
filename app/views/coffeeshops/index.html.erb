@@ -77,8 +77,8 @@
               <% end %>
               <div class="main-listing">
                 <span id="<%= index %>-name" class="biz-name"><%= truncate(coffeeshop.name )%></span><br>
-                <span class="biz-rating"><%= calculate_stars(coffeshop, "overall_average").html_safe %></span>
-                <span class="biz-review-number"><%= pluralize(coffeshop.reviews_count, "review") %></span><br>
+                <span class="biz-rating"><%= calculate_stars(coffeeshop, "overall_average").html_safe %></span>
+                <span class="biz-review-number"><%= pluralize(coffeeshop.reviews_count, "review") %></span><br>
                 <span class="biz-cost">
                   <% Coffeeshop.first.price.times do %>
                     $
