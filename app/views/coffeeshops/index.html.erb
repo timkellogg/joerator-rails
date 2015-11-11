@@ -54,14 +54,14 @@
     <% end %>
 
     <%= link_to coffeeshops_path do %>
-      <button type="button" class="filter-btn btn btn-default">Clear All Filters</button>
+      <button id="clearAll" type="button" class="filter-btn btn btn-default">Clear All Filters</button>
     <% end %>
   </div>
 
   <div class="card-container text-center">
-    
+
   </div>
-  
+
   <div id="results-listing" class="card-container text-left col-md-7">
     <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
     <ul class="list-group">
@@ -101,9 +101,9 @@
   <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
   </div>
   <% if @coffeeshops.any? %>
-  <div id="map-container" class="col-md-5 card-container text-right">
-    <div id="map"></div>
-  </div>
+    <div id="map-container" class="col-md-5 card-container text-right">
+      <div id="map" data-spy="affix"></div>
+    </div>
   <% end %>
 </div>
 
@@ -127,22 +127,33 @@
 
 <script>
 
-  // affix 
+  // affix
   $("#map-container").affix({
     offset: {
-      top: $("#results-listing")
+      top: $("#map-container").offset().top
     }
-  });
+  })
+  // affix
+  // $("#map-container").affix({
+  //   offset: {
+  //     top: $("#results-listing").offset().top
+  //   }
+  // });
 
   $(".filter-btn").on("click", function() {
     $(this).addClass("filter-active");
   });
 
+  $("#clearAll").on("click", function() {
+    window.location.reload();
+  })
+
 </script>
 
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
 <script>
-  // Individual maps 
+  // Individual maps
   $(".map-trigger").on("click", function(event) {
     event.preventDefault();
     var idPrefix = event.target.id;
@@ -187,9 +198,9 @@
 
 
 <script>
-// Global map that charts all of the locations 
+// Global map that charts all of the locations
   function initMap() {
-    
+
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 8
       // center: {lat: 41.8369, lng: 87.6847}
