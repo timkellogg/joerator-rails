@@ -36,7 +36,7 @@ Rails.application.configure do
   config.static_cache_control = "public, max-age=2592000"
 
   # Configure proper cache invalidation
-  config.assets.digest = true
+  # config.assets.digest = true 
 
   # Confirm that caching is turned on in production
   config.action_controller.perform_caching = true
