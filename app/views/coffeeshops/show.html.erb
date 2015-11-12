@@ -1,6 +1,15 @@
 <% provide(:title, @coffeeshop.name) %>
 
 <div id="coffeeshop-wrapper" class="container">
+  <% if current_user && !favorited?(current_user, @coffeeshop) %>
+    <div id="fav-container" class="row">
+      <%= link_to "Favorite", { :controller => "coffeeshops", :action => "favorite", :id => @coffeeshop.id }, :method => :post, :remote => true, class: 'btn btn-gray' %>
+    </div>
+  <% elsif current_user && favorited?(current_user, @coffeeshop) %>
+    <div id="unfav-container" class="row">
+    <%= link_to "Unfavorite", { :controller => "coffeeshops", :action => "unfavorite", :id => @coffeeshop.id }, :method => :patch, :remote => true, class: 'btn btn-blue' %>
+    </div>
+  <% end %>
 
   <div class="row">
     <h2><%= @coffeeshop.name %><br>
@@ -12,19 +21,11 @@
   <div class="row">
     <% if @coffeeshop.picture? %>
       <%= image_tag @coffeeshop.picture.url %>
-      <% else %>
+    <% else %>
       <%= image_tag("mug.png", class: 'card-image') %>
     <% end %>
   </div><br>
-      <% if current_user && !favorited?(current_user, @coffeeshop) %>
-      <div id="fav-container" class="row">
-        <%= link_to "Favorite", { :controller => "coffeeshops", :action => "favorite", :id => @coffeeshop.id }, :method => :post, :remote => true, class: 'btn btn-gray' %>
-      </div>
-    <% elsif current_user && favorited?(current_user, @coffeeshop) %>
-      <div id="unfav-container" class="row">
-        <%= link_to "Unfavorite", { :controller => "coffeeshops", :action => "unfavorite", :id => @coffeeshop.id }, :method => :patch, :remote => true, class: 'btn btn-blue' %>
-      </div>
-    <% end %>
+
 
     <div class="pull-left">
     <a href="https://twitter.com/share" class="twitter-share-button " data-via="timkellogg">Tweet</a>
@@ -32,14 +33,6 @@
     <div class="fb-like pull-right" data-share="true" data-width="450" data-show-faces="true"></div>
   </div><br>
 
-    <div id="coffeeshop-glance" class="row">
-      <% if @coffeeshop.reviews.any? %>
-        <h3>Coffee Quality: <%= calculate_stars(@coffeeshop, "average_quality").html_safe %></h3>
-        <h3>Atmosphere:     <%= calculate_stars(@coffeeshop, "average_study").html_safe %></h3>
-        <h3>Amenities:      <%= calculate_stars(@coffeeshop, "average_laptop").html_safe %></h3>
-        <h3>Hipster Factor: <%= calculate_stars(@coffeeshop, "average_hipster").html_safe %></h3>
-      <% end %>
-    </div>
   <% if current_user && current_user.admin? %>
     <hr>
 
@@ -64,7 +57,6 @@
       <%= link_to 'Add a review', new_coffeeshop_review_path(@coffeeshop), remote: true, id: 'review-add-btn', class: 'btn btn-blue' %>
     <% end %>
       <div id="add-review-form"></div>
-
       <% if @reviews.any? %>
         <%= will_paginate @reviews %>
         <% @reviews.each do |review| %>
@@ -95,18 +87,20 @@
     <aside id="coffeeshop-aside" class="col-md-4">
       <div id="restaurant-info-box">
         <p class="lead">
+          Coffee Quality: <%= calculate_stars(@coffeeshop, "average_quality").html_safe %><br>
+          Atmosphere:     <%= calculate_stars(@coffeeshop, "average_study").html_safe %><br>
+          Amenities:      <%= calculate_stars(@coffeeshop, "average_laptop").html_safe %><br>
+          Hipster Factor: <%= calculate_stars(@coffeeshop, "average_hipster").html_safe %><br>
           <% if @coffeeshop.menu %>
+          
             <%= link_to coffeeshop_menu_path(@coffeeshop, @coffeeshop.menu) do %>
-              <%= fa_icon "cutlery" %> Menu
+              Menu <%= fa_icon "cutlery" %> 
             <% end %><br>
           <% end %>
+          Price
           <% @coffeeshop.price.times do |n| %>
             <i class="fa fa-usd"></i>
-          <% end %>
-          Price
-        </p>
-        <hr>
-        <p class="lead">
+          <% end %><br>    
           Hours: <%= (@coffeeshop.opens_at).strftime("%-I:%M a.m.") %> &ndash; <%= (@coffeeshop.closes_at).strftime("%-I:%M p.m.") %> <br>
           Parking: <%= @coffeeshop.parking %><br>
           Accepts Credit: <%= friendly_bool(@coffeeshop.accepts_credit) %><br>
