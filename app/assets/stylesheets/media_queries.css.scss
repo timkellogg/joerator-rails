@@ -1,0 +1,58 @@
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 768px) { 
+  .secondary-listing,
+  .biz-rating,
+  .biz-cost,
+  .biz-review-number {
+    display: none;
+  }
+  .biz-name {
+    display: block;
+  }
+  .list-group-container {
+    margin: auto;
+  }
+  .list-group-item img {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  #map {
+    display: block;
+    width: 250px;
+  }
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (max-width: 992px) { 
+  #search-form {
+    margin-bottom: 5px;
+  }
+  #map {
+    display: block;
+    text-align: center;
+    margin: auto;
+  }
+  .filter-btn.btn.btn-default {
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 423px) {
+  .home-img img {
+    margin-left: -14px;
+  } 
+  .list-group-item {
+    img.card-img {
+      text-align: center;
+      margin: auto;
+    }
+  }
+}
+
+
+ /*Large devices (large desktops, 1200px and up) 
+@media (min-width: @screen-lg-min) { ... }*/

@@ -58,10 +58,6 @@
     <% end %>
   </div>
 
-  <div class="card-container text-center">
-
-  </div>
-
   <div id="results-listing" class="card-container text-left col-md-7">
     <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
 
@@ -80,12 +76,12 @@
                 <span class="biz-rating"><%= calculate_stars(coffeeshop, "overall_average").html_safe %></span>
                 <span class="biz-review-number"><%= pluralize(coffeeshop.reviews_count, "review") %></span><br>
                 <span class="biz-cost">
-                  <% Coffeeshop.first.price.times do %>
+                  <% coffeeshop.price.times do %>
                     $
                   <% end %>
                 </span>
               </div>
-              <div class="secondary-listing pull-right">
+              <div class="secondary-listing pull-right text-right">
                 <small id="<%= index %>-address">
                   <span id="<%= index %>-lat" class="hidden"><%= coffeeshop.latitude %></span>
                   <span id="<%= index %>-lng" class="hidden"><%= coffeeshop.longitude %></span>
@@ -95,7 +91,7 @@
                   <%= truncate(coffeeshop.city) %>,
                   <%= truncate(coffeeshop.state) %>
                 </address>
-                <span>
+                <span class="biz-map-btn">
                   <a id="<%= index %>" type="button" class="btn map-trigger btn-sm btn-blue" data-toggle="modal" data-target=".bs-example-modal-lg"><%= fa_icon "map-marker" %></a>
                 </span>
               </div>
@@ -107,7 +103,7 @@
   <%= will_paginate @coffeeshops, renderer: BootstrapPagination::Rails %>
   </div>
   <% if @coffeeshops.any? %>
-    <div id="map-container" class="col-md-5 card-container text-right">
+    <div id="map-container" class="col-md-5 col-sm-12 card-container text-right">
       <div id="map" data-spy="affix"></div>
     </div>
   <% end %>
