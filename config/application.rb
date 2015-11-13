@@ -26,10 +26,10 @@ module JoeRator
     # config.time_zone = 'Central Time (US & Canada)'
 
     # Configure caching store 
-    config.cache_store = :dalli_store
+    config.cache_store = :dalli_store if Rails.env.production?
 
     # Configure custom validator path
-    config.autoload_paths += %W["#{config.root}/app/validators/"]
+    config.autoload_paths += %W["#{config.root}/app/validators/"] if Rails.env.production?
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]

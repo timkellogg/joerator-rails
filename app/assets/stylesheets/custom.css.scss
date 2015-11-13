@@ -141,6 +141,7 @@
 
   }
 
+
   #menu-wrapper {
     margin: 0 auto;
     text-align: center;
@@ -492,10 +493,16 @@ form {
   margin-top: 5%;
 }
 
-.menu-item {
-  image {
+#menu-wrapper {
+}
 
+.menu-item {
+  .menu-pic img {
+    height: 175px;
+    width: 175px;
   }
+  text-align: center;
+  margin-top: 10px;
 }
 
 /*overriding bootstrap*/

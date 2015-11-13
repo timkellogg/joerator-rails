@@ -1,7 +1,7 @@
 <%= provide(:title, "#{@menu.coffeeshop.name}'s Menu") %>
 
 <h2><%= @menu.coffeeshop.name %>'s Menu</h2>
-<hr>
+
 <div id="menu-wrapper" class="container">
   <div class="row text-center">
     <div class="col-xs-12">
@@ -13,14 +13,19 @@
   </div>
  
   <% if @menu.items.any? %>
+  <hr>
   <div id="menu">
     <% @menu.items.each do |item| %>
-      <div id="item-<%= item.id %>" class="col-md-3 menu-item">
-        <%= image_tag item.picture.url if item.picture? %>
-        <%= item.name %>
+      <div id="item-<%= item.id %>" class="col-xs-12 menu-item">
+        <span class="menu-pic">
+          <%= image_tag item.picture.url if item.picture? %>
+        </span><br>
+        <p class="lead">
+          <%= item.name %>
+        </p><br>
         <% if current_user && current_user.admin? && @menu %>
-          <%= link_to 'Edit', edit_menu_item_path(@menu, item), class: 'btn btn-gray' %>
-          <%= link_to 'Remove', menu_item_path(item.menu, item), remote: true, data: { confirm: 'Are you sure?', method: :delete }, class: 'btn btn-red' %>
+          <%= link_to 'Edit', edit_menu_item_path(@menu, item), class: 'btn btn-xs btn-gray' %>
+          <%= link_to 'Remove', menu_item_path(item.menu, item), remote: true, data: { confirm: 'Are you sure?', method: :delete }, class: 'btn btn-xs btn-red' %>
         <% end %>
     </div>
     <% end %>

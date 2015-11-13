@@ -67,7 +67,7 @@
           <li class="list-group-item">
             <div class="list-group-container">
               <% if coffeeshop.picture? %>
-                <%= image_tag Coffeeshop.first.picture.url, class: 'card-image pull-left' %>
+                <%= image_tag coffeeshop.picture.url, class: 'card-image pull-left' %>
               <% else %>
                 <%= image_tag("mug.png", class: 'card-image') %>
               <% end %>
@@ -139,7 +139,7 @@
 
   $("#clearAll").on("click", function() {
     window.location.reload();
-  })
+  });
 
 </script>
 
