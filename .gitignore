@@ -19,6 +19,7 @@
 .zeus.sock
 
 /public/uploads
+.coffeeshop_pictures
 
 # Ingore environmental variables
 .env
