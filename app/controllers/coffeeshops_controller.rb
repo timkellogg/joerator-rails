@@ -18,7 +18,7 @@ class CoffeeshopsController < ApplicationController
       @came_from_search = true
       @show_map  = true
 
-    # Filtering matches 
+    # Filtering matches
     elsif params[:filter] == "1"
       sanitize_params
       @coffeeshops = Coffeeshop.where(approved: true).where(price: 1).paginate(:page => params[:page])
@@ -134,9 +134,9 @@ class CoffeeshopsController < ApplicationController
 
   private
 
-    # Keeps params but prevents XSS by sanitizing params that are acceptable 
+    # Keeps params but prevents XSS by sanitizing params that are acceptable
     def sanitize_params
-      begin 
+      begin
         return params = params.slice(:search) if params[:search]
         return params = params.slice(:search_location) if params[:search_location]
       rescue NoMethodError
@@ -159,6 +159,6 @@ class CoffeeshopsController < ApplicationController
       params.require(:coffeeshop).permit(:name, :address, :qualityRating,
         :studyRating, :laptopRating, :hipsterRating, :imageLink, :webAddress, :city, :state,
         :opens_at, :closes_at, :price, :accepts_credit, :parking, :style, :vegan_friendly,
-        :veggie_friendly, :city, :state, :picture)
+        :veggie_friendly, :city, :state, :picture, :phone)
     end
 end

@@ -15,6 +15,8 @@ describe Coffeeshop do
   it { should validate_presence_of :price           }
   it { should validate_presence_of :parking         }
   it { should validate_presence_of :style           }
+  it { should validate_presence_of :phone           }
+  it { should validate_length_of   :phone           }
 
   it { should_not allow_value(6).for(:price)        }
   it { should_not allow_value(-1).for(:price)       }

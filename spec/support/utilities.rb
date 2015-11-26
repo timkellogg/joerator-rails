@@ -19,6 +19,7 @@ def fill_in_coffeeshop_form
   fill_in "Website", with: "https://examplecoffeeshop.com/"
   fill_in "Opens at", with: "8"
   fill_in "Closes at", with: "8"
+  fill_in "Phone", with: "1234567890"
   select "casual", from: "Style"
   select "average", from: "How expensive?"
   select "lots", from: "Parking"

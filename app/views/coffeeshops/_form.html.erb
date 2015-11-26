@@ -16,18 +16,18 @@
       <h4>Contact Information</h4>
     </div>
 
-    <div class="form-group">     
+    <div class="form-group">
       <div class="col-md-12 text-left">
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control' %>
       </div>
     </div>
-      
+
     <div class="form-group">
       <div class="col-md-7 text-left">
         <%= f.label :address %>
         <%= f.text_field :address, class: 'form-control' %>
-      </div>  
+      </div>
 
       <div class="col-md-3 text-left">
         <%= f.label :city, class: 'slight-margin-top' %>
@@ -35,11 +35,18 @@
       </div>
       <div class="col-md-2 text-left">
         <%= f.label :state, class: 'slighter-margin-top' %>
-        <%= f.select(:state, options_for_select(get_states), {}, { class: 'form-control' })%> 
+        <%= f.select(:state, options_for_select(get_states), {}, { class: 'form-control' })%>
       </div>
     </div>
 
-    <div class="form-group">     
+    <div class="form-group">
+      <div class="col-xs-12 text-left">
+        <%= f.label :phone %>
+        <%= f.text_field :phone, class: 'form-control', placeholder: '##########' %>
+      </div>
+    </div>
+
+    <div class="form-group">
       <div class="col-md-12 text-left">
         <%= f.label :webAddress, "Website" %>
         <%= f.text_field :webAddress, class: 'form-control' %>
@@ -50,14 +57,14 @@
       <h4>Business Details</h4>
     </div>
 
-    <div class="form-group">     
+    <div class="form-group">
       <div class="col-md-12 text-left">
         <%= f.label :picture, "Upload image of Coffeeshop" %>
         <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
       </div>
     </div>
 
-    <div class="form-group">     
+    <div class="form-group">
       <div class="col-md-6 text-left">
         <%= f.label :opens_at, "Opens at" %>
         <%= f.text_field :opens_at, class: 'form-control' %>
@@ -86,15 +93,15 @@
     <div class="form-group">
       <div class="col-xs-4 text-left">
         <%= f.label :style %>
-        <%= f.select(:style, options_for_select(["formal", "casual"]), {}, { class: 'form-control' })%> 
+        <%= f.select(:style, options_for_select(["formal", "casual"]), {}, { class: 'form-control' })%>
       </div>
       <div class="col-xs-4 text-left">
         <%= f.label :price, "How expensive?" %>
-         <%= f.select(:price, options_for_select([ ["very expensive", 5], ["expensive", 4], ["average", 3], ["cheap", 2], ["dirt cheap", 1]]), {}, { class: 'form-control' })%> 
+         <%= f.select(:price, options_for_select([ ["very expensive", 5], ["expensive", 4], ["average", 3], ["cheap", 2], ["dirt cheap", 1]]), {}, { class: 'form-control' })%>
       </div>
       <div class="col-md-4 text-left">
         <%= f.label :parking %>
-        <%= f.select(:parking, options_for_select(["lots", "some", "none"]), {}, { class: 'form-control' })%> 
+        <%= f.select(:parking, options_for_select(["lots", "some", "none"]), {}, { class: 'form-control' })%>
       </div>
     </div>
 
@@ -106,7 +113,7 @@
 
 
 <script type="text/javascript">
-  // Validate picture size 
+  // Validate picture size
   $('#coffeeshop_picture').bind('change', function() {
     var size_in_megabytes = this.files[0].size/1024/1024;
     if (size_in_megabytes > 5) {
@@ -114,4 +121,3 @@
     }
   });
 </script>
-

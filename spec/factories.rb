@@ -23,13 +23,14 @@ FactoryGirl.define do
     style "casual"
     overall_average 0.0
     approved true
+    phone "1234567890"
 
     factory :unseen do
       approved false
     end
   end
 
-  factory :menu do 
+  factory :menu do
     coffeeshop
   end
 

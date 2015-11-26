@@ -91,16 +91,17 @@
           Atmosphere:     <%= calculate_stars(@coffeeshop, "average_study").html_safe %><br>
           Amenities:      <%= calculate_stars(@coffeeshop, "average_laptop").html_safe %><br>
           Hipster Factor: <%= calculate_stars(@coffeeshop, "average_hipster").html_safe %><br>
+          <%= fa_icon "phone"%> <%= @coffeeshop.phone %><br>
           <% if @coffeeshop.menu %>
-          
             <%= link_to coffeeshop_menu_path(@coffeeshop, @coffeeshop.menu) do %>
-              Menu <%= fa_icon "cutlery" %> 
+              Menu <%= fa_icon "cutlery" %>
             <% end %><br>
           <% end %>
           Price
           <% @coffeeshop.price.times do |n| %>
             <i class="fa fa-usd"></i>
-          <% end %><br>    
+          <% end %><br>
+
           Hours: <%= (@coffeeshop.opens_at).strftime("%-I:%M a.m.") %> &ndash; <%= (@coffeeshop.closes_at).strftime("%-I:%M p.m.") %> <br>
           Parking: <%= @coffeeshop.parking %><br>
           Accepts Credit: <%= friendly_bool(@coffeeshop.accepts_credit) %><br>

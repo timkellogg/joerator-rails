@@ -7,8 +7,9 @@ class Coffeeshop < ActiveRecord::Base
                         :webAddress,
                         :state, :city,
                         :opens_at, :closes_at,
-                        :price, :parking, :style
-
+                        :price, :parking, :style,
+                        :phone
+  validates :phone,    length:       { minimum: 7, maximum: 14 }
   validates :state,    length:       { maximum: 2 }
   validates :price,    numericality: { less_than_or_equal_to: 5, greater_than: 0, only_integer: true }
   validates :parking,  inclusion:    { :in => %w[lots some none]}
@@ -45,9 +46,9 @@ class Coffeeshop < ActiveRecord::Base
     self.save
   end
 
-  # Convert addresses into latitude and longitude in production
-  geocoded_by :full_address 
-  after_validation :geocode
+  # Convert addresses into latitude and longitude unless testing
+  geocoded_by :full_address
+  after_validation :geocode unless Rails.env.test?
 
   # File uploading
   mount_uploader :picture, PictureUploader
