@@ -20,6 +20,7 @@ gem 'yelp', require: 'yelp'
 gem 'mini_magick', '3.8.0'
 gem 'fog', '1.26.0'
 gem 'dotenv'
+gem 'mechanize'
 
 group :production do
   gem 'puma'
