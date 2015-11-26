@@ -6,7 +6,10 @@ class Coffeeshop < ActiveRecord::Base
   validates_presence_of :name,
                         :webAddress,
                         :state, :city,
-                        :opens_at, :closes_at,
+                        :weekday_opens_at,
+                        :weekday_closes_at,
+                        :weekend_opens_at,
+                        :weekend_closes_at,
                         :price, :parking, :style,
                         :phone
   validates :phone,    length:       { minimum: 7, maximum: 14 }

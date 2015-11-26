@@ -101,8 +101,14 @@
           <% @coffeeshop.price.times do |n| %>
             <i class="fa fa-usd"></i>
           <% end %><br>
-
-          Hours: <%= (@coffeeshop.opens_at).strftime("%-I:%M a.m.") %> &ndash; <%= (@coffeeshop.closes_at).strftime("%-I:%M p.m.") %> <br>
+          Weekday Hours:
+          <%= (@coffeeshop.weekday_opens_at).strftime("%-I:%M a.m.") %> &ndash;
+          <%= (@coffeeshop.weekday_closes_at).strftime("%-I:%M p.m.") %>
+          <br>
+          Weekday Hours:
+          <%= (@coffeeshop.weekday_opens_at).strftime("%-I:%M a.m.") %> &ndash;
+          <%= (@coffeeshop.weekday_closes_at).strftime("%-I:%M p.m.") %>
+          <br>
           Parking: <%= @coffeeshop.parking %><br>
           Accepts Credit: <%= friendly_bool(@coffeeshop.accepts_credit) %><br>
           Atmosphere: <%= @coffeeshop.style %><br>

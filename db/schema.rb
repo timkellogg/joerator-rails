@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126002828) do
+ActiveRecord::Schema.define(version: 20151126192332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,30 +20,32 @@ ActiveRecord::Schema.define(version: 20151126002828) do
     t.string   "name"
     t.string   "address"
     t.string   "webAddress"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.time     "opens_at"
-    t.time     "closes_at"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "price"
-    t.boolean  "accepts_credit",  default: true
+    t.boolean  "accepts_credit",    default: true
     t.string   "parking"
     t.string   "style"
-    t.boolean  "vegan_friendly",  default: false
-    t.boolean  "veggie_friendly", default: false
+    t.boolean  "vegan_friendly",    default: false
+    t.boolean  "veggie_friendly",   default: false
     t.string   "city"
     t.string   "state"
     t.float    "latitude"
     t.float    "longitude"
     t.string   "picture"
-    t.float    "overall_average", default: 0.0
-    t.float    "average_hipster", default: 0.0
-    t.float    "average_study",   default: 0.0
-    t.float    "average_laptop",  default: 0.0
-    t.float    "average_quality", default: 0.0
-    t.boolean  "approved",        default: false
-    t.integer  "reviews_count",   default: 0
-    t.integer  "items_count",     default: 0
+    t.float    "overall_average",   default: 0.0
+    t.float    "average_hipster",   default: 0.0
+    t.float    "average_study",     default: 0.0
+    t.float    "average_laptop",    default: 0.0
+    t.float    "average_quality",   default: 0.0
+    t.boolean  "approved",          default: false
+    t.integer  "reviews_count",     default: 0
+    t.integer  "items_count",       default: 0
     t.string   "phone"
+    t.time     "weekday_opens_at"
+    t.time     "weekday_closes_at"
+    t.time     "weekend_opens_at"
+    t.time     "weekend_closes_at"
   end
 
   create_table "coffeeshops_users", force: :cascade do |t|

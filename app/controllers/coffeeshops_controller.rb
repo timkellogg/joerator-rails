@@ -157,8 +157,14 @@ class CoffeeshopsController < ApplicationController
 
     def coffeeshop_params
       params.require(:coffeeshop).permit(:name, :address, :qualityRating,
-        :studyRating, :laptopRating, :hipsterRating, :imageLink, :webAddress, :city, :state,
-        :opens_at, :closes_at, :price, :accepts_credit, :parking, :style, :vegan_friendly,
-        :veggie_friendly, :city, :state, :picture, :phone)
+                                        :studyRating, :laptopRating,
+                                        :hipsterRating, :imageLink,
+                                        :webAddress, :city, :state,
+                                        :weekend_opens_at, :weekend_closes_at,
+                                        :weekday_opens_at, :weekday_closes_at,
+                                        :price, :accepts_credit, :parking,
+                                        :style, :vegan_friendly,
+                                        :veggie_friendly, :city, :state,
+                                        :picture, :phone)
     end
 end

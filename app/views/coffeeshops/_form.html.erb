@@ -58,20 +58,28 @@
     </div>
 
     <div class="form-group">
-      <div class="col-md-12 text-left">
-        <%= f.label :picture, "Upload image of Coffeeshop" %>
-        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+      <div class="col-md-3 text-left">
+        <%= f.label :weekday_opens_at, "Weekday Opens at" %>
+        <%= f.text_field :weekday_opens_at, class: 'form-control' %>
+      </div>
+      <div class="col-md-3 text-left">
+        <%= f.label :weekday_closes_at, "Weekday Closes at" %>
+        <%= f.text_field :weekday_closes_at, class: 'form-control' %>
+      </div>
+      <div class="col-md-3 text-left">
+        <%= f.label :weekend_opens_at, "Weekend Opens at" %>
+        <%= f.text_field :weekend_opens_at, class: 'form-control' %>
+      </div>
+      <div class="col-md-3 text-left">
+        <%= f.label :weekend_closes_at, "Weekend Closes at" %>
+        <%= f.text_field :weekend_closes_at, class: 'form-control' %>
       </div>
     </div>
 
     <div class="form-group">
-      <div class="col-md-6 text-left">
-        <%= f.label :opens_at, "Opens at" %>
-        <%= f.text_field :opens_at, class: 'form-control' %>
-      </div>
-      <div class="col-md-6 text-left">
-        <%= f.label :closes_at, "Closes at" %>
-        <%= f.text_field :closes_at, class: 'form-control' %>
+      <div class="col-md-12 text-left">
+        <%= f.label :picture, "Upload image of Coffeeshop" %>
+        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
       </div>
     </div>
 

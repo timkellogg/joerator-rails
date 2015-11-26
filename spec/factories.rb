@@ -16,8 +16,10 @@ FactoryGirl.define do
     state "CA"
     address "123 Main Street"
     city "Los Angeles"
-    opens_at "8:00"
-    closes_at "8:00"
+    weekday_opens_at "8:00"
+    weekday_closes_at "8:00"
+    weekend_opens_at "10:00"
+    weekend_closes_at "5:00"
     price 3
     parking "lots"
     style "casual"
