@@ -26,6 +26,7 @@ Coffeeshop.create!(
   style: "casual",
   city: "Portland",
   state: "OR",
+  phone: "1234567890",
   webAddress: "https://www.facebook.com/PipsOriginal/"
 )
 
@@ -41,6 +42,7 @@ Coffeeshop.create!(
   style: "casual",
   city: "Portland",
   state: "OR",
+  phone: "1234567890",
   webAddress: "http://www.ovationpdx.com/contact.html"
 )
 
@@ -56,6 +58,7 @@ Coffeeshop.create!(
   style: "casual",
   city: "Portland",
   state: "OR",
+  phone: "1234567890",
   webAddress: "http://www.sterling.coffee/"
 )
 
