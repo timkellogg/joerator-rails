@@ -51,7 +51,7 @@ class Coffeeshop < ActiveRecord::Base
 
   # Convert addresses into latitude and longitude unless testing
   geocoded_by :full_address
-  after_validation :geocode if Rails.env.production?
+  after_validation :geocode unless Rails.env.testing?
 
   # File uploading
   mount_uploader :picture, PictureUploader
