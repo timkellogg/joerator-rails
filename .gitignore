@@ -26,7 +26,7 @@
 
 # Ignore production assets/scripts
 lib/assets
-
+lib/
 
 # Ignore seeds
 db/seeds.rb
