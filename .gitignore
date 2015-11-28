@@ -26,8 +26,7 @@
 
 # Ignore production assets/scripts
 lib/assets
-lib/tasks/production.rake
-lib/tasks/*
+
 
 # Ignore seeds
 db/seeds.rb
