@@ -86,12 +86,20 @@
     </div>
     <aside id="coffeeshop-aside" class="col-md-4">
       <div id="restaurant-info-box">
-        <p class="lead">
+        <p>
+        <% if @coffeeshop.reviews.any? %>
+          <%= fa_icon "coffee" %>
           Coffee Quality: <%= calculate_stars(@coffeeshop, "average_quality").html_safe %><br>
+          <%= fa_icon "cloud" %>
           Atmosphere:     <%= calculate_stars(@coffeeshop, "average_study").html_safe %><br>
+          <%= fa_icon "plug" %>
           Amenities:      <%= calculate_stars(@coffeeshop, "average_laptop").html_safe %><br>
+          <%= fa_icon "paint-brush" %>
           Hipster Factor: <%= calculate_stars(@coffeeshop, "average_hipster").html_safe %><br>
-          <%= fa_icon "phone"%> <%= @coffeeshop.phone %><br>
+        <% else %>
+          No reviews yet!<br><br>
+        <% end %>
+          Phone: <%= friendly_phone_number(@coffeeshop.phone) %><br>
           <% if @coffeeshop.menu %>
             <%= link_to coffeeshop_menu_path(@coffeeshop, @coffeeshop.menu) do %>
               Menu <%= fa_icon "cutlery" %>
@@ -101,11 +109,11 @@
           <% @coffeeshop.price.times do |n| %>
             <i class="fa fa-usd"></i>
           <% end %><br>
-          Weekday Hours:
+          Weekday:
           <%= (@coffeeshop.weekday_opens_at).strftime("%-I:%M a.m.") %> &ndash;
           <%= (@coffeeshop.weekday_closes_at).strftime("%-I:%M p.m.") %>
           <br>
-          Weekday Hours:
+          Weekday:
           <%= (@coffeeshop.weekday_opens_at).strftime("%-I:%M a.m.") %> &ndash;
           <%= (@coffeeshop.weekday_closes_at).strftime("%-I:%M p.m.") %>
           <br>

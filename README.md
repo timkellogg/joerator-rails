@@ -42,8 +42,7 @@ _Joerator is a Yelp clone written in Ruby on Rails 4.2 that focuses on Coffeesho
 * Fix map on coffeeshop page (only fails for some coffeeshops)
 * Add style improvements:
   * Fix coffeeshop page info panel  
-  * Add favicon
-  * Fix loading of review to show the correct style the first time  
+  * Add favicon 
 
 ### Legal
 
