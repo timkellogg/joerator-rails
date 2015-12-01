@@ -11,11 +11,12 @@ $("#review-container").prepend(
   '<div id="@review-<%= @review.id %>">' +
     '<div class="media-left pull-left">' +
       '<%= link_to user_path(@review.user) do %>' +
-        '<span class="@review-pic"><%= gravatar_for @review.user %></span>' +
+        '<span class="review-pic"><%= gravatar_for @review.user %></span>' +
       '<% end %>' +
     '</div>' +
     '<div class="media-body">' +
-      '<h4 class="media-heading"><span class="pull-left"><%= @review.user.name %>' +
+      '<h4 class="media-heading"><span class="pull-left"><%= truncate(@review.user.name) %>, ' +
+        '<%= time_ago_in_words(@review.created_at) %> ago' +
         '<% if current_user && current_user.admin? %>' +
           '<%= link_to coffeeshop_review_path(@coffeeshop, @review), remote: true, data: { confirm: "area you sure", method: :delete } do %>' +
             '<%= fa_icon "trash-o" %>' +
@@ -25,5 +26,5 @@ $("#review-container").prepend(
     '</h4>' +
     '<p class="text-center pull-left"><%= @review.body %></p>' +
   '</div>' +
-'</div>'
+'</div><br><hr>'
 )
