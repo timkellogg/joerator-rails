@@ -36,7 +36,6 @@
     <%= render 'layouts/header' %>
     <div id="site-content-wrapper" class="container">
       <%= yield %>
-      <%= debug(params) if Rails.env.production? %>
     </div>
 	</div>
 </body>
