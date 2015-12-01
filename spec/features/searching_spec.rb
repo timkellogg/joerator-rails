@@ -72,8 +72,8 @@ describe "searching coffeeshops", :type => :feature do
     end
   end
 
-  context "when sorting by number of items" do 
-    before do 
+  context "when sorting by number of items" do
+    before do
       @most_items = FactoryGirl.create(:coffeeshop)
       menu1 = FactoryGirl.create(:menu, coffeeshop: @most_items)
       item1 = FactoryGirl.create(:item, menu: menu1)
@@ -85,14 +85,14 @@ describe "searching coffeeshops", :type => :feature do
       visit root_path
     end
 
-    it "should order coffeeshops by the highest number of items on their menus" do 
+    it "should order coffeeshops by the highest number of items on their menus" do
       visit "/coffeeshops?sort=biggest_menu"
       @most_items.name.should appear_before(@medium_items.name)
       @medium_items.name.should appear_before(@no_items.name)
     end
   end
 
-  context "when searching by state or city" do
+  context "when searching by city" do
     before do
       @match = FactoryGirl.create(:coffeeshop)
       @match.update(city: "Match")
@@ -103,6 +103,42 @@ describe "searching coffeeshops", :type => :feature do
 
     it "should list only those that apply" do
       fill_in "search_location", with: "Match"
+      click_button "search-location-btn"
+      expect(page).to have_content "Your search returned"
+      expect(page).to have_content @match.name
+      expect(page).to_not have_content @mismatch.name
+    end
+  end
+
+  context "when searching by state initials" do
+    before do
+      @match = FactoryGirl.create(:coffeeshop)
+      @match.update(state: "HI")
+      @mismatch = FactoryGirl.create(:coffeeshop)
+      @mismatch.update(state: "asetasdf")
+      visit root_path
+    end
+
+    it "should list only those that apply" do
+      fill_in "search_location", with: "HI"
+      click_button "search-location-btn"
+      expect(page).to have_content "Your search returned"
+      expect(page).to have_content @match.name
+      expect(page).to_not have_content @mismatch.name
+    end
+  end
+
+  context "when searching by a state's full name" do
+    before do
+      @match = FactoryGirl.create(:coffeeshop)
+      @match.update(state: "HI")
+      @mismatch = FactoryGirl.create(:coffeeshop)
+      @mismatch.update(state: "not a match")
+      visit root_path
+    end
+
+    it "should list only those that apply" do
+      fill_in "search_location", with: "Hawaii"
       click_button "search-location-btn"
       expect(page).to have_content "Your search returned"
       expect(page).to have_content @match.name
@@ -127,8 +163,8 @@ describe "searching coffeeshops", :type => :feature do
     end
   end
 
-  context "when filtering" do  
-    before do 
+  context "when filtering" do
+    before do
       @only_match_first = FactoryGirl.create(:coffeeshop)
       @match_both = FactoryGirl.create(:coffeeshop)
       @match_both.update(price: 1)
@@ -137,36 +173,16 @@ describe "searching coffeeshops", :type => :feature do
 
     # Could improve this test by having only_math_first checking but parmas aren't passed
     # From button. Behavior works as expected however
-    it "should return matches that take into account previous parameters" do  
+    it "should return matches that take into account previous parameters" do
       fill_in "search", with: "Coffeeshop"
       click_button "search-name-btn"
       expect(page).to have_content @only_match_first.name
       expect(page).to have_content @match_both.name
       click_button "$"
-      expect(page.current_url.include?("&search")).to eq true 
+      expect(page.current_url.include?("&search")).to eq true
       expect(page).to have_content @match_both.name
       expect(page.status_code).to eq 200
     end
   end
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,4 +1,5 @@
 class CoffeeshopsController < ApplicationController
+  include ApplicationHelper
   before_action :is_logged_in_and_admin, only: [:edit, :update, :destroy, :approve ]
   before_action :set_coffeeshop, only: [:show, :edit, :update, :destroy, :favorite, :unfavorite, :approve ]
 
@@ -6,59 +7,111 @@ class CoffeeshopsController < ApplicationController
     @came_from_search = false
     @show_map = false
 
-    # # Sanitizing (prevents XSS attacks)
-    # params = params.slice(:sort, :search, :search_location)
-
     # Searching matches
     if params[:search]
-      @coffeeshops = Coffeeshop.where(approved: true).search(params[:search]).order(created_at: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .search(params[:search])
+        .order(created_at: :desc)
+        .paginate(:page => params[:page])
       @came_from_search = true
     elsif params[:search_location]
-      @coffeeshops = Coffeeshop.where(approved: true).search_location(params[:search_location]).order(created_at: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .search_location(convert_state_initials(params[:search_location]))
+        .order(created_at: :desc)
+        .paginate(:page => params[:page])
       @came_from_search = true
       @show_map  = true
 
     # Filtering matches
     elsif params[:filter] == "1"
       sanitize_params
-      @coffeeshops = Coffeeshop.where(approved: true).where(price: 1).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .where(price: 1)
+        .paginate(:page => params[:page])
     elsif params[:filter] == "2"
       sanitize_params
-      @coffeeshops = Coffeeshop.where(approved: true).where(price: 2).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .where(price: 2)
+        .paginate(:page => params[:page])
     elsif params[:filter] == "3"
       sanitize_params
-      @coffeeshops = Coffeeshop.where(approved: true).where(price: 3).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .where(price: 3)
+        .paginate(:page => params[:page])
     elsif params[:filter] == "4"
       sanitize_params
-      @coffeeshops = Coffeeshop.where(approved: true).where(price: 4).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .where(price: 4)
+        .paginate(:page => params[:page])
     elsif params[:filter] == "5"
-      @coffeeshops = Coffeeshop.where(approved: true).where(price: 5).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .where(price: 5)
+        .paginate(:page => params[:page])
     elsif params[:filter] == "vegan"
-      @coffeeshops = Coffeeshop.where(approved: true).where(vegan_friendly: true).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .where(vegan_friendly: true)
+        .paginate(:page => params[:page])
     elsif params[:filter] == "veggie"
-      @coffeeshops = Coffeeshop.where(approved: true).where(veggie_friendly: true).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .where(veggie_friendly: true)
+        .paginate(:page => params[:page])
     # Sorting matches
     elsif params[:sort] == 'biggest_menu'
-      @coffeeshops = Coffeeshop.where(approved: true).order(items_count: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .order(items_count: :desc)
+        .paginate(:page => params[:page])
     elsif params[:sort] == "highest_rated"
-      @coffeeshops = Coffeeshop.where(approved: true).order(overall_average: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .order(overall_average: :desc)
+        .paginate(:page => params[:page])
     elsif params[:sort] == "most_recent"
-      @coffeeshops = Coffeeshop.where(approved: true).order(created_at: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .order(created_at: :desc)
+        .paginate(:page => params[:page])
     elsif params[:sort] == "most_reviewed"
-      @coffeeshops = Coffeeshop.where(approved: true).order(reviews_count: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .order(reviews_count: :desc)
+        .paginate(:page => params[:page])
     elsif params[:sort] == "best_study"
-      @coffeeshops = Coffeeshop.where(approved: true).order(average_study: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .order(average_study: :desc)
+        .paginate(:page => params[:page])
     elsif params[:sort] == "best_quality"
-      @coffeeshops = Coffeeshop.where(approved: true).order(average_quality: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .order(average_quality: :desc)
+        .paginate(:page => params[:page])
     elsif params[:sort] == "best_hipster"
-      @coffeeshops = Coffeeshop.where(approved: true).order(average_hipster: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .order(average_hipster: :desc)
+        .paginate(:page => params[:page])
     else
-      @coffeeshops = Coffeeshop.where(approved: true).order(created_at: :desc).paginate(:page => params[:page])
+      @coffeeshops = Coffeeshop
+        .where(approved: true)
+        .order(created_at: :desc)
+        .paginate(:page => params[:page])
     end
   end
 
   def show
-    @reviews = @coffeeshop.reviews.order(created_at: :desc).paginate(:page => params[:page])
+    @reviews = @coffeeshop.reviews
+      .order(created_at: :desc)
+      .paginate(:page => params[:page])
 
     if @coffeeshop.menu
       @menu = @coffeeshop.menu

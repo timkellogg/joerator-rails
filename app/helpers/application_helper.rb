@@ -22,6 +22,15 @@ module ApplicationHelper
     end
   end
 
+  def convert_state_initials(state_name)
+    states = get_states.to_h
+    if states[state_name]
+      states[state_name]
+    else 
+      state_name
+    end
+  end
+
   def get_states
     [
       [ "Alabama", "AL" ],

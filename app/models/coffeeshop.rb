@@ -77,4 +77,5 @@ class Coffeeshop < ActiveRecord::Base
         errors.add(:picture, "should be less than 5M")
       end
     end
+
 end

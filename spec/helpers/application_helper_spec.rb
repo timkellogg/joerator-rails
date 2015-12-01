@@ -16,4 +16,14 @@ describe ApplicationHelper do
       expect(friendly_phone_number('1234567890')).to eq '(123) 456-7890'
     end
   end
+
+  describe "#convert_state_initials" do
+    it "should convert state full names into initials" do
+      expect(convert_state_initials("California")).to eq "CA"
+    end
+
+    it "should return the string if not a state name" do
+      expect(convert_state_initials("Bob")).to eq "Bob"
+    end
+  end
 end
